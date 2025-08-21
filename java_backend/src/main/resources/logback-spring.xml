@@ -1,0 +1,13 @@
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <appender name="TEXT_FORMAT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd'T'HH:mm:ss.SSSXXX}}) %clr(${LOG_LEVEL_PATTERN:-%5p}) %36(%clr(%X{X-Request-Id})) %clr(---) %clr([%15.15t]) %clr(%-40.40logger{39}) %clr(:) %m %kvp%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
+            </pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="TEXT_FORMAT"/>
+    </root>
+</configuration>

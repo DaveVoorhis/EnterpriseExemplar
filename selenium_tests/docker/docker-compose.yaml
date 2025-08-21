@@ -1,0 +1,63 @@
+services:
+
+  selenium-hub:
+    image: selenium/hub:4.35.0
+    container_name: selenium-hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+
+  selenium-node-chrome:
+    image: selenium/node-chrome:4.35.0
+    platform: linux/amd64
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_NODE_MAX_SESSIONS=10
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - DBUS_SESSION_BUS_ADDRESS=/dev/null
+
+  selenium-node-edge:
+    image: selenium/node-edge:4.35.0
+    platform: linux/amd64
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_NODE_MAX_SESSIONS=10
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - DBUS_SESSION_BUS_ADDRESS=/dev/null
+
+  selenium-node-firefox:
+    image: selenium/node-firefox:4.35.0
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_NODE_MAX_SESSIONS=10
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - DBUS_SESSION_BUS_ADDRESS=/dev/null
+
+# Optional: Java/Maven test runner (runs your tests inside the same network)
+#  selenium-test-runner:
+#    image: "jelastic/maven:3.9.5-openjdk-21"
+#    working_dir: /workspace
+#    volumes:
+#      - ../:/workspace              # mount your project here
+#    environment:
+#      - SELENIUM_GRID_URL="http://selenium-hub:4444"
+#    depends_on:
+#      selenium-hub:
+#        condition: service_started
+#    entrypoint: ["bash","-lc"]
+#    command: >
+#      echo "Ready. Run tests with: mvn -q -Dselenium.grid.url=$SELENIUM_GRID_URL test";
+#      sleep infinity
+#    networks: [grid]
+#    profiles: ["tests"]            # only starts when you use --profile tests
+

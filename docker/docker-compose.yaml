@@ -1,0 +1,110 @@
+# This composition will build and deploy the full stack to Docker containers.
+
+services:
+
+  build_react_frontend:
+    image: "node:24"
+    user: "node"
+    working_dir: /home/node/react_frontend
+    container_name: build_react_frontend
+    hostname: build_react_frontend
+    environment:
+      - NODE_ENV=dev
+    volumes:
+      - ../react_frontend:/home/node/react_frontend
+    command: /bin/sh -c "
+        rm -rf dist node_modules package-lock.json;
+        ${npmextras}
+        npm install;
+        npm run build"
+
+  build_java_backend:
+    image: "jelastic/maven:3.9.5-openjdk-21"
+    working_dir: /home/java_backend
+    container_name: build_java_backend
+    hostname: build_java_backend
+    volumes:
+      - ../java_backend:/home/java_backend
+      - m2:/root/.m2
+    command: /bin/sh -c "mvn clean install ${mvnparms}"
+
+  sqlserver_db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: always
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: ${sqlpass}
+    ports:
+      - "1433:1433"
+    container_name: sqlserver_db
+    hostname: sqlserver_db
+    volumes:
+      - mssqlvolume:/var/opt/mssql
+
+  sqlserver_db_init:
+    depends_on:
+      sqlserver_db:
+        condition: service_started
+    build: ../java_backend/docker/${platform}/dbNewInit
+    container_name: sqlserver_db_init
+    hostname: sqlserver_db_init
+
+  run_java_backend:
+    depends_on:
+      sqlserver_db_init:
+         condition: service_completed_successfully
+      build_java_backend:
+         condition: service_completed_successfully
+    image: "jelastic/maven:3.9.5-openjdk-21"
+    restart: always
+    container_name: backend
+    hostname: backend
+    working_dir: /home/java_backend
+    environment:
+      SPRING_DATASOURCE_JDBCURL: "jdbc:sqlserver://sqlserver_db:1433;database=main;user=sa;password=${sqlpass};encrypt=false"
+      SPRING_DATASOURCETWO_JDBCURL: "jdbc:sqlserver://sqlserver_db:1433;database=two;user=sa;password=${sqlpass};encrypt=false"
+      SPRING_DATASOURCETHREE_JDBCURL: "jdbc:sqlserver://sqlserver_db:1433;database=three;user=sa;password=${sqlpass};encrypt=false"
+    ports:
+      - 8080:8080
+    volumes:
+      - ../java_backend:/home/java_backend
+    command: /bin/sh -c "java -Dspring.profiles.active=mockoauth -jar target/JavaBackendExemplar-1.0.0-SNAPSHOT.jar"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/actuator/health"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+
+  run_react_frontend:
+    depends_on:
+      build_react_frontend:
+        condition: service_completed_successfully
+    image: nginx:1.29.0
+    restart: always
+    container_name: frontend
+    hostname: frontend
+    ports:
+      - 80:80
+    volumes:
+      - ../react_frontend/dist:/usr/share/nginx/html
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+
+  announce_ready:
+    depends_on:
+      run_java_backend:
+        condition: service_healthy
+      run_react_frontend:
+        condition: service_healthy
+    image: alpine:3.22.1
+    container_name: announce_ready
+    hostname: announce_ready
+    command: "echo '>>>>>>>>>> Application is ready to access via browser on localhost. <<<<<<<<<<'"
+
+volumes:
+  m2:
+  mssqlvolume:
+    driver: local

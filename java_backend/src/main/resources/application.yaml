@@ -1,0 +1,82 @@
+spring:
+  application:
+    name: backend_exemplar
+  main:
+    banner-mode: off
+  jackson:
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: true
+    jsonparser:
+      feature:
+        INCLUDE_SOURCE_IN_LOCATION: true
+  datasource:
+    jdbcUrl: jdbc:h2:mem:testdb;user=sa;MODE=MSSQLServer;
+  datasource-two:
+    jdbcUrl: jdbc:h2:mem:testdb;user=sa;MODE=MSSQLServer;
+  datasource-three:
+    jdbcUrl: jdbc:h2:mem:testdb;user=sa;MODE=MSSQLServer;
+  jpa:
+    open-in-view: true
+  lifecycle:
+    # 30s is the default; configure this to suit your server needs.
+    # used in conjunction with server.shutdown: graceful
+    timeout-per-shutdown-phase: 30s
+
+server:
+  shutdown: graceful
+  servlet:
+    context-path: /api
+  error:
+    whitelabel:
+      enabled: false
+
+logging:
+  level:
+    root: info
+    com.zaxxer.hikari: error
+
+management:
+  server:
+    port: 8080
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+
+oauth:
+  issuer: "https://login.microsoftonline.com/AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrq/v2.0"
+
+periodic-background-task:
+  schedule: "1 */1 * * * *"
+
+new-user-is-enabled-by-default: false
+first-user-is-admin: false
+
+---
+spring:
+  config:
+    activate:
+      on-profile: verbose,mockoauth
+
+logging:
+  level:
+    root: info
+    org.reldb.exemplars.java.backend: debug
+
+---
+spring:
+  config:
+    activate:
+      on-profile: mockoauth
+
+mockoauth:
+  secure_userid: dave.voorhis@reldb.org
+  secure_username: "Dave Voorhis"
+
+new-user-is-enabled-by-default: true
+first-user-is-admin: true
