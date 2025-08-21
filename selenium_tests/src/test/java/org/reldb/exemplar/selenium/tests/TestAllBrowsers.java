@@ -2,11 +2,17 @@ package org.reldb.exemplar.selenium.tests;
 
 import org.junit.platform.launcher.core.*;
 import org.junit.platform.launcher.listeners.*;
-import org.junit.platform.engine.discovery.DiscoverySelectors;
+import org.junit.platform.reporting.open.xml.OpenTestReportGeneratingListener;
 import org.reldb.exemplar.selenium.tests.utils.ProgressListener;
 
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+
+import static org.junit.platform.engine.discovery.DiscoverySelectors.selectPackage;
 
 public class TestAllBrowsers {
 
@@ -14,10 +20,7 @@ public class TestAllBrowsers {
 
     private static final List<String> BROWSERS = List.of("chrome", "firefox", "edge");
 
-    public static void main(String[] args) {
-        var request = LauncherDiscoveryRequestBuilder.request()
-                .selectors(DiscoverySelectors.selectPackage(TEST_PACKAGE))
-                .build();
+    public static void main(String[] args) throws IOException {
 
         long totalFailures = 0;
 
@@ -29,10 +32,25 @@ public class TestAllBrowsers {
 
             var progressListener = new ProgressListener(browser, out);
 
+            var launcherConfig = LauncherConfig.builder()
+                    .enableTestExecutionListenerAutoRegistration(true)
+                    .build();
+
+            Path reportsDir = Paths.get("selenium_tests", "target", "reports", "test-results", browser);
+            Files.createDirectories(reportsDir);
+
+            var request = LauncherDiscoveryRequestBuilder.request()
+                    .selectors(selectPackage(TEST_PACKAGE))
+                    .configurationParameter("junit.platform.reporting.open.xml.enabled", "true")
+                    .configurationParameter("junit.platform.reporting.output.dir", reportsDir.toAbsolutePath().toString())
+                    .build();
+
+            var openXmlListener = new OpenTestReportGeneratingListener();
+
             var summaryGeneratingListener = new SummaryGeneratingListener();
-            try (var session = LauncherFactory.openSession()) {
+            try (var session = LauncherFactory.openSession(launcherConfig)) {
                 var launcher = session.getLauncher();
-                launcher.registerTestExecutionListeners(progressListener, summaryGeneratingListener);
+                launcher.registerTestExecutionListeners(progressListener, summaryGeneratingListener, openXmlListener);
                 launcher.execute(request);
             }
             summaryGeneratingListener.getSummary().printTo(out);
