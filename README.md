@@ -1,6 +1,6 @@
 # EnterpriseExemplar
 
-Working illustration of a database-driven enterprise application backend, frontend, and Docker deployment.
+Working illustration of a database-driven enterprise application backend, frontend, integration tests and Docker deployment.
 
 For details see:
 - [java_backend/README.md](./java_backend/README.md)

@@ -317,28 +317,22 @@ the POM.xml Maven build file supports some additional features:
 mvn spotless:check
 ```
 
-Spotless can fix errors it reported. To apply changes:
+Spotless can fix formatting issues it reported. To apply changes:
 
 ````shell
 mvn spotless:apply
-````
-
-To ignore spotless checks on build (if enabled) use:
-
-````shell
-mvn package -DskipSpotless=true
 ````
 
 Skipping spotless checks in code can be done as follows:
 
 ```
 // spotless:off
-    static final Map<ErrorClassification, ErrorInfo> errorInfos = Map.of(
-            UNEXPECTED,          new ErrorInfo("ERR_001", "Unexpected Error."),
-            API_NOT_IMPLEMENTED, new ErrorInfo("ERR_002", "API Method not implemented."),
-            ...
-
-        );
+@NativeQuery(value = """
+        SELECT roles.*
+          FROM user_roles, roles
+         WHERE user_roles.user_id = :userId
+           AND user_roles.role_id = roles.role_id
+        """)
 // spotless:on
 ```
 
