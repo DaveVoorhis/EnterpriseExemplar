@@ -17,7 +17,7 @@ public class AccessSiteTest extends TestBase {
 
         driver.get(siteURL().toString());
 
-        wait.until(session -> session.getTitle().contains(expectedTitle));
+        wait.until(session -> session.getTitle() != null && session.getTitle().contains(expectedTitle));
     }
 
     @Test
@@ -27,7 +27,7 @@ public class AccessSiteTest extends TestBase {
         driver.get(siteURL().toString());
 
         var wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(session -> session.getTitle().contains(expectedTitle));
+        wait.until(session -> session.getTitle() != null && session.getTitle().contains(expectedTitle));
 
         var tabs = driver.findElements(By.className("tab-button"));
 
