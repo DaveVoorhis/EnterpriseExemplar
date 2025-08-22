@@ -20,10 +20,11 @@ public class TestAllBrowsers {
 
     public static void main(String[] args) throws IOException {
 
-        // Workaround for Edge bug
-        System.setProperty("SE_DRIVER_MIRROR_URL", "https://msedgedriver.microsoft.com");
-
-        long totalFailures = 0;
+        var browsersRun = 0L;
+        var totalTests = 0L;
+        var totalPasses = 0L;
+        var totalSkips = 0L;
+        var totalFailures = 0L;
 
         for (String browser : BROWSERS) {
             System.setProperty("BROWSER", browser);
@@ -56,8 +57,19 @@ public class TestAllBrowsers {
             }
             summaryGeneratingListener.getSummary().printTo(out);
 
-            totalFailures += summaryGeneratingListener.getSummary().getTotalFailureCount();
+            browsersRun++;
+
+            var summary = summaryGeneratingListener.getSummary();
+            totalTests += summary.getTestsFoundCount();
+            totalSkips += summary.getTestsSkippedCount();
+            totalPasses += summary.getTestsSucceededCount();
+            totalFailures += summary.getTotalFailureCount();
         }
+
+        System.out.println();
+        System.out.printf("Browsers: %s; Tests: %s; Passed: %s; Failed: %s; Skipped: %s",
+                browsersRun, totalTests, totalPasses, totalFailures, totalSkips);
+        System.out.println();
 
         System.exit(totalFailures > 0 ? 1 : 0);
     }
