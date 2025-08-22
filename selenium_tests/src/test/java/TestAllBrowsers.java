@@ -1,5 +1,3 @@
-package org.reldb.exemplar.selenium.tests;
-
 import org.junit.platform.launcher.core.*;
 import org.junit.platform.launcher.listeners.*;
 import org.junit.platform.reporting.open.xml.OpenTestReportGeneratingListener;
@@ -21,6 +19,9 @@ public class TestAllBrowsers {
     private static final List<String> BROWSERS = List.of("chrome", "firefox", "edge");
 
     public static void main(String[] args) throws IOException {
+
+        // Workaround for Edge bug
+        System.setProperty("SE_DRIVER_MIRROR_URL", "https://msedgedriver.microsoft.com");
 
         long totalFailures = 0;
 

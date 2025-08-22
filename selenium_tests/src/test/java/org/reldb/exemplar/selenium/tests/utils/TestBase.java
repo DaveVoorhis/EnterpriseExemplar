@@ -1,10 +1,13 @@
 package org.reldb.exemplar.selenium.tests.utils;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -12,14 +15,33 @@ import java.net.URI;
 import java.net.URL;
 
 public abstract class TestBase {
-    protected WebDriver driver;
+    protected static WebDriver driver;
 
-    private final static String SELENIUM_GRID_URL = "SELENIUM_GRID_URL";
+    private final static String SELENIUM_GRID_URL = "SELENIUM_GRID_URL"; // often http://localhost:4444
+    private final static String TEST_SITE_URL = "TEST_SITE_URL";  // often http://localhost or http://localhost:5173
+
+    public static String getConfigSetting(String key) {
+        return System.getProperty(key, System.getenv().get(key));
+    }
+
+    public static String siteURI() {
+        return getConfigSetting(TEST_SITE_URL);
+    }
+
+    public static URL siteURL() throws Exception {
+        var siteURI = siteURI();
+        var uri = siteURI != null ? siteURI : "http://localhost:5173";
+        return new URI(uri).toURL();
+    }
+
+    private static String gridURI() {
+        return getConfigSetting(SELENIUM_GRID_URL);
+    }
 
     private static URL gridUrl() throws Exception {
-        String url = System.getProperty(SELENIUM_GRID_URL,
-                System.getenv().getOrDefault(SELENIUM_GRID_URL, "http://localhost:4444"));
-        return new URI(url).toURL();
+        var gridURI = gridURI();
+        var uri = gridURI != null ? gridURI : "http://localhost:4444";
+        return new URI(uri).toURL();
     }
 
     private static MutableCapabilities optionsFor(String browser) {
@@ -31,14 +53,30 @@ public abstract class TestBase {
         };
     }
 
-    @BeforeEach
-    void createDriver() throws Exception {
-        String browser = System.getProperty("BROWSER", "chrome");
-        driver = new RemoteWebDriver(gridUrl(), optionsFor(browser));
+    private static RemoteWebDriver obtainRemoteWebDriver() throws Exception {
+        var browser = System.getProperty("BROWSER", "chrome");
+        return new RemoteWebDriver(gridUrl(), optionsFor(browser));
     }
 
-    @AfterEach
-    void quitDriver() {
+    private static WebDriver obtainLocalWebDriver() {
+        var browser = System.getProperty("BROWSER", "chrome");
+        return switch (browser.toLowerCase()) {
+            case "chrome" -> new ChromeDriver();
+            case "firefox" -> new FirefoxDriver();
+            case "edge" -> new EdgeDriver();
+            default -> throw new IllegalArgumentException("Unknown BROWSER: " + browser);
+        };
+    }
+
+    @BeforeAll
+    static void createDriver() throws Exception {
+        driver = gridURI() != null
+                ? obtainRemoteWebDriver()
+                : obtainLocalWebDriver();
+    }
+
+    @AfterAll
+    static void quitDriver() {
         if (driver != null) {
             driver.quit();
         }
