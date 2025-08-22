@@ -5,3 +5,8 @@ Selenium-based integration tests that drive the application via the frontend run
 Once the docker containers have been launched, go to http://localhost:4444 to see the Selenium console.
 
 Use 'secret' as the VNC password when prompted, if you wish to view interactive activity.
+
+To enable Safari test capability on MacOS, run the following from the commandline:
+```shell
+safaridriver --enable
+```

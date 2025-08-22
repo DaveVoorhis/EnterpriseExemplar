@@ -10,6 +10,8 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 
 import java.net.URI;
 import java.net.URL;
@@ -49,6 +51,7 @@ public abstract class TestBase {
             case "chrome" -> new ChromeOptions();
             case "firefox" -> new FirefoxOptions();
             case "edge" -> new EdgeOptions();
+            case "safari" -> new SafariOptions();
             default -> throw new IllegalArgumentException("Unknown BROWSER: " + browser);
         };
     }
@@ -64,6 +67,7 @@ public abstract class TestBase {
             case "chrome" -> new ChromeDriver();
             case "firefox" -> new FirefoxDriver();
             case "edge" -> new EdgeDriver();
+            case "safari" -> new SafariDriver();
             default -> throw new IllegalArgumentException("Unknown BROWSER: " + browser);
         };
     }

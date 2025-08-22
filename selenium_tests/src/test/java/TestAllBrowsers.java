@@ -16,9 +16,11 @@ public class TestAllBrowsers {
 
     private static final String TEST_PACKAGE = "org.reldb.exemplar.selenium.tests";
 
-    private static final List<String> BROWSERS = List.of("chrome", "firefox", "edge");
+    private static final List<String> BROWSERS = List.of("chrome", "firefox", "edge", "safari");
 
     public static void main(String[] args) throws IOException {
+
+        System.out.println("Running on " + System.getProperty("os.name"));
 
         var browsersRun = 0L;
         var totalTests = 0L;
