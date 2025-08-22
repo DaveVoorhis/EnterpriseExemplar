@@ -9,25 +9,23 @@ import java.time.Duration;
 
 public class AccessSiteTest extends TestBase {
 
+    public static final String EXPECTED_TITLE = "Java + Spring Boot × React";
+
     @Test
     void canOpenApplication() throws Exception {
-        var expectedTitle = "Java + Spring Boot × React";
-
         var wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         driver.get(siteURL().toString());
 
-        wait.until(session -> session.getTitle() != null && session.getTitle().contains(expectedTitle));
+        wait.until(session -> session.getTitle() != null && session.getTitle().contains(EXPECTED_TITLE));
     }
 
     @Test
     void canAccessTabs() throws Exception {
-        var expectedTitle = "Java + Spring Boot × React";
-
         driver.get(siteURL().toString());
 
         var wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(session -> session.getTitle() != null && session.getTitle().contains(expectedTitle));
+        wait.until(session -> session.getTitle() != null && session.getTitle().contains(EXPECTED_TITLE));
 
         var tabs = driver.findElements(By.className("tab-button"));
 
