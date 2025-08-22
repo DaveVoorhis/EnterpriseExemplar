@@ -18,8 +18,6 @@ public class AccessSiteTest extends TestBase {
         driver.get(siteURL().toString());
 
         wait.until(session -> session.getTitle().contains(expectedTitle));
-
-        Assertions.assertTrue(driver.getTitle().contains(expectedTitle));
     }
 
     @Test
@@ -34,27 +32,20 @@ public class AccessSiteTest extends TestBase {
         var tabs = driver.findElements(By.className("tab-button"));
 
         var demoTab = tabs.get(0);
-
         var usersTab = tabs.get(1);
-
         var rolesTab = tabs.get(2);
-
         var miscellaneousTab = tabs.get(3);
 
         demoTab.click();
-
-        wait.until(session -> session.findElement(By.className("grid-form")));
+        wait.until(session -> session.findElement(By.id("demo_content")));
 
         usersTab.click();
-
-        wait.until(session -> session.findElement(By.className("list-header")));
+        wait.until(session -> session.findElement(By.id("users_content")));
 
         rolesTab.click();
-
-        wait.until(session -> session.findElement(By.className("grid-form")));
+        wait.until(session -> session.findElement(By.id("roles_content")));
 
         miscellaneousTab.click();
-
-        wait.until(session -> session.findElement(By.className("btn")));
+        wait.until(session -> session.findElement(By.id("miscellaneous_content")));
     }
 }

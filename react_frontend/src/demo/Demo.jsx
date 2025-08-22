@@ -171,7 +171,7 @@ export default function Demo() {
   ];
 
   return (
-    <main className="content">
+    <main className="content" id="demo_content">
       <section className="card">
         <Notification />
         <h2>Create Demo</h2>

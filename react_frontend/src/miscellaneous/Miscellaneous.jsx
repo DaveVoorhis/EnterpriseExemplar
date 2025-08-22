@@ -32,7 +32,7 @@ export default function Demo() {
     }
 
     return (
-        <main className="content">
+        <main className="content" id="miscellaneous_content">
           <section className="card">
             <Notification />
             <div>
