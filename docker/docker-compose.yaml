@@ -16,7 +16,8 @@ services:
         rm -rf dist node_modules package-lock.json;
         ${npmextras}
         npm install;
-        npm run build"
+        npm run build;
+        chmod 0755 dist"
 
   build_java_backend:
     image: "jelastic/maven:3.9.5-openjdk-21"
