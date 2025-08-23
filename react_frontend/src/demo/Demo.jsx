@@ -173,7 +173,6 @@ export default function Demo() {
   return (
     <main className="content" id="demo_content">
       <section className="card">
-        <Notification />
         <h2>Create Demo</h2>
         <form onSubmit={handleCreate} className="grid-form">
           <label className="label">

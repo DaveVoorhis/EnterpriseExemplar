@@ -175,7 +175,6 @@ export default function Roles() {
   return (
     <main className="content" id="roles_content">
       <section className="card">
-        <Notification />
         <h2>Create Role</h2>
         <form onSubmit={handleCreate} className="grid-form">
           <label className="label">

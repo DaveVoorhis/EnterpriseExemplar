@@ -82,7 +82,6 @@ export default function Users() {
   return (
     <main className="content" id="users_content">
       <section className="card">
-        <Notification />
         <div className="list-header">
           <h2>All Users</h2>
           <input

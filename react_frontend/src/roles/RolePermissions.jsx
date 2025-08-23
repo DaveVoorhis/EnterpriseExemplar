@@ -81,8 +81,6 @@ export default function RolePermissions({ roleId }) {
   const subheadingValueAccessor = "category"
 
   return (
-      <>
-      <Notification />
       <Table
           columns={columns}
           data={items}
@@ -90,6 +88,5 @@ export default function RolePermissions({ roleId }) {
           subheadingConditionAccessor = {subheadingConditionAccessor}
           subheadingValueAccessor = {subheadingValueAccessor}
       />
-      </>
   );
 }

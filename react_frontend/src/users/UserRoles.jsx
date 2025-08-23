@@ -69,13 +69,10 @@ export default function UserRoles({ userId }) {
   ];
 
   return (
-    <>
-    <Notification />
     <Table
       columns={columns}
       data={items}
       emptyMessage="No roles found."
     />
-    </>
   )
 }

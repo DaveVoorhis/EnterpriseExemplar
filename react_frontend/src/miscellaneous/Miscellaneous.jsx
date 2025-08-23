@@ -34,7 +34,6 @@ export default function Miscellaneous() {
     return (
         <main className="content" id="miscellaneous_content">
           <section className="card">
-            <Notification />
             <div>
               <h2>Miscellaneous</h2>
               <MiscButton

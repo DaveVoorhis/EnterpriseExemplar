@@ -1,10 +1,11 @@
-import React from "react";
-import TabbedPanel from "./components/TabbedPanel";
-import ErrorBoundary from './components/ErrorBoundary';
-import Demo from './demo/Demo';
-import Users from './users/Users';
-import Roles from './roles/Roles';
-import Miscellaneous from './miscellaneous/Miscellaneous';
+import React from 'react'
+import TabbedPanel from './components/TabbedPanel'
+import ErrorBoundary from './components/ErrorBoundary'
+import Notification from './components/Notification'
+import Demo from './demo/Demo'
+import Users from './users/Users'
+import Roles from './roles/Roles'
+import Miscellaneous from './miscellaneous/Miscellaneous'
 
 const tabs = [
     { id: "demo", label: "🎬 Demo", content: <Demo /> },
@@ -31,6 +32,7 @@ export default function App() {
             <div>For the JavaBackend by DaveVoorhis</div>
             <div className="muted">Frontend by DaveVoorhis and ChatGPT</div>
           </footer>
+          <Notification />
         </div>
     </ErrorBoundary>
   );
