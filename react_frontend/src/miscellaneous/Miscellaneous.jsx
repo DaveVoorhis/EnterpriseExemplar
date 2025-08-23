@@ -7,7 +7,7 @@ import MiscButton from "./MiscButton"
 const DEMO_URL = 'demo'
 const ROLES_URL = 'users/roles';
 
-export default function Demo() {
+export default function Miscellaneous() {
     const addDemo = async (payload) => apiPost(DEMO_URL, payload)
     const removeRole = async (id) => apiDelete(`${ROLES_URL}/${id}`)
 
