@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { api, apiPost, apiDelete, apiPut, errorMessage, setApiUser } from './api.js'
+import { login, logout, userManager, handleCallback } from './authService'
 import TabbedPanel from './components/TabbedPanel'
 import ErrorBoundary from './components/ErrorBoundary'
 import Notification from './components/Notification'
@@ -15,6 +17,23 @@ const tabs = [
 ];
 
 export default function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (window.location.pathname === "/callback") {
+      handleCallback().then(user => {
+        setUser(user);
+        window.history.replaceState({}, document.title, "/");
+      });
+    } else {
+      userManager.getUser().then(user => {
+        setUser(user);
+      });
+    }
+  }, []);
+
+  if (user) setApiUser(user);
+
   return (
     <ErrorBoundary>
         <div className="shell">
@@ -24,10 +43,18 @@ export default function App() {
                   <img className="header-image" src="/images/Logo.png"/>&nbsp;
                   <h1>EnterpriseExemplar</h1>
               </div>
-              <div className="sub">Java + Spring Boot × React</div>
+              <div className="sub">Java + Spring Boot × React &nbsp;
+              {user
+                ? <button onClick={() => logout()}>Logout {user ? user.profile.name : undefined}</button>
+                : undefined}
+              </div>
             </div>
           </header>
-          <TabbedPanel tabs={tabs} />
+          {user
+            ? <TabbedPanel tabs={tabs} />
+            : <h3>Please log in...&nbsp;
+                <button onClick={() => login()}>Login</button></h3>
+          }
           <footer className="footer">
             <div>For the JavaBackend by DaveVoorhis</div>
             <div className="muted">Frontend by DaveVoorhis and ChatGPT</div>

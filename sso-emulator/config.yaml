@@ -5,6 +5,7 @@ storage:
 
 web:
   http: 0.0.0.0:5556
+  allowedOrigins: ['*']
 
 oauth2:
   skipApprovalScreen: true
@@ -12,9 +13,12 @@ oauth2:
 staticClients:
   - id: example-app
     redirectURIs:
-      - "http://localhost:5556/callback"
+    - "http://localhost:5173/callback"
+    - "http://localhost:5173"
     name: "Example App"
-    secret: example-secret
+    public: true
+    allowedOrigins:
+    - "http://localhost:5173"
 
 enablePasswordDB: true
 

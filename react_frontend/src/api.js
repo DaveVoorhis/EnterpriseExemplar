@@ -29,19 +29,25 @@ function withTimeout(ms, promise) {
   };
 }
 
+let apiAuthToken = null;
+
+export function setApiUser(user) {
+    apiAuthToken = user.access_token;
+}
+
 export async function api(path, options = {}) {
   const url = path.startsWith('http') ? path : `${API_BASE}/${path.replace(/^\//,'')}`;
 
-  const { signal, finally: clearTimer } = withTimeout(15000); // 15s default
   const correlationId = uuid()
+  const token = apiAuthToken ? apiAuthToken : getAuthToken()
   const headers = {
     'Content-Type': 'application/json',
     'X-Request-Id': correlationId,
+    'Authorization': `Bearer ${token}`,
     ...(options.headers || {}),
   };
-  const token = getAuthToken();
-  if (token) headers['Authorization'] = `Bearer ${token}`;
 
+  const { signal, finally: clearTimer } = withTimeout(15000); // 15s default
   try {
       const result = await fetch(url, { ...options, headers, signal });
       if (!result.ok) {
