@@ -1,0 +1,10 @@
+services:
+
+  sso-emulator:
+    image: ghcr.io/dexidp/dex:latest
+    container_name: sso-emulator
+    command: ["dex", "serve", "/etc/dex/config.yaml"]
+    volumes:
+      - ./config.yaml:/etc/dex/config.yaml:ro
+    ports:
+      - "5556:5556"   # HTTP API + web UI
