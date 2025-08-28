@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class UserContextService {
-    private static final String USERNAME = "preferred_username";
+    private static final String USERNAME = "email";
 
     @Autowired
     private SecurityContextProvider securityContextProvider;

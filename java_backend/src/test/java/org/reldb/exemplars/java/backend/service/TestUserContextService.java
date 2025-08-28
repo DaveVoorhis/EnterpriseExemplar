@@ -55,7 +55,7 @@ class TestUserContextService extends ApplicationTestBase {
         final var jwt = new Jwt("blah",
                 Instant.now(), Instant.now().plus(10, ChronoUnit.SECONDS),
                 Map.of("blah", "blah"),
-                Map.of("preferred_username", username));
+                Map.of("email", username));
         final var token = new JwtAuthenticationToken(jwt);
         when(securityContextProvider.getAuthentication())
                 .thenReturn(token);

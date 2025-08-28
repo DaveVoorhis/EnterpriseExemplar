@@ -24,19 +24,16 @@ enablePasswordDB: true
 
 staticPasswords:
   - email: "alice@example.com"
-    preferred_username: "alice@example.com"
     hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W" # password = "password"
     username: "alice"
     userID: "1001"
 
   - email: "bob@example.com"
-    preferred_username: "bob@example.com"
     hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W" # password = "password"
     username: "bob"
     userID: "1002"
 
   - email: "charlie@example.com"
-    preferred_username: "charlie@example.com"
     hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W" # password = "password"
     username: "charlie"
     userID: "1003"
