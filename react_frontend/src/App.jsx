@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { api, apiPost, apiDelete, apiPut, errorMessage, setApiUser } from './api.js'
-import { login, logout, userManager, handleCallback } from './authService'
+import { login, logout, userManager, handleCallback, getUser } from './authService'
 import TabbedPanel from './components/TabbedPanel'
 import ErrorBoundary from './components/ErrorBoundary'
 import Notification from './components/Notification'
@@ -26,11 +26,9 @@ export default function App() {
         window.history.replaceState({}, document.title, "/");
       });
     } else {
-      userManager.getUser().then(user => {
-        setUser(user);
-      });
+      getUser().then(user => setUser(user));
     }
-  }, []);
+  }, [user]);
 
   if (user) setApiUser(user);
 
@@ -43,21 +41,17 @@ export default function App() {
                   <img className="header-image" src="/images/Logo.png"/>&nbsp;
                   <h1>EnterpriseExemplar</h1>
               </div>
-              <div className="sub">Java + Spring Boot × React &nbsp;
+              <div className="sub">
               {user
-                ? <button onClick={() => logout()}>Logout {user ? user.profile.name : undefined}</button>
-                : undefined}
+                ? <button className="btn btn-primary" onClick={() => logout()}>Logout</button>
+                : <button className="btn btn-primary" onClick={() => login()}>Log In</button>}
               </div>
             </div>
           </header>
-          {user
-            ? <TabbedPanel tabs={tabs} />
-            : <h3>Please log in...&nbsp;
-                <button onClick={() => login()}>Login</button></h3>
-          }
+          {user ? <TabbedPanel tabs={tabs} /> : undefined}
           <footer className="footer">
-            <div>For the JavaBackend by DaveVoorhis</div>
-            <div className="muted">Frontend by DaveVoorhis and ChatGPT</div>
+            <div>EnterpriseExemplar = (Java + Spring Boot + SQL Server) × React ÷ Docker</div>
+            <div className="muted">Backend by DaveVoorhis; Frontend by DaveVoorhis feat. ChatGPT</div>
           </footer>
           <Notification />
         </div>

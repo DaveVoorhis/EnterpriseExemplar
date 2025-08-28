@@ -22,3 +22,7 @@ export function handleCallback() {
 export function logout() {
   return userManager.signoutRedirect();
 }
+
+export function getUser() {
+  return userManager.getUser();
+}
