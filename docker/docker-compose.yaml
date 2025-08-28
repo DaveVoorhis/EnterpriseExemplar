@@ -50,12 +50,24 @@ services:
     container_name: sqlserver_db_init
     hostname: sqlserver_db_init
 
+  sso-emulator:
+    image: ghcr.io/dexidp/dex:latest
+    container_name: sso-emulator
+    hostname: sso-emulator
+    command: ["dex", "serve", "/etc/dex/config.yaml"]
+    volumes:
+      - ./config.yaml:/etc/dex/config.yaml:ro
+    ports:
+      - "5556:5556"
+
   run_java_backend:
     depends_on:
       sqlserver_db_init:
          condition: service_completed_successfully
       build_java_backend:
          condition: service_completed_successfully
+      sso-emulator:
+         condition: service_started
     image: "jelastic/maven:3.9.5-openjdk-21"
     restart: always
     container_name: backend
@@ -65,11 +77,13 @@ services:
       SPRING_DATASOURCE_JDBCURL: "jdbc:sqlserver://sqlserver_db:1433;database=main;user=sa;password=${sqlpass};encrypt=false"
       SPRING_DATASOURCETWO_JDBCURL: "jdbc:sqlserver://sqlserver_db:1433;database=two;user=sa;password=${sqlpass};encrypt=false"
       SPRING_DATASOURCETHREE_JDBCURL: "jdbc:sqlserver://sqlserver_db:1433;database=three;user=sa;password=${sqlpass};encrypt=false"
+      OAUTH_ISSUER: "http://sso-emulator:5556"
     ports:
       - 8080:8080
     volumes:
       - ../java_backend:/home/java_backend
-    command: /bin/sh -c "java -Dspring.profiles.active=mockoauth -jar target/JavaBackendExemplar-1.0.0-SNAPSHOT.jar"
+#    command: /bin/sh -c "java -Dspring.profiles.active=mockoauth -jar target/JavaBackendExemplar-1.0.0-SNAPSHOT.jar"
+    command: /bin/sh -c "java -jar target/JavaBackendExemplar-1.0.0-SNAPSHOT.jar"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/api/actuator/health"]
       interval: 15s
