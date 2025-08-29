@@ -1,12 +1,14 @@
 import { UserManager } from "oidc-client-ts";
 
+const baseUrl = `${window.location.origin}`;
+
 const oidcConfig = {
   authority: "http://localhost:5556",
   client_id: "example-app",
-  redirect_uri: "http://localhost:5173/callback",
   response_type: "code",
   scope: "openid profile email",
-  post_logout_redirect_uri: "http://localhost:5173",
+  redirect_uri: `${baseUrl}?callback=1`,
+  post_logout_redirect_uri: `${baseUrl}`
 };
 
 export const userManager = new UserManager(oidcConfig);

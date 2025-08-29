@@ -13,11 +13,14 @@ oauth2:
 staticClients:
   - id: example-app
     redirectURIs:
-    - "http://localhost:5173/callback"
+    - "http://localhost?callback=1"
+    - "http://localhost"
+    - "http://localhost:5173?callback=1"
     - "http://localhost:5173"
     name: "Example App"
     public: true
     allowedOrigins:
+    - "http://localhost"
     - "http://localhost:5173"
 
 enablePasswordDB: true

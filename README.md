@@ -39,3 +39,14 @@ npm run dev
 
 That will launch the frontend in dev mode. It will provide the URL to browse the application.
 Then you can make changes to frontend source and they'll deploy and refresh the browser automatically.
+
+By default, the frontend will prompt for a login when you press the
+*Log In* button. The first successful login will automatically be granted 'ADMIN' 
+role. The following accounts are provided by the `sso-emulator` container which acts 
+as an IdP/OIDC/SSO server:
+
+- alice@example.com
+- bob@example.com
+- charlie@example.com
+
+All three have password `password`.

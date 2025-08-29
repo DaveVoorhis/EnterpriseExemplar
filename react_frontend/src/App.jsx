@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { api, apiPost, apiDelete, apiPut, errorMessage, setApiUser } from './api.js'
 import { login, logout, userManager, handleCallback, getUser } from './authService'
 import TabbedPanel from './components/TabbedPanel'
@@ -18,9 +19,11 @@ const tabs = [
 
 export default function App() {
   const [user, setUser] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
-    if (window.location.pathname === "/callback") {
+    const params = new URLSearchParams(location.search);
+    if (params.get("callback") === "1") {
       handleCallback().then(user => {
         setUser(user);
         window.history.replaceState({}, document.title, "/");
@@ -29,6 +32,11 @@ export default function App() {
       getUser().then(user => setUser(user));
     }
   }, [user]);
+
+  const doLogout = () => {
+      logout();
+      setUser(null);
+  }
 
   if (user) setApiUser(user);
 
@@ -43,7 +51,7 @@ export default function App() {
               </div>
               <div className="sub">
               {user
-                ? <button className="btn btn-primary" onClick={() => logout()}>Logout</button>
+                ? <button className="btn btn-primary" onClick={() => doLogout()}>Logout</button>
                 : <button className="btn btn-primary" onClick={() => login()}>Log In</button>}
               </div>
             </div>
