@@ -78,6 +78,8 @@ services:
       SPRING_DATASOURCETWO_JDBCURL: "jdbc:sqlserver://sqlserver_db:1433;database=two;user=sa;password=${sqlpass};encrypt=false"
       SPRING_DATASOURCETHREE_JDBCURL: "jdbc:sqlserver://sqlserver_db:1433;database=three;user=sa;password=${sqlpass};encrypt=false"
       OAUTH_ISSUER: "http://sso-emulator:5556"
+      NEWUSERISENABLEDBYDEFAULT: true
+      FIRSTUSERISADMIN: true
     ports:
       - 8080:8080
     volumes:
