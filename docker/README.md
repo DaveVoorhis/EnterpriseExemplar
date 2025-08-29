@@ -49,6 +49,6 @@ Then you can make changes to frontend source and they'll deploy and refresh the 
 You **need** to map hostname `sso-emulator` to `127.0.0.1` in your system `/etc/hosts` (or equivalent.) 
 
 This allows the backend
-container to reference the OID/SSO server container by hostname `sso-emulator` inside the Docker network
-whilst allowing the browser-hosted frontend to reference OID/SSO server (which is port-mapped to the host) via the same
+container to reference the IdP/OIDC/SSO server container by hostname `sso-emulator` inside the Docker network
+whilst allowing the browser-hosted frontend to reference the IdP/OIDC/SSO server (which is port-mapped to the host) via the same
 `sso-emulator` hostname.

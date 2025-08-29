@@ -28,6 +28,15 @@ docker-compose -f docker-compose-allbackend.yaml --env-file .envm4 up
 
 Once started, leave it running in its own window/shell/session/etc.
 
+#### IMPORTANT: For frontend logins to work...
+
+You **need** to map hostname `sso-emulator` to `127.0.0.1` in your system `/etc/hosts` (or equivalent.)
+
+This allows the backend
+container to reference the IdP/OIDC/SSO server container by hostname `sso-emulator` inside the Docker network
+whilst allowing the browser-hosted frontend to reference the IdP/OIDC/SSO server (which is port-mapped to the host) via the same
+`sso-emulator` hostname.
+
 ### 3 - Launch the frontend:
 
 Once the backend is running, run:
