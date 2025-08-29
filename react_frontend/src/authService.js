@@ -1,9 +1,11 @@
 import { UserManager } from "oidc-client-ts";
 
+const SSO_AUTHORITY = import.meta.env.VITE_SSO_AUTHORITY || "http://localhost:5556";
+
 const baseUrl = `${window.location.origin}`;
 
 const oidcConfig = {
-  authority: "http://localhost:5556",
+  authority: `${SSO_AUTHORITY}`,
   client_id: "example-app",
   response_type: "code",
   scope: "openid profile email",
