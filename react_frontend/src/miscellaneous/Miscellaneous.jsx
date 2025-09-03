@@ -31,6 +31,16 @@ export default function Miscellaneous() {
         notifyInformation("You have received a notification.");
     }
 
+    const hasPermission = async (permissionName) => await api(`users/permission/${permissionName}`);
+
+    async function checkPermission(permissionName) {
+        try {
+            alert(await hasPermission(permissionName))
+        } catch (e) {
+            notifyError(errorMessage(e));
+        }
+    }
+
     return (
         <main className="content" id="miscellaneous_content">
           <section className="card">
@@ -50,6 +60,16 @@ export default function Miscellaneous() {
                 prompt='Display an informational notification'
                 buttonText='Send Notification'
                 onClick={showNotification}
+              />
+              <MiscButton
+                prompt='Check user has permission GET_ALL_DEMOS'
+                buttonText='Check permission'
+                onClick={() => checkPermission('GET_ALL_DEMOS')}
+              />
+              <MiscButton
+                prompt='Check user has permission ADMIN'
+                buttonText='Check permission'
+                onClick={() => checkPermission('ADMIN')}
               />
             </div>
           </section>
