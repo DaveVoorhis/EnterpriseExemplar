@@ -35,7 +35,7 @@ export default function Miscellaneous() {
 
     async function checkPermission(permissionName) {
         try {
-            alert(await hasPermission(permissionName))
+            alert(`User has permission ${permissionName}: ` + await hasPermission(permissionName))
         } catch (e) {
             notifyError(errorMessage(e));
         }
