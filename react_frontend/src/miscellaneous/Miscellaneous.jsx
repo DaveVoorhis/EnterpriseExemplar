@@ -31,7 +31,7 @@ export default function Miscellaneous() {
         notifyInformation("You have received a notification.");
     }
 
-    const hasPermission = async (permissionName) => await api(`users/permission/${permissionName}`);
+    const hasPermission = (permissionName) => api(`users/permission/${permissionName}`);
 
     async function checkPermission(permissionName) {
         try {
