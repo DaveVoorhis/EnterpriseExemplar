@@ -54,6 +54,7 @@ services:
 
   sso-emulator:
     image: ghcr.io/dexidp/dex:latest
+    restart: always
     container_name: sso-emulator
     hostname: sso-emulator
     command: ["dex", "serve", "/etc/dex/config.yaml"]
