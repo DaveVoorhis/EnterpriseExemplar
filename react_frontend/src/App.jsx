@@ -45,7 +45,7 @@ export default function App() {
               </div>
             </div>
           </header>
-          {user ? <Tabs /> : undefined}
+          {user ? <Tabs /> : null}
           <footer className="footer">
             <div>EnterpriseExemplar = (Java + Spring Boot + SQL Server) × React ÷ Docker</div>
             <div className="muted">Backend by DaveVoorhis; Frontend by DaveVoorhis feat. ChatGPT</div>

@@ -68,7 +68,7 @@ export default function RolePermissions({ roleId }) {
     { header: "Description", accessor: "description", className: "mono" },
     { header: "Assigned", accessor: "lastLogin", className: "mono",
       cell: row => roleId === ADMIN_ROLE_ID
-          ? row.checked ? <span>✅</span> : undefined
+          ? row.checked ? <span>✅</span> : null
           : <input
                 id={`${roleId}:${row.name}`}
                 type="checkbox"
