@@ -20,12 +20,12 @@ export default function Tabs() {
 
   useEffect(() => { refresh() }, [])
 
-  const refresh = () =>
-     Promise.all(
-        tabData.map(tab => !tab.permit
-            ? tab
-            : tab.permit().then(permitted => permitted ? tab : null))
-     ).then(alltabs => setTabs(alltabs.filter(tab => tab != null)));
+  const refresh = () => Promise.all(tabData.map(resolveTab))
+     .then(tabs => setTabs(tabs.filter(tab => tab != null)));
+
+  const resolveTab = (tab) => tab.permit
+     ? tab.permit().then(permitted => permitted ? tab : null)
+     : Promise.resolve(tab);
 
   if (!tabs.length) return <div align="center">Loading...</div>
 
