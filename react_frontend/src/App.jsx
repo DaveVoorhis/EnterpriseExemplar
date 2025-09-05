@@ -10,7 +10,9 @@ export default function App() {
   const [user, setUser] = useState(null);
   const location = useLocation();
 
-  useEffect(() => {
+  useEffect(() => { refresh() }, [user]);
+
+  const refresh = async () => {
     const params = new URLSearchParams(location.search);
     if (params.get("callback") === "1") {
       handleCallback().then(user => {
@@ -20,7 +22,7 @@ export default function App() {
     } else {
       getUser().then(user => setUser(user));
     }
-  }, [user]);
+  }
 
   const doLogout = () => {
       logout();

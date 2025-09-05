@@ -20,7 +20,7 @@ export default function Tabs() {
 
   useEffect(() => { refresh() }, [])
 
-  async function refresh() {
+  const refresh = async () => {
     const tabset = await Promise.all(
         tabData.map(async (tab) => (!tab.permit || await tab.permit())
             ? tab
