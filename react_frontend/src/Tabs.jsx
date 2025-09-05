@@ -9,33 +9,26 @@ import Miscellaneous from './miscellaneous/Miscellaneous'
 export default function Tabs() {
   const [tabs, setTabs] = useState([])
 
-  const hasPermission = async (permissionName) => await api(`users/permission/${permissionName}`);
+  const hasPermission = (permissionName) => api(`users/permission/${permissionName}`);
 
-  useEffect(() => refresh, [])
+  const tabData = [
+     { id: "demo", label: "🎬 Demo", content: <Demo />, permit: () => hasPermission('GET_ALL_DEMOS') },
+     { id: "users", label: "👥 Users", content: <Users />, permit: () => hasPermission('ADMIN') },
+     { id: "roles", label: "🛡️ Roles", content: <Roles />, permit: () => hasPermission('ADMIN') },
+     { id: "misc", label: "🌀 Miscellaneous", content: <Miscellaneous /> }
+  ];
 
-  // TODO: Rewrite. This is repellently ugly.
+  useEffect(() => { refresh() }, [])
+
   async function refresh() {
-      const tabData = [
-         { id: "demo", label: "🎬 Demo", content: <Demo />, permit: () => hasPermission('GET_ALL_DEMOS') },
-         { id: "users", label: "👥 Users", content: <Users />, permit: () => hasPermission('ADMIN') },
-         { id: "roles", label: "🛡️ Roles", content: <Roles />, permit: () => hasPermission('ADMIN') },
-         { id: "misc", label: "🌀 Miscellaneous", content: <Miscellaneous /> }
-      ];
-      const tabs = [];
-      for (const tab of tabData) {
-          if (!tab.permit) {
-              tabs.push(tab);
-          } else {
-              var permitted = await tab.permit();
-              if (permitted) {
-                  tabs.push(tab);
-              }
-          }
-      };
-      setTabs(tabs);
+    const tabset = await Promise.all(
+        tabData.map(async (tab) => (!tab.permit || await tab.permit())
+            ? tab
+            : null));
+    setTabs(tabset.filter(tab => tab != null));
   }
 
-  return (
-    (tabs.length) ? <TabbedPanel tabs={tabs} /> : undefined
-  );
+  if (!tabs.length) return <div align="center">Loading...</div>
+
+  return <TabbedPanel tabs={tabs} />
 }
