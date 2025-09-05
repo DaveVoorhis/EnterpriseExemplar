@@ -20,13 +20,12 @@ export default function Tabs() {
 
   useEffect(() => { refresh() }, [])
 
-  const refresh = async () => {
-    const tabset = await Promise.all(
-        tabData.map(async (tab) => (!tab.permit || await tab.permit())
+  const refresh = () =>
+     Promise.all(
+        tabData.map(tab => !tab.permit
             ? tab
-            : null));
-    setTabs(tabset.filter(tab => tab != null));
-  }
+            : tab.permit().then(permitted => permitted ? tab : null))
+     ).then(alltabs => setTabs(alltabs.filter(tab => tab != null)));
 
   if (!tabs.length) return <div align="center">Loading...</div>
 
