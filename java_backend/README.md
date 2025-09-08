@@ -214,7 +214,7 @@ For further information on roles and permissions, see the *Manage User Roles and
 
 Assuming you're in your local directory, there are multiple ways to start the application locally:
 
-1. Command-line (Maven): `mvn spring-boot:run -Dspring-boot.run.profiles=mockoauth`
+1. Command-line (Maven): `mvn spring-boot:run`
 
 2. Command-line (Java): `java -jar target/JavaBackendExemplar-0.0.1.jar`
 
@@ -267,7 +267,7 @@ I.e., uppercase, dots to underscores, dashes to nothing.
 ### Special Configuration Profiles
 
 #### Bypassing authentication for local development
-If you start the application with the Spring profile 'mockoauth' (`-Dspring.profiles.active=mockoauth`) as shown above,
+If you start the application with the Spring profile 'mockoauth' (`-Dspring.profiles.active=mockoauth`),
 it will treat all bearer tokens as valid, i.e., you can call the application with any bearer token (e.g., an `Authorization` header containing `Bearer blahblahblah`) and it will ignore the contents.
 E.g., to launch the .jar under Windows with the `mockoauth` profile:
 ```shell
