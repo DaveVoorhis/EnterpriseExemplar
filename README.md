@@ -1,19 +1,16 @@
 # EnterpriseExemplar
 
-Working and work-in-progress illustration of a database-driven enterprise application backend (written in Java using Spring Boot), 
-frontend (written in JavaScript/HTML/CSS using React), integration tests (written in Java using Selenium) and Docker deployment using Docker Compose.
+This is a working work-in-progress illustration of a database-driven enterprise application consisting of:
+- SQL database-driven backend that exposes a RESTful API, written in Java using Spring Boot.  [README.md](./java_backend/README.md)
+- Browser-hosted frontend that uses the backend API, written in JavaScript/HTML/CSS using React.  [README.md](./react_frontend/README.md)
+- Browser-driving integration tests written in Java using Selenium.  [README.md](./selenium_tests/README.md)
+- Docker deployment using Docker Compose.  [README.md](./docker/README.md)
 
 The running application demonstrates 'Demo' records that can be created, read, updated, deleted and searched. User
 roles and permissions can be edited and defined.
 
-NOTE: Since this is work in progress, at any time there may be broken, partly working or parts-all-over-the-workbench components. 
+**NOTE**: Since this is work in progress, at any time there may be broken, partly working or parts-all-over-the-workbench components. 
 Currently, the `selenium_tests` subproject is mostly parts-on-the-workbench.
-
-For details see:
-- [java_backend/README.md](./java_backend/README.md)
-- [react_frontend/README.md](./react_frontend/README.md)
-- [selenium_tests/README.md](./selenium_tests/README.md)
-- [docker/README.md](./docker/README.md)
 
 ## Quickstart
 
