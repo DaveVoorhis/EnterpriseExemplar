@@ -29,7 +29,7 @@ Short reason: it allows single-sign-on to work.
 
 Longer reason: This allows the backend container to reference the local IdP/OIDC/SSO server container by hostname `sso-emulator` inside the Docker network
 whilst allowing the browser-hosted frontend to reference the IdP/OIDC/SSO server (which is port-mapped to the host) via the same
-`sso-emulator` hostname.
+`sso-emulator` hostname outside the Docker network.
 
 ### 3 - Launch the backend
 
