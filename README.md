@@ -1,6 +1,9 @@
 # EnterpriseExemplar
 
-Working illustration of a database-driven enterprise application backend, frontend, integration tests and Docker deployment.
+Working and work-in-progress illustration of a database-driven enterprise application backend, frontend, integration tests and Docker deployment.
+
+NOTE: Since this is work in progress, at any time there may be non-working, partly working or parts-all-over-the-workbench components. 
+Currently, the selenium_tests subproject is a mostly parts-on-the-workbench.
 
 For details see:
 - [java_backend/README.md](./java_backend/README.md)
