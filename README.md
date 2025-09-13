@@ -39,7 +39,7 @@ docker-compose -f docker-compose-allbackend.yaml up
 - To build, deploy and run on Apple Silicon:
 ```shell
 cd docker
-docker-compose -f docker-compose-allbackend.yaml --env-file .env --env-file .env.m4 up
+docker-compose -f docker-compose-allbackend.yaml --env-file .env --env-file m4.env up
 ```
 
 See the Docker [[README.md](./docker/README.md)] for additional options and information.

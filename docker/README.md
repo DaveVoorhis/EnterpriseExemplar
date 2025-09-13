@@ -27,7 +27,7 @@ docker-compose up
 
 - For Apple Silicon:
 ```shell
-docker-compose --env-file .env --env-file .env.m4 up
+docker-compose --env-file .env --env-file m4.env up
 ```
 
 See below for additional environment options.
@@ -46,7 +46,7 @@ docker-compose -f docker-compose-allbackend.yaml up
 
 - For Apple Silicon:
 ```shell
-docker-compose -f docker-compose-allbackend.yaml --env-file .env --env-file .env.m4 up
+docker-compose -f docker-compose-allbackend.yaml --env-file .env --env-file m4.env up
 ```
 
 Once the backend is running, navigate to the `react_frontend` directory and run:
@@ -63,13 +63,13 @@ Then you can make changes to frontend source and they'll deploy and refresh the 
 Environment files (`.env.*`) provide environment-specific settings for different host environments:
 
 - `.env` Default settings
-- `.env.m4` Run on Apple Silicon CPUs.
-- `.env.nossl` Run with reduced SSL certificate checks to permit running on **dev-only** machines with zScaler.
+- `m4.env` Run on Apple Silicon CPUs.
+- `nossl.env` Run with reduced SSL certificate checks to permit running on **dev-only** machines with zScaler.
 
 These can be used in combination. For example, to launch all backend services on a development M4 MacOS system with reduced SSL certificate checks:
 
 ```shell
-docker-compose -f docker-compose-allbackend.yaml --env-file .env --env-file .env.m4 --env-file .env.nossl up
+docker-compose -f docker-compose-allbackend.yaml --env-file .env --env-file m4.env --env-file nossl.env up
 ```
 
-Note that the order of `--env-file` specifications is important. The `.env` file must be specified before `.env.m4` and before `.env.nossl`.
+Note that the order of `--env-file` specifications is important. The `.env` file must be specified before `m4.env`, and it before `nossl.env`.
