@@ -2,6 +2,9 @@
 
 Working and work-in-progress illustration of a database-driven enterprise application backend, frontend, integration tests and Docker deployment.
 
+The application demonstrates 'Demo' records that can be created, read, updated, deleted and searched. User
+roles and permissions can be edited and defined.
+
 NOTE: Since this is work in progress, at any time there may be broken, partly working or parts-all-over-the-workbench components. 
 Currently, the `selenium_tests` subproject is mostly parts-on-the-workbench.
 
@@ -61,13 +64,11 @@ By default, the frontend will prompt for a login when you press the
 *Log In* button. The following accounts are provided by the `sso-emulator` container which acts
 as an IdP/OIDC/SSO server:
 
-- alice@example.com
-- bob@example.com
-- charlie@example.com
+- `alice@example.com`
+- `bob@example.com`
+- `charlie@example.com`
 
 All three have password `password`.
 
-The first successful login will automatically be granted 'ADMIN' role. 
-
-The application demonstrates 'Demo' records that can be created, read, updated, deleted and searched. User
-roles and permissions can be edited and defined.
+The first successful login will automatically be granted 'ADMIN' role. Subsequent logins will be granted 'User' role. Use the
+first successfully logged-in account (which has 'ADMIN' role) to grant permissions to roles and grant roles to users.
