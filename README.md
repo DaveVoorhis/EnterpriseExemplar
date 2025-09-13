@@ -30,19 +30,21 @@ whilst allowing the browser-hosted frontend to reference the IdP/OIDC/SSO server
 
 ### 3 - Launch the backend
 
-- To run on most platforms but not Apple Silicon, with default settings including reduced SSL checks to facilitate local dev deployments on machines with zScaler:
+- To build, deploy and run on most platforms but not Apple Silicon:
 ```shell
 cd docker
 docker-compose -f docker-compose-allbackend.yaml up
 ```
 
-- To build, deploy and run on Apple Silicon, without certificate bypasses:
+- To build, deploy and run on Apple Silicon:
 ```shell
 cd docker
-docker-compose -f docker-compose-allbackend.yaml --env-file .envm4 up
+docker-compose -f docker-compose-allbackend.yaml --env-file .env --env-file .env.m4 up
 ```
 
-Once started, leave it running in its own window/shell/session/etc.
+See the Docker [[README.md](./docker/README.md)] for additional options and information.
+
+Once started, leave the Docker containers running in their own window/shell/session/etc.
 
 ### 4 - Launch the frontend
 

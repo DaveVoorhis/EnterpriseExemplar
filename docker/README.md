@@ -1,38 +1,52 @@
 # Docker
 
-This directory contains Docker compositions to support development.
+This directory contains Docker compositions to support development and local testing.
 
-## docker-compose.yaml
+## IMPORTANT: For frontend logins to work...
 
-*This builds and runs the entire application from source with nothing more than Docker or Rancher Desktop.*
+You **need** to map hostname `sso-emulator` to `127.0.0.1` in your local DNS resolver.
+- MacOS/Unix/Linux: add line `127.0.0.1      sso-emulator` to `/etc/hosts`
+- Windows: add line `127.0.0.1      sso-emulator` to `C:\Windows\System32\Drivers\etc\hosts`
 
-To build, deploy and run, navigate to the docker directory, then:
+This allows the backend
+container to reference the IdP/OIDC/SSO server container by hostname `sso-emulator` inside the Docker network
+whilst allowing the browser-hosted frontend to reference the IdP/OIDC/SSO server (which is port-mapped to the host) via the same
+`sso-emulator` hostname from outside the Docker network.
 
-- To run on most platforms with default settings including reduced SSL checks to facilitate local dev deployments on machines with zScaler:
+## To build and run the entire application...
+
+*This builds and runs the entire application from source with nothing more than Docker or Rancher Desktop. 
+It's used to quickly deploy a working application for local testing.*
+
+Navigate to the docker directory, then:
+
+- For most platforms:
 ```shell
 docker-compose up
 ```
 
-- To build, deploy and run on Apple Silicon without certificate bypasses:
+- For Apple Silicon:
 ```shell
-docker-compose --env-file .envm4 up
+docker-compose --env-file .env --env-file .env.m4 up
 ```
 
-## docker-compose-allbackend.yaml
+See below for additional environment options.
+
+## To build and run the application backend...
 
 *This builds and runs the application backend from source. It's used to quickly deploy a working backend to support frontend
 development.*
 
-To build, deploy and run the backend, navigate to the docker directory, then:
+Navigate to the docker directory, then:
 
-- To run on most platforms with default settings including reduced SSL checks to facilitate local dev deployments on machines with zScaler:
+- For most platforms:
 ```shell
 docker-compose -f docker-compose-allbackend.yaml up
 ```
 
-- To build, deploy and run on Apple Silicon, without certificate bypasses:
+- For Apple Silicon:
 ```shell
-docker-compose -f docker-compose-allbackend.yaml --env-file .envm4 up
+docker-compose -f docker-compose-allbackend.yaml --env-file .env --env-file .env.m4 up
 ```
 
 Once the backend is running, navigate to the `react_frontend` directory and run:
@@ -44,11 +58,18 @@ npm run dev
 That will launch the frontend in dev mode. It will provide the URL to browse the application.
 Then you can make changes to frontend source and they'll deploy and refresh the browser automatically.
 
-# IMPORTANT: For frontend logins to work...
+## Environment Options
 
-You **need** to map hostname `sso-emulator` to `127.0.0.1` in your system `/etc/hosts` (or equivalent.) 
+Environment files (`.env.*`) provide environment-specific settings for different host environments:
 
-This allows the backend
-container to reference the IdP/OIDC/SSO server container by hostname `sso-emulator` inside the Docker network
-whilst allowing the browser-hosted frontend to reference the IdP/OIDC/SSO server (which is port-mapped to the host) via the same
-`sso-emulator` hostname from outside the Docker network.
+- `.env` Default settings
+- `.env.m4` Run on Apple Silicon CPUs.
+- `.env.nossl` Run with reduced SSL certificate checks to permit running on **dev-only** machines with zScaler.
+
+These can be used in combination. For example, to launch all backend services on a development M4 MacOS system with reduced SSL certificate checks:
+
+```shell
+docker-compose -f docker-compose-allbackend.yaml --env-file .env --env-file .env.m4 --env-file .env.nossl up
+```
+
+Note that the order of `--env-file` specifications is important. The `.env` file must be specified before `.env.m4` and before `.env.nossl`.
