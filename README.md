@@ -1,8 +1,9 @@
 # EnterpriseExemplar
 
-Working and work-in-progress illustration of a database-driven enterprise application backend, frontend, integration tests and Docker deployment.
+Working and work-in-progress illustration of a database-driven enterprise application backend (written in Java using Spring Boot), 
+frontend (written in JavaScript/HTML/CSS using React), integration tests (written in Java using Selenium) and Docker deployment using Docker Compose.
 
-The application demonstrates 'Demo' records that can be created, read, updated, deleted and searched. User
+The running application demonstrates 'Demo' records that can be created, read, updated, deleted and searched. User
 roles and permissions can be edited and defined.
 
 NOTE: Since this is work in progress, at any time there may be broken, partly working or parts-all-over-the-workbench components. 
