@@ -1,7 +1,7 @@
 # EnterpriseExemplar
 
 This is a working work-in-progress illustration of a database-driven enterprise application consisting of:
-- A SQL database-driven backend that exposes a RESTful API authenticates against an identity provider, written in Java using Spring Boot.  [README.md](./java_backend/README.md)
+- A SQL database-driven backend that exposes a RESTful API authenticated against an identity provider, written in Java using Spring Boot.  [README.md](./java_backend/README.md)
 - A Browser-hosted frontend that uses the backend API and supports sign-on via an identity provider, written in JavaScript/HTML/CSS using React.  [README.md](./react_frontend/README.md)
 - Browser-driving end-to-end integration tests written in Java using Selenium.  [README.md](./selenium_tests/README.md)
 - Docker deployment using Docker Compose.  [README.md](./docker/README.md)
