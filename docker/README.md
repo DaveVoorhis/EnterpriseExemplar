@@ -62,7 +62,7 @@ Then you can make changes to frontend source and they'll deploy and refresh the 
 
 Environment files (`.env` and `*.env`) provide environment-specific settings for different host environments:
 
-- `.env` Default settings
+- `.env` Default settings.
 - `m4.env` Run on Apple Silicon CPUs.
 - `nossl.env` Run with reduced SSL certificate checks to permit running on **dev-only** machines with zScaler.
 
