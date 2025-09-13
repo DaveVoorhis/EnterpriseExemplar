@@ -51,4 +51,4 @@ You **need** to map hostname `sso-emulator` to `127.0.0.1` in your system `/etc/
 This allows the backend
 container to reference the IdP/OIDC/SSO server container by hostname `sso-emulator` inside the Docker network
 whilst allowing the browser-hosted frontend to reference the IdP/OIDC/SSO server (which is port-mapped to the host) via the same
-`sso-emulator` hostname.
+`sso-emulator` hostname from outside the Docker network.
