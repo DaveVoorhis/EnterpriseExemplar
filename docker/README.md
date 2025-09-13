@@ -60,7 +60,7 @@ Then you can make changes to frontend source and they'll deploy and refresh the 
 
 ## Environment Options
 
-Environment files (`.env.*`) provide environment-specific settings for different host environments:
+Environment files (`.env` and `*.env`) provide environment-specific settings for different host environments:
 
 - `.env` Default settings
 - `m4.env` Run on Apple Silicon CPUs.
