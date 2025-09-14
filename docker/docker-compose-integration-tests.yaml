@@ -1,0 +1,182 @@
+# This composition builds the full application stack and runs integration tests on it.
+
+services:
+
+  build_react_frontend:
+    image: "node:24"
+    user: "node"
+    working_dir: /home/node/react_frontend
+    container_name: build_react_frontend
+    hostname: build_react_frontend
+    environment:
+      - NODE_ENV=dev
+      - VITE_SSO_AUTHORITY=http://sso-emulator:5556
+      - VITE_API_BASE=http://backend:8080/api
+    volumes:
+      - ../react_frontend:/home/node/react_frontend
+    command: /bin/sh -c "
+      rm -rf dist node_modules package-lock.json;
+      ${npmextras}
+      npm install;
+      npm run build;
+      chmod 0755 dist"
+
+  build_java_backend:
+    image: "jelastic/maven:3.9.5-openjdk-21"
+    working_dir: /home/java_backend
+    container_name: build_java_backend
+    hostname: build_java_backend
+    volumes:
+      - ../java_backend:/home/java_backend
+      - m2:/root/.m2
+    command: /bin/sh -c "mvn clean install ${mvnparms}"
+
+  sqlserver_db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: always
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: ${sqlpass}
+    ports:
+      - "1433:1433"
+    container_name: sqlserver_db
+    hostname: sqlserver_db
+    volumes:
+      - mssqlvolumefortests:/var/opt/mssql
+
+  sqlserver_db_init:
+    depends_on:
+      sqlserver_db:
+        condition: service_started
+    build: ../java_backend/docker/${platform}/dbNewInit
+    container_name: sqlserver_db_init
+    hostname: sqlserver_db_init
+
+  sso-emulator:
+    image: ghcr.io/dexidp/dex:latest
+    restart: always
+    container_name: sso-emulator
+    hostname: sso-emulator
+    command: ["dex", "serve", "/etc/dex/config.yaml"]
+    volumes:
+      - ./config.yaml:/etc/dex/config.yaml:ro
+    ports:
+      - "5556:5556"
+
+  run_java_backend:
+    depends_on:
+      sqlserver_db_init:
+        condition: service_completed_successfully
+      build_java_backend:
+        condition: service_completed_successfully
+      sso-emulator:
+        condition: service_started
+    image: "jelastic/maven:3.9.5-openjdk-21"
+    restart: always
+    container_name: backend
+    hostname: backend
+    working_dir: /home/java_backend
+    environment:
+      SPRING_DATASOURCE_JDBCURL: "jdbc:sqlserver://sqlserver_db:1433;database=main;user=sa;password=${sqlpass};encrypt=false"
+      SPRING_DATASOURCETWO_JDBCURL: "jdbc:sqlserver://sqlserver_db:1433;database=two;user=sa;password=${sqlpass};encrypt=false"
+      SPRING_DATASOURCETHREE_JDBCURL: "jdbc:sqlserver://sqlserver_db:1433;database=three;user=sa;password=${sqlpass};encrypt=false"
+      OAUTH_ISSUER: "http://sso-emulator:5556"
+      NEWUSERISENABLEDBYDEFAULT: true
+      FIRSTUSERISADMIN: true
+    ports:
+      - 8080:8080
+    volumes:
+      - ../java_backend:/home/java_backend
+    #    command: /bin/sh -c "java -Dspring.profiles.active=mockoauth -jar target/JavaBackendExemplar-1.0.0-SNAPSHOT.jar"
+    command: /bin/sh -c "java -jar target/JavaBackendExemplar-1.0.0-SNAPSHOT.jar"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/actuator/health"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+
+  run_react_frontend:
+    depends_on:
+      build_react_frontend:
+        condition: service_completed_successfully
+    image: nginx:1.29.0
+    restart: always
+    container_name: frontend
+    hostname: frontend
+    ports:
+      - 80:80
+    volumes:
+      - ../react_frontend/dist:/usr/share/nginx/html
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+
+  selenium-hub:
+    image: selenium/hub:4.35.0
+    container_name: selenium-hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+
+  selenium-node-chrome:
+    image: selenium/node-chrome:4.35.0
+    platform: linux/amd64
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_NODE_MAX_SESSIONS=10
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - DBUS_SESSION_BUS_ADDRESS=/dev/null
+
+  selenium-node-edge:
+    image: selenium/node-edge:4.35.0
+    platform: linux/amd64
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_NODE_MAX_SESSIONS=10
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - DBUS_SESSION_BUS_ADDRESS=/dev/null
+
+  selenium-node-firefox:
+    image: selenium/node-firefox:4.35.0
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_NODE_MAX_SESSIONS=10
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - DBUS_SESSION_BUS_ADDRESS=/dev/null
+
+  test-runner:
+    image: "jelastic/maven:3.9.5-openjdk-21"
+    container_name: test-runner
+    hostname: test-runner
+    working_dir: /workspace
+    volumes:
+      - ../selenium_tests:/workspace
+      - m2:/root/.m2
+    environment:
+      - SELENIUM_GRID_URL=http://selenium-hub:4444
+      - TEST_SITE_URL=http://frontend
+    depends_on:
+      run_java_backend:
+        condition: service_healthy
+      run_react_frontend:
+        condition: service_healthy
+      selenium-hub:
+        condition: service_started
+    command: /bin/sh -c "echo 'Ready. Run tests with mvn test'; sleep infinity"
+
+volumes:
+  m2:
+  mssqlvolumefortests:
+    driver: local

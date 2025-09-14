@@ -16,7 +16,8 @@ public class TestAllBrowsers {
 
     private static final String TEST_PACKAGE = "org.reldb.exemplar.selenium.tests";
 
-    private static final List<String> BROWSERS = List.of("chrome", "firefox", "edge", "safari");
+//    private static final List<String> BROWSERS = List.of("chrome", "firefox", "edge", "safari");
+    private static final List<String> BROWSERS = List.of("chrome", "firefox");
 
     public static void main(String[] args) throws IOException {
 

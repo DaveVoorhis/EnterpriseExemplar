@@ -58,6 +58,26 @@ npm run dev
 That will launch the frontend in dev mode. It will provide the URL to browse the application.
 Then you can make changes to frontend source and they'll deploy and refresh the browser automatically.
 
+See below for additional environment options.
+
+## To build and launch the application and run integration tests...
+
+**NOTE**: This is a work in progress.
+
+Navigate to the docker directory, then:
+
+- For most platforms:
+```shell
+docker-compose -f docker-compose-integration-tests.yaml up
+```
+
+- For Apple Silicon:
+```shell
+docker-compose -f docker-compose-integration-tests.yaml --env-file .env --env-file m4.env up
+```
+
+See below for additional environment options.
+
 ## Environment Options
 
 Environment files (`.env` and `*.env`) provide environment-specific settings for different host environments:
