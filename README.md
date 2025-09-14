@@ -16,60 +16,49 @@ Currently, the `selenium_tests` subproject is mostly parts-on-the-workbench.
 
 ### 1 - Install
 - Docker Desktop or Rancher Desktop.
-- Node.js version 22 or above.
 
 ### 2 - Map hostname `sso-emulator` to `127.0.0.1`
 - MacOS/Unix/Linux: add line `127.0.0.1      sso-emulator` to `/etc/hosts`
 - Windows: add line `127.0.0.1      sso-emulator` to `C:\Windows\System32\Drivers\etc\hosts`
 
-Short reason: it allows single-sign-on to work.
+Short reason: it allows user/password logins to work.
 
 Longer reason: This allows the backend container to reference the local IdP/OIDC/SSO server container by hostname `sso-emulator` inside the Docker network
 whilst allowing the browser-hosted frontend to reference the IdP/OIDC/SSO server (which is port-mapped to the host) via the same
 `sso-emulator` hostname outside the Docker network.
 
-### 3 - Launch the backend
+### 3 - Build and launch the application stack
 
 - To build, deploy and run on most platforms but not Apple Silicon:
 ```shell
 cd docker
-docker-compose -f docker-compose-allbackend.yaml up
+docker-compose up
 ```
 
 - To build, deploy and run on Apple Silicon:
 ```shell
 cd docker
-docker-compose -f docker-compose-allbackend.yaml --env-file .env --env-file m4.env up
+docker-compose --env-file .env --env-file m4.env up
 ```
 
 See the Docker [[README.md](./docker/README.md)] for additional options and information.
 
 Once started, leave the Docker containers running in their own window/shell/session/etc.
 
-### 4 - Launch the frontend
+### 4 - Try the application
 
-Once the backend is running, run:
-```shell
-cd react_frontend
-npm install
-npm run dev
-```
-
-That will launch the frontend in dev mode. It will provide the URL to browse the application.
-Changes to frontend source will deploy and refresh the browser automatically.
-
-### 5 - Try the application
+Point your browser at http://localhost
 
 By default, the frontend will prompt for a login when you press the
-*Log In* button. The following accounts are provided by the `sso-emulator` container which acts
+*Log In* button. The following accounts are provided by the `sso-emulator` Docker container which acts
 as an IdP/OIDC/SSO server:
 
 - `alice@example.com`
 - `bob@example.com`
 - `charlie@example.com`
 
-All three have password `password`.
+All three have password `pwd`.
 
 The first successful login will automatically be granted 'ADMIN' role. Subsequent logins will be granted 'User' role. Users will
-not appear until they have logged in at least once. After users have logged in at least once, use the
+not appear in the application until they have logged in at least once. After users have logged in at least once, use the
 first successfully logged-in account (which has 'ADMIN' role) to grant permissions to roles and grant roles to users.

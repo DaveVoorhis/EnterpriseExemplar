@@ -17,26 +17,29 @@ staticClients:
     - "http://localhost"
     - "http://localhost:5173?callback=1"
     - "http://localhost:5173"
+    - "http://frontend?callback=1"
+    - "http://frontend"
     name: "Example App"
     public: true
     allowedOrigins:
     - "http://localhost"
     - "http://localhost:5173"
+    - "http://frontend"
 
 enablePasswordDB: true
 
 staticPasswords:
   - email: "alice@example.com"
-    hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W" # password = "password"
+    hash: "$2y$10$ZA6eF1opbGaVJ5ewrPPJxe3xH8JBKHC3I4PtPfv6V9mraZdATSHgG" # password = "password"
     username: "alice"
     userID: "1001"
 
   - email: "bob@example.com"
-    hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W" # password = "password"
+    hash: "$2y$10$ZA6eF1opbGaVJ5ewrPPJxe3xH8JBKHC3I4PtPfv6V9mraZdATSHgG" # password = "password"
     username: "bob"
     userID: "1002"
 
   - email: "charlie@example.com"
-    hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W" # password = "password"
+    hash: "$2y$10$ZA6eF1opbGaVJ5ewrPPJxe3xH8JBKHC3I4PtPfv6V9mraZdATSHgG" # password = "password"
     username: "charlie"
     userID: "1003"
