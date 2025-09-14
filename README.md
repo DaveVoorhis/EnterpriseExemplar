@@ -47,7 +47,7 @@ cd docker
 docker-compose --env-file .env --env-file m4.env up
 ```
 
-See the Docker [[README.md](./docker/README.md)] for additional options and information.
+See the Docker [README.md](./docker/README.md) for additional options and information.
 
 Once started, leave the Docker containers running in their own window/shell/session/etc.
 
