@@ -5,8 +5,14 @@ This directory contains Docker compositions to support development and local tes
 ## IMPORTANT: For frontend logins to work...
 
 You **need** to map hostname `sso-emulator` to `127.0.0.1` in your local DNS resolver.
-- MacOS/Unix/Linux: add line `127.0.0.1      sso-emulator` to `/etc/hosts`
-- Windows: add line `127.0.0.1      sso-emulator` to `C:\Windows\System32\Drivers\etc\hosts`
+- MacOS/Unix/Linux: add the following line to `/etc/hosts`:
+   ```
+   127.0.0.1      sso-emulator
+  ```
+- Windows: add the following line to `C:\Windows\System32\Drivers\etc\hosts`:
+   ```
+   127.0.0.1      sso-emulator
+   ```
 
 This allows the backend
 container to reference the IdP/OIDC/SSO server container by hostname `sso-emulator` inside the Docker network

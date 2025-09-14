@@ -18,8 +18,14 @@ Currently, the `selenium_tests` subproject is mostly parts-on-the-workbench.
 - Docker Desktop or Rancher Desktop.
 
 ### 2 - Map hostname `sso-emulator` to `127.0.0.1`
-- MacOS/Unix/Linux: add line `127.0.0.1      sso-emulator` to `/etc/hosts`
-- Windows: add line `127.0.0.1      sso-emulator` to `C:\Windows\System32\Drivers\etc\hosts`
+- MacOS/Unix/Linux: add the following line to `/etc/hosts`:
+   ```
+   127.0.0.1      sso-emulator
+  ```
+- Windows: add the following line to `C:\Windows\System32\Drivers\etc\hosts`:
+   ```
+   127.0.0.1      sso-emulator
+   ```
 
 Short reason: it allows user/password logins to work.
 
