@@ -2,6 +2,8 @@
 
 Selenium-based integration tests that drive the application via the frontend running in a browser.
 
+**NOTE**: Work-in-progress. No guarantee this works as documented!
+
 ## Local Simple Tests
 
 1 - Launch the application backend, such as via:
