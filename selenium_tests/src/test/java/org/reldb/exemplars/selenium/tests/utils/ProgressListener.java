@@ -1,4 +1,4 @@
-package org.reldb.exemplar.selenium.tests.utils;
+package org.reldb.exemplars.selenium.tests.utils;
 
 import org.junit.platform.engine.TestExecutionResult;
 import org.junit.platform.engine.TestSource;

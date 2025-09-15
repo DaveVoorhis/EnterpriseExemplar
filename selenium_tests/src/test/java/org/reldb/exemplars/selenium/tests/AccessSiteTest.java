@@ -1,32 +1,32 @@
-package org.reldb.exemplar.selenium.tests;
+package org.reldb.exemplars.selenium.tests;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.reldb.exemplar.selenium.tests.utils.TestBase;
+import org.reldb.exemplars.selenium.tests.utils.TestBase;
 
 import java.time.Duration;
 
 public class AccessSiteTest extends TestBase {
 
-    public static final String EXPECTED_TITLE = "Java + Spring Boot × React";
-
     @Test
     void canOpenApplication() throws Exception {
-        var wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        driver.get(siteURL().toString());
-
-        wait.until(session -> session.getTitle() != null && session.getTitle().contains(EXPECTED_TITLE));
+        home();
     }
 
     @Test
-    @Disabled("Needs rewrite to allow for login.")
+    void canLoginAndLogout() throws Exception {
+        login(USER0, PASSWORD0);
+        logout();
+    }
+
+    @Test
     void canAccessTabs() throws Exception {
-        driver.get(siteURL().toString());
+        login(USER0, PASSWORD0);
 
         var wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(session -> session.getTitle() != null && session.getTitle().contains(EXPECTED_TITLE));
+
+        wait.until(session -> session.findElements(By.className("tab-button")).size() == 4);
 
         var tabs = driver.findElements(By.className("tab-button"));
 
@@ -46,5 +46,7 @@ public class AccessSiteTest extends TestBase {
 
         miscellaneousTab.click();
         wait.until(session -> session.findElement(By.id("miscellaneous_content")));
+
+        logout();
     }
 }

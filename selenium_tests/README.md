@@ -52,4 +52,7 @@ safaridriver --enable
 cd selenium_tests
 mvn test
 ```
-Or by running the `TestAllBrowsers` class.
+Or by running the `TestAllBrowsers` class, e.g.:
+```shell
+mvn exec:java
+```

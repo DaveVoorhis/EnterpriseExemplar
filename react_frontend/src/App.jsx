@@ -42,8 +42,8 @@ export default function App() {
               </div>
               <div className="sub">
               {user
-                ? <button className="btn btn-primary" onClick={() => doLogout()}>Logout</button>
-                : <button className="btn btn-primary" onClick={() => login()}>Log In</button>}
+                ? <button id="logoutButton" className="btn btn-primary" onClick={() => doLogout()}>Logout</button>
+                : <button id="loginButton" className="btn btn-primary" onClick={() => login()}>Log In</button>}
               </div>
             </div>
           </header>
