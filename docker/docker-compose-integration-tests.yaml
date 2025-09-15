@@ -174,7 +174,7 @@ services:
         condition: service_healthy
       selenium-hub:
         condition: service_started
-    command: /bin/sh -c "echo 'Ready. Run tests with mvn exec:java'; sleep infinity"
+    command: /bin/sh -c "echo 'Ready. Run tests with mvn clean; mvn test-compile; mvn exec:java'; sleep infinity"
 
 volumes:
   m2:

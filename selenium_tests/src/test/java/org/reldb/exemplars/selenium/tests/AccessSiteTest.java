@@ -10,6 +10,14 @@ import java.time.Duration;
 public class AccessSiteTest extends TestBase {
 
     @Test
+    @Disabled("Only enable for debugging.")
+    void keepBrowserAlive() throws Exception {
+        driver.get("about:blank");
+        var wait = new WebDriverWait(driver, Duration.ofDays(10));
+        wait.until(session -> session.findElements(By.className("does-not-exist")).size() == 1);
+    }
+
+    @Test
     void canOpenApplication() throws Exception {
         home();
     }
