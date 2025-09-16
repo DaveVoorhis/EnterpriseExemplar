@@ -132,6 +132,12 @@ services:
       - SE_NODE_MAX_SESSIONS=10
       - SE_NODE_OVERRIDE_MAX_SESSIONS=true
       - DBUS_SESSION_BUS_ADDRESS=/dev/null
+    command: >
+      sh -c "
+        sudo apt-get update && sudo apt-get install -y socat && sudo rm -rf /var/lib/apt/lists/*;
+        sudo socat TCP-LISTEN:80,fork TCP:frontend:80 &
+        /opt/bin/entry_point.sh
+      "
 
   selenium-node-edge:
     image: selenium/node-edge:4.35.0
@@ -144,6 +150,12 @@ services:
       - SE_NODE_MAX_SESSIONS=10
       - SE_NODE_OVERRIDE_MAX_SESSIONS=true
       - DBUS_SESSION_BUS_ADDRESS=/dev/null
+    command: >
+      sh -c "
+        sudo apt-get update && sudo apt-get install -y socat && sudo rm -rf /var/lib/apt/lists/*;
+        sudo socat TCP-LISTEN:80,fork TCP:frontend:80 &
+        /opt/bin/entry_point.sh
+      "
 
   selenium-node-firefox:
     image: selenium/node-firefox:4.35.0
@@ -155,9 +167,15 @@ services:
       - SE_NODE_MAX_SESSIONS=10
       - SE_NODE_OVERRIDE_MAX_SESSIONS=true
       - DBUS_SESSION_BUS_ADDRESS=/dev/null
+    command: >
+      sh -c "
+        sudo apt-get update && sudo apt-get install -y socat && sudo rm -rf /var/lib/apt/lists/*;
+        sudo socat TCP-LISTEN:80,fork TCP:frontend:80 &
+        /opt/bin/entry_point.sh
+      "
 
   test-runner:
-    image: "jelastic/maven:3.9.5-openjdk-21"
+    image: "maven:3.9.6-eclipse-temurin-21-jammy"
     container_name: test-runner
     hostname: test-runner
     working_dir: /workspace
@@ -166,7 +184,7 @@ services:
       - m2:/root/.m2
     environment:
       - SELENIUM_GRID_URL=http://selenium-hub:4444
-      - TEST_SITE_URL=http://frontend
+      - TEST_SITE_URL=http://localhost
     depends_on:
       run_java_backend:
         condition: service_healthy
@@ -174,7 +192,14 @@ services:
         condition: service_healthy
       selenium-hub:
         condition: service_started
-    command: /bin/sh -c "echo 'Ready. Run tests with mvn clean; mvn test-compile; mvn exec:java'; sleep infinity"
+    command: >
+      sh -c "
+        # forward localhost:80 -> frontend:80
+        apt-get update && apt-get install -y socat && rm -rf /var/lib/apt/lists/*;
+        socat TCP-LISTEN:80,fork TCP:frontend:80 &
+        echo 'Ready. Run tests with mvn clean; mvn test-compile; mvn exec:java';
+        sleep infinity
+      "
 
 volumes:
   m2:
