@@ -24,7 +24,7 @@ public interface RoleRepository extends CrudRepository<@NonNull Role, @NonNull L
     // spotless:off
     @NativeQuery(value = """
             INSERT INTO roles (role_id, name, description, active)
-            VALUES (:roleId, :name, :description, 1);
+            VALUES (:roleId, :name, :description, true);
             """)
     // spotless:on
     void addSpecialRole(long roleId, String name, String description);

@@ -35,16 +35,10 @@ whilst allowing the browser-hosted frontend to reference the IdP/OIDC/SSO server
 
 ### 3 - Build and launch the application stack
 
-- To build, deploy and run on most platforms but not Apple Silicon:
+- To build, deploy and run on most platforms:
 ```shell
 cd docker
 docker-compose up
-```
-
-- To build, deploy and run on Apple Silicon:
-```shell
-cd docker
-docker-compose --env-file .env --env-file m4.env up
 ```
 
 See the Docker [README.md](./docker/README.md) for additional options and information.

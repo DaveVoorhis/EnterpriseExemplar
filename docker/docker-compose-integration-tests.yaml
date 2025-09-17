@@ -31,25 +31,21 @@ services:
       - m2:/root/.m2
     command: /bin/sh -c "mvn clean install ${mvnparms}"
 
-  sqlserver_db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    environment:
-      ACCEPT_EULA: Y
-      SA_PASSWORD: ${sqlpass}
-    ports:
-      - "1433:1433"
-    container_name: sqlserver_db
-    hostname: sqlserver_db
+  postgres_db:
+    image: postgres:17.6
+    restart: always
+    shm_size: 128mb
     volumes:
-      - mssqlvolumefortests:/var/opt/mssql
-
-  sqlserver_db_init:
-    depends_on:
-      sqlserver_db:
-        condition: service_started
-    build: ../java_backend/docker/${platform}/dbNewInit
-    container_name: sqlserver_db_init
-    hostname: sqlserver_db_init
+      - pgsqlvolumefortests:/var/lib/postgresql/data
+      - ./pg_init:/docker-entrypoint-initdb.d
+    environment:
+      #      POSTGRES_DB: postgres
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: ${sqlpass}
+    container_name: postgres_db
+    hostname: postgres_db
+    ports:
+      - "5432:5432"
 
   sso-emulator:
     image: ghcr.io/dexidp/dex:latest
@@ -63,8 +59,8 @@ services:
 
   run_java_backend:
     depends_on:
-      sqlserver_db_init:
-        condition: service_completed_successfully
+      postgres_db:
+        condition: service_started
       build_java_backend:
         condition: service_completed_successfully
       sso-emulator:
@@ -74,9 +70,9 @@ services:
     hostname: backend
     working_dir: /home/java_backend
     environment:
-      SPRING_DATASOURCE_JDBCURL: "jdbc:sqlserver://sqlserver_db:1433;database=main;user=sa;password=${sqlpass};encrypt=false"
-      SPRING_DATASOURCETWO_JDBCURL: "jdbc:sqlserver://sqlserver_db:1433;database=two;user=sa;password=${sqlpass};encrypt=false"
-      SPRING_DATASOURCETHREE_JDBCURL: "jdbc:sqlserver://sqlserver_db:1433;database=three;user=sa;password=${sqlpass};encrypt=false"
+      SPRING_DATASOURCE_JDBCURL: "jdbc:postgresql://postgres_db:5432/main?user=pguser&password=${sqlpass}"
+      SPRING_DATASOURCETWO_JDBCURL: "jdbc:postgresql://postgres_db:5432/two?user=pguser&password=${sqlpass}"
+      SPRING_DATASOURCETHREE_JDBCURL: "jdbc:postgresql://postgres_db:5432/three?user=pguser&password=${sqlpass}"
       OAUTH_ISSUER: "http://sso-emulator:5556"
       NEWUSERISENABLEDBYDEFAULT: true
       FIRSTUSERISADMIN: true
@@ -207,5 +203,5 @@ services:
 
 volumes:
   m2:
-  mssqlvolumefortests:
+  pgsqlvolumefortests:
     driver: local
