@@ -31,11 +31,6 @@ Navigate to the docker directory, then:
 docker-compose up
 ```
 
-- For Apple Silicon:
-```shell
-docker-compose --env-file .env --env-file m4.env up
-```
-
 See below for additional environment options.
 
 ## To build and run the application backend...
@@ -48,11 +43,6 @@ Navigate to the docker directory, then:
 - For most platforms:
 ```shell
 docker-compose -f docker-compose-allbackend.yaml up
-```
-
-- For Apple Silicon:
-```shell
-docker-compose -f docker-compose-allbackend.yaml --env-file .env --env-file m4.env up
 ```
 
 Once the backend is running, navigate to the `react_frontend` directory and run:
@@ -75,11 +65,6 @@ Navigate to the docker directory, then:
 docker-compose -f docker-compose-integration-tests.yaml up
 ```
 
-- For Apple Silicon:
-```shell
-docker-compose -f docker-compose-integration-tests.yaml --env-file .env --env-file m4.env up
-```
-
 Once the docker containers have been launched, go to http://localhost:4444 to see the Selenium console. Use 'secret' as the VNC password when prompted, if you wish to view interactive activity.
 
 The test results will be stored in the `target/reports/test-results` subdirectory of the `selenium_tests` project.
@@ -91,13 +76,12 @@ See below for additional environment options.
 Environment files (`.env` and `*.env`) provide environment-specific settings for different host environments:
 
 - `.env` Default settings.
-- `m4.env` Run on Apple Silicon CPUs.
 - `nossl.env` Run with reduced SSL certificate checks to permit running on **dev-only** machines with zScaler.
 
-These can be used in combination. For example, to launch all backend services on a development M4 MacOS system with reduced SSL certificate checks:
+These must be used in combination. For example, to launch all backend services with reduced SSL certificate checks:
 
 ```shell
-docker-compose -f docker-compose-allbackend.yaml --env-file .env --env-file m4.env --env-file nossl.env up
+docker-compose -f docker-compose-allbackend.yaml --env-file .env --env-file nossl.env up
 ```
 
-Note that the order of `--env-file` specifications is important. The `.env` file must be specified before `m4.env`, and it before `nossl.env`.
+Note that the order of `--env-file` specifications is important. The `.env` file must be specified first.

@@ -1,0 +1,3 @@
+CREATE DATABASE main OWNER pguser;
+CREATE DATABASE two OWNER pguser;
+CREATE DATABASE three OWNER pguser;

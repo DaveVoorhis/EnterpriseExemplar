@@ -16,11 +16,11 @@ public interface RolePermissionRepository extends CrudRepository<@NonNull RolePe
             FROM app_users, user_roles, roles, role_permissions
             WHERE app_users.user_id = :userid
               AND role_permissions.permission_name = :permissionName
-              AND app_users.enabled != 0
+              AND app_users.enabled
               AND app_users.user_id = user_roles.user_id
               AND user_roles.role_id = roles.role_id
               AND roles.role_id = role_permissions.role_id
-              AND roles.active != 0
+              AND roles.active
             """)
     // spotless:on
     long countActiveEnabledRolePermission(long userid, String permissionName);
@@ -32,7 +32,7 @@ public interface RolePermissionRepository extends CrudRepository<@NonNull RolePe
              WHERE user_roles.role_id = roles.role_id
                AND user_roles.user_id = :userId
                AND roles.role_id = role_permissions.role_id
-               AND roles.active != 0
+               AND roles.active
             """)
     // spotless:on
     List<String> findActiveUserPermissions(long userId);

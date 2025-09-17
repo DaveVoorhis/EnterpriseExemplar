@@ -1,11 +1,6 @@
 package org.reldb.exemplars.java.backend.model.two;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +10,8 @@ import lombok.Setter;
 public class Demo {
     @Id
     @Column(name = "demo_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
+    @SequenceGenerator(name = "demo_id", allocationSize = 1)
     private long demoId;
 
     @Setter

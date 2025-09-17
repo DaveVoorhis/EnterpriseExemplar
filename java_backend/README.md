@@ -111,7 +111,7 @@ This backend uses a simple layered architecture where:
 ### Runtime (minimum)
 
 - Java JRE/JDK 21 or above
-- SQL Server DBMS instance with databases named `main`, `two`, `three`. See [./docker/README.md](docker/README.md) for Docker launch instructions.
+- PostgreSQL DBMS instance with databases named `main`, `two`, `three`. See [README.md](../docker/README.md) for Docker launch instructions.
 
 ### Build
 
@@ -135,13 +135,13 @@ The application expects to access three pre-existing databases, as follows:
 The databases are identified by connection strings specified in environment variables, for example:
 
 ```shell
-SPRING_DATASOURCE_JDBCURL="jdbc:sqlserver://my-sql-server:1433;database=main;user=dave;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
-SPRING_DATASOURCETWO_JDBCURL="jdbc:sqlserver://my-sql-server:1433;database=two;user=dave;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
-SPRING_DATASOURCETHREE_JDBCURL="jdbc:sqlserver://my-sql-server:1433;database=three;user=dave;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
+SPRING_DATASOURCE_JDBCURL="jdbc:postgresql://postgres_db:5432/main?user=pguser&password=sqlpass"
+SPRING_DATASOURCETWO_JDBCURL="jdbc:postgresql://postgres_db:5432/two?user=pguser&password=sqlpass"
+SPRING_DATASOURCETHREE_JDBCURL="jdbc:postgresql://postgres_db:5432/three?user=pguser&password=sqlpass"
 ```
 
-Note that the passwords have been elided in the above, so you'll need to obtain them and replace `{your_password_here}` with the real passwords and
-probably use a different user account from `dave`.
+Note that the passwords have been elided in the above, so you'll need to obtain them and replace `sqlpass` with the real passwords and
+probably use a different user account from `pguser`.
 
 The Liquibase database migrator is configured to manage database schema changes for the `main` and `two` databases.
 
@@ -191,7 +191,7 @@ be manually granted `ADMIN` privilege as described below.
 If `new-user-is-enabled-by-default` is set to `false`, the first user will need to be manually enabled
 in the `main` database via SQL query. E.g.:
 ```sql
-UPDATE app_users SET enabled = 1 WHERE email = '<username>';
+UPDATE app_users SET enabled = true WHERE email = '<username>';
 ```
 
 If `first-user-is-admin` is set to `false`, a user will need to be designated as administrator and 
@@ -230,9 +230,9 @@ To simplify application launch, you may wish to create a shell (MacOS) or CMD (W
 E.g., for Windows create a `launch.cmd` file within the backend project root:
 
 ```shell
-set SPRING_DATASOURCE_JDBCURL=jdbc:sqlserver://my-sql-server:1433;database=main;user=dave;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
-set SPRING_DATASOURCETWO_JDBCURL=jdbc:sqlserver://my-sql-server:1433;database=two;user=dave;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
-set SPRING_DATASOURCETHREE_JDBCURL=jdbc:sqlserver://my-sql-server:1433;database=three;user=dave;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+set SPRING_DATASOURCE_JDBCURL=jdbc:postgresql://postgres_db:5432/main?user=pguser&password=sqlpass;
+set SPRING_DATASOURCETWO_JDBCURL=jdbc:postgresql://postgres_db:5432/two?user=pguser&password=sqlpass;
+set SPRING_DATASOURCETHREE_JDBCURL=jdbc:postgresql://postgres_db:5432/three?user=pguser&password=sqlpass;
 java -jar target\JavaBackendExemplar-0.0.1.jar
 ``` 
 
@@ -240,13 +240,13 @@ For MacOS or Linux, create a `launch.sh` file within the backend project root:
 
 ```shell
 #!/bin/sh
-export SPRING_DATASOURCE_JDBCURL="jdbc:sqlserver://my-sql-server:1433;database=main;user=dave;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
-export SPRING_DATASOURCETWO_JDBCURL="jdbc:sqlserver://my-sql-server:1433;database=two;user=dave;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
-export SPRING_DATASOURCETHREE_JDBCURL="jdbc:sqlserver://my-sql-server:1433;database=three;user=dave;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
+export SPRING_DATASOURCE_JDBCURL="jdbc:postgresql://postgres_db:5432/main?user=pguser&password=sqlpass"
+export SPRING_DATASOURCETWO_JDBCURL="jdbc:postgresql://postgres_db:5432/two?user=pguser&password=sqlpass"
+export SPRING_DATASOURCETHREE_JDBCURL="jdbc:postgresql://postgres_db:5432/three?user=pguser&password=sqlpass"
 java -jar target/JavaBackendExemplar-0.0.1.jar
 ```
 
-**NOTE**: Replace `{your_password_here}` and `dave` with the appropriate credentials for your environment.
+**NOTE**: Replace `postgres_db`, `sqlpass` and `pguser` with the appropriate credentials for your environment.
 
 You can verify that the databases are accessible from the application console log. If you see entries like the following for all
 three databases, it's connecting to real databases:
@@ -257,7 +257,7 @@ If you see any log entries like the following for any of the three databases, it
 ```
 ... Added connection conn0: url=jdbc:h2:mem:testdb user=SA
 ```
-It may also fail to launch at all, and will show errors in the log related to failed JDBC connections like `java.lang.RuntimeException: Failed to get driver instance for jdbcUrl=jdbc:h2:mem:testdb;user=sa;MODE=MSSQLServer;`
+It may also fail to launch at all, and will show errors in the log related to failed JDBC connections like `java.lang.RuntimeException: Failed to get driver instance for jdbcUrl=jdbc:h2:mem:testdb;user=sa;MODE=PostgreSQL;`
 
 **WARNING: Set your SCM configuration to ***not*** upload your launch script, to avoid uploading passwords to the code repository.**
 
@@ -300,9 +300,9 @@ java -jar -Dspring.profiles.active=verbose target\JavaBackendExemplar-0.0.1.jar
 E.g.:
 ```shell
 #!/bin/sh
-export SPRING_DATASOURCE_JDBCURL="jdbc:sqlserver://my-sql-server.database.windows.net:1433;database=main;user=dave;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
-export SPRING_DATASOURCETWO_JDBCURL="jdbc:sqlserver://my-sql-server.database.windows.net:1433;database=two;user=dave;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
-export SPRING_DATASOURCETHREE_JDBCURL="jdbc:sqlserver://my-sql-server.database.windows.net:1433;database=three;user=dave;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
+export SPRING_DATASOURCE_JDBCURL="jdbc:postgresql://postgres_db:5432/main?user=pguser&password=sqlpass"
+export SPRING_DATASOURCETWO_JDBCURL="jdbc:postgresql://postgres_db:5432/two?user=pguser&password=sqlpass"
+export SPRING_DATASOURCETHREE_JDBCURL="jdbc:postgresql://postgres_db:5432/three?user=pguser&password=sqlpass"
 java -jar target/JavaBackendExemplar-0.0.1.jar
 ```
 
