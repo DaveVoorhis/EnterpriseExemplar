@@ -22,7 +22,7 @@ services:
       chmod 0755 dist"
 
   build_java_backend:
-    image: "jelastic/maven:3.9.5-openjdk-21"
+    image: "maven:3.9.11-eclipse-temurin-21-alpine"
     working_dir: /home/java_backend
     container_name: build_java_backend
     hostname: build_java_backend
@@ -33,7 +33,6 @@ services:
 
   sqlserver_db:
     image: mcr.microsoft.com/mssql/server:2022-latest
-    restart: always
     environment:
       ACCEPT_EULA: Y
       SA_PASSWORD: ${sqlpass}
@@ -54,7 +53,6 @@ services:
 
   sso-emulator:
     image: ghcr.io/dexidp/dex:latest
-    restart: always
     container_name: sso-emulator
     hostname: sso-emulator
     command: ["dex", "serve", "/etc/dex/config.yaml"]
@@ -72,7 +70,6 @@ services:
       sso-emulator:
         condition: service_started
     image: "jelastic/maven:3.9.5-openjdk-21"
-    restart: always
     container_name: backend
     hostname: backend
     working_dir: /home/java_backend
@@ -100,7 +97,6 @@ services:
       build_react_frontend:
         condition: service_completed_successfully
     image: nginx:1.29.0
-    restart: always
     container_name: frontend
     hostname: frontend
     ports:
@@ -135,6 +131,7 @@ services:
     command: >
       sh -c "
         sudo apt-get update && sudo apt-get install -y socat && sudo rm -rf /var/lib/apt/lists/*;
+        # forward localhost:80 -> frontend:80
         sudo socat TCP-LISTEN:80,fork TCP:frontend:80 &
         /opt/bin/entry_point.sh
       "
@@ -153,6 +150,7 @@ services:
     command: >
       sh -c "
         sudo apt-get update && sudo apt-get install -y socat && sudo rm -rf /var/lib/apt/lists/*;
+        # forward localhost:80 -> frontend:80
         sudo socat TCP-LISTEN:80,fork TCP:frontend:80 &
         /opt/bin/entry_point.sh
       "
@@ -170,6 +168,7 @@ services:
     command: >
       sh -c "
         sudo apt-get update && sudo apt-get install -y socat && sudo rm -rf /var/lib/apt/lists/*;
+        # forward localhost:80 -> frontend:80
         sudo socat TCP-LISTEN:80,fork TCP:frontend:80 &
         /opt/bin/entry_point.sh
       "
@@ -192,13 +191,18 @@ services:
         condition: service_healthy
       selenium-hub:
         condition: service_started
+      selenium-node-chrome:
+        condition: service_started
+      selenium-node-edge:
+        condition: service_started
+      selenium-node-firefox:
+        condition: service_started
     command: >
       sh -c "
-        # forward localhost:80 -> frontend:80
         apt-get update && apt-get install -y socat && rm -rf /var/lib/apt/lists/*;
+        # forward localhost:80 -> frontend:80
         socat TCP-LISTEN:80,fork TCP:frontend:80 &
-        echo 'Ready. Run tests with mvn clean ${mvnparms}; mvn test-compile ${mvnparms}; mvn exec:java ${mvnparms}';
-        sleep infinity
+        mvn clean test-compile exec:java ${mvnparms}
       "
 
 volumes:

@@ -68,8 +68,6 @@ See below for additional environment options.
 
 ## To build and launch the application and run integration tests...
 
-**NOTE**: This is a work in progress.
-
 Navigate to the docker directory, then:
 
 - For most platforms:
@@ -81,6 +79,8 @@ docker-compose -f docker-compose-integration-tests.yaml up
 ```shell
 docker-compose -f docker-compose-integration-tests.yaml --env-file .env --env-file m4.env up
 ```
+
+Once the docker containers have been launched, go to http://localhost:4444 to see the Selenium console. Use 'secret' as the VNC password when prompted, if you wish to view interactive activity.
 
 See below for additional environment options.
 
