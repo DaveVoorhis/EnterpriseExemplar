@@ -31,11 +31,11 @@ public class TestGlobalExceptionController {
 
     @Test
     void handleNoResourceFoundExceptionShouldReturnErrorResponseWithNotFoundError() {
-        final var ex = new NoResourceFoundException(HttpMethod.GET, "/non/existence");
+        final var ex = new NoResourceFoundException(HttpMethod.GET, "http://something", "/non/existence");
 
         final var errorResponseEntity = globalExceptionController
                 .handleNoResourceFoundException(ex);
-        final var expectedErrorResponse = ErrorResponse.resourceNotFound("No static resource /non/existence.");
+        final var expectedErrorResponse = ErrorResponse.resourceNotFound("No static resource /non/existence for request 'http://something'.");
 
         validateException(errorResponseEntity, expectedErrorResponse);
     }
