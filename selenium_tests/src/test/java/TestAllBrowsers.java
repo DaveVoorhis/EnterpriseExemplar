@@ -50,7 +50,7 @@ public class TestAllBrowsers {
         var totalFailures = 0L;
 
         var browsers = browsersString.split(",");
-        for (String browser : browsers) {
+        for (var browser : browsers) {
             System.setProperty("BROWSER", browser);
             System.out.println("===== Running test suite for " + browser + " =====");
 
@@ -62,7 +62,7 @@ public class TestAllBrowsers {
                     .enableTestExecutionListenerAutoRegistration(true)
                     .build();
 
-            Path reportsDir = Paths.get("selenium_tests", "target", "reports", "test-results", browser);
+            var reportsDir = Paths.get("target", "reports", "test-results", browser);
             Files.createDirectories(reportsDir);
 
             var request = LauncherDiscoveryRequestBuilder.request()
