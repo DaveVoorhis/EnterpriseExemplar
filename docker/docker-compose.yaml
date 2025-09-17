@@ -22,7 +22,7 @@ services:
         chmod 0755 dist"
 
   build_java_backend:
-    image: "jelastic/maven:3.9.5-openjdk-21"
+    image: "maven:3.9.11-eclipse-temurin-21-alpine"
     working_dir: /home/java_backend
     container_name: build_java_backend
     hostname: build_java_backend
@@ -71,7 +71,7 @@ services:
          condition: service_completed_successfully
       sso-emulator:
          condition: service_started
-    image: "jelastic/maven:3.9.5-openjdk-21"
+    image: "maven:3.9.11-eclipse-temurin-21-alpine"
     restart: always
     container_name: backend
     hostname: backend

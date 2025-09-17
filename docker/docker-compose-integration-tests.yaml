@@ -69,7 +69,7 @@ services:
         condition: service_completed_successfully
       sso-emulator:
         condition: service_started
-    image: "jelastic/maven:3.9.5-openjdk-21"
+    image: "maven:3.9.11-eclipse-temurin-21-alpine"
     container_name: backend
     hostname: backend
     working_dir: /home/java_backend
@@ -174,7 +174,7 @@ services:
       "
 
   test-runner:
-    image: "maven:3.9.6-eclipse-temurin-21-jammy"
+    image: "maven:3.9.9-eclipse-temurin-21-jammy"
     container_name: test-runner
     hostname: test-runner
     working_dir: /workspace
