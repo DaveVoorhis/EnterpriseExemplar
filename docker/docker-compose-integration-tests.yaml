@@ -197,7 +197,7 @@ services:
         # forward localhost:80 -> frontend:80
         apt-get update && apt-get install -y socat && rm -rf /var/lib/apt/lists/*;
         socat TCP-LISTEN:80,fork TCP:frontend:80 &
-        echo 'Ready. Run tests with mvn clean; mvn test-compile; mvn exec:java';
+        echo 'Ready. Run tests with mvn clean ${mvnparms}; mvn test-compile ${mvnparms}; mvn exec:java ${mvnparms}';
         sleep infinity
       "
 
