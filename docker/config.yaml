@@ -30,16 +30,16 @@ enablePasswordDB: true
 
 staticPasswords:
   - email: "alice@example.com"
-    hash: "$2y$10$ZA6eF1opbGaVJ5ewrPPJxe3xH8JBKHC3I4PtPfv6V9mraZdATSHgG" # password = "password"
+    hash: "$2y$10$ZA6eF1opbGaVJ5ewrPPJxe3xH8JBKHC3I4PtPfv6V9mraZdATSHgG" # password = "pwd"
     username: "alice"
     userID: "1001"
 
   - email: "bob@example.com"
-    hash: "$2y$10$ZA6eF1opbGaVJ5ewrPPJxe3xH8JBKHC3I4PtPfv6V9mraZdATSHgG" # password = "password"
+    hash: "$2y$10$ZA6eF1opbGaVJ5ewrPPJxe3xH8JBKHC3I4PtPfv6V9mraZdATSHgG" # password = "pwd"
     username: "bob"
     userID: "1002"
 
   - email: "charlie@example.com"
-    hash: "$2y$10$ZA6eF1opbGaVJ5ewrPPJxe3xH8JBKHC3I4PtPfv6V9mraZdATSHgG" # password = "password"
+    hash: "$2y$10$ZA6eF1opbGaVJ5ewrPPJxe3xH8JBKHC3I4PtPfv6V9mraZdATSHgG" # password = "pwd"
     username: "charlie"
     userID: "1003"
