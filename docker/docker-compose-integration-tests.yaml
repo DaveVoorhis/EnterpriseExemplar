@@ -1,4 +1,5 @@
 # This composition builds the full application stack and runs integration tests on it.
+# See test reports in selenium_tests/target/reports after test-runner finishes.
 
 services:
 
@@ -39,7 +40,6 @@ services:
       - pgsqlvolumefortests:/var/lib/postgresql/data
       - ./pg_init:/docker-entrypoint-initdb.d
     environment:
-      #      POSTGRES_DB: postgres
       POSTGRES_USER: pguser
       POSTGRES_PASSWORD: ${sqlpass}
     container_name: postgres_db

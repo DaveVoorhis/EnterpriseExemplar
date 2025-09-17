@@ -71,6 +71,23 @@ The test results will be stored in the `target/reports/test-results` subdirector
 
 See below for additional environment options.
 
+## To launch the SQL database to support running the backend locally...
+
+Navigate to the docker directory, then:
+
+- For most platforms:
+```shell
+docker-compose -f docker-compose-sqldb.yaml up
+```
+
+Use the following connection strings:
+```
+SPRING_DATASOURCE_JDBCURL: "jdbc:postgresql://localhost:5432/main?user=pguser&password=${sqlpass}"
+SPRING_DATASOURCETWO_JDBCURL: "jdbc:postgresql://localhost:5432/two?user=pguser&password=${sqlpass}"
+SPRING_DATASOURCETHREE_JDBCURL: "jdbc:postgresql://localhost:5432/three?user=pguser&password=${sqlpass}"
+```
+Replace `${sqlpass}` with the password defined in the `.env` file.
+
 ## Environment Options
 
 Environment files (`.env` and `*.env`) provide environment-specific settings for different host environments:
