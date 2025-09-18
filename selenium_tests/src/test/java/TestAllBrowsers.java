@@ -60,7 +60,7 @@ public class TestAllBrowsers {
         BrowserQueue.add(browsers);
         Arrays.stream(browsers)
                 .parallel()
-                .forEach(browser -> accumulate(runSuiteFor(browser)));
+                .forEach(TestAllBrowsers::runSuiteFor);
 
         System.out.println();
         System.out.printf("Browsers: %s; Tests: %s; Passed: %s; Failed: %s; Skipped: %s",
@@ -78,7 +78,7 @@ public class TestAllBrowsers {
         totalFailures += summary.getTotalFailureCount();
     }
 
-    private static TestExecutionSummary runSuiteFor(String browser) {
+    private static void runSuiteFor(String browser) {
         System.out.println("===== Running test suite for " + browser + " =====");
 
         var out = new PrintWriter(System.out, true);
@@ -112,7 +112,7 @@ public class TestAllBrowsers {
         }
         summaryGeneratingListener.getSummary().printTo(out);
 
-        return summaryGeneratingListener.getSummary();
+        accumulate(summaryGeneratingListener.getSummary());
     }
 
     private static Properties loadProperties() throws IOException {

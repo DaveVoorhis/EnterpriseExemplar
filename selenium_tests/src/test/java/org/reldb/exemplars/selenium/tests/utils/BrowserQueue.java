@@ -12,7 +12,7 @@ public class BrowserQueue {
         Arrays.stream(browsers).forEach(browser -> browsersToTest.add(new Browser(browser)));
     }
 
-    public synchronized static Browser getOrDefault(String defaultItem) {
+    public static Browser getOrDefault(String defaultItem) {
         try {
             return browsersToTest.remove();
         } catch (NoSuchElementException nsee) {
