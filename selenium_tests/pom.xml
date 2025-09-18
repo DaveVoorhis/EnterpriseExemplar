@@ -8,11 +8,11 @@
     <version>1.0.0-SNAPSHOT</version>
     <name>selenium_test_exemplar</name>
     <description>Selenium test exemplar</description>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.release>21</maven.compiler.release>
         <selenium-java.version>4.35.0</selenium-java.version>
         <junit-jupiter.version>5.13.4</junit-jupiter.version>
         <junit-platform.version>1.13.4</junit-platform.version>
@@ -58,20 +58,30 @@
                 <version>${maven-surefire-plugin.version}</version>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>${exec-maven-plugin.version}</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.7.1</version>
                 <executions>
                     <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
                         <goals>
-                            <goal>java</goal>
+                            <goal>single</goal>
                         </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>assembly.xml</descriptor>
+                            </descriptors>
+                            <archive>
+                                <manifest>
+                                    <mainClass>TestAllBrowsers</mainClass>
+                                </manifest>
+                            </archive>
+                            <!-- Don’t append -jar-with-dependencies -->
+                            <appendAssemblyId>false</appendAssemblyId>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <mainClass>TestAllBrowsers</mainClass>
-                    <classpathScope>test</classpathScope>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

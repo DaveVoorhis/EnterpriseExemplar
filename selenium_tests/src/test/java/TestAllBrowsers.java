@@ -59,7 +59,7 @@ public class TestAllBrowsers {
         var browsers = browsersString.split(",");
         BrowserQueue.add(browsers);
         Arrays.stream(browsers)
-//                .parallel()
+                .parallel()
                 .forEach(TestAllBrowsers::runSuiteFor);
 
         System.out.println();
@@ -89,7 +89,7 @@ public class TestAllBrowsers {
                 .enableTestExecutionListenerAutoRegistration(true)
                 .build();
 
-        var reportsDir = Paths.get("selenium_tests","target", "reports", "test-results", browser);
+        var reportsDir = Paths.get("target", "reports", "test-results", browser);
         try {
             Files.createDirectories(reportsDir);
         } catch (IOException e) {

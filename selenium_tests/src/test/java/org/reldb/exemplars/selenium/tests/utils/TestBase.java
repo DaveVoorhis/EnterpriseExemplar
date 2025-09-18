@@ -27,17 +27,8 @@ public abstract class TestBase {
 
     protected WebDriver driver = getDriver();
 
-    protected WebDriver getDriver() {
-        var driver = threadLocal.get();
-        if (driver == null) {
-            driver = BrowserQueue.getOrDefault("chrome").getDriver();
-            threadLocal.set(driver);
-        }
-        return driver;
-    }
-
     public String siteURI() {
-        return Browser.getConfigSetting(TEST_SITE_URL);
+        return Config.getConfigSetting(TEST_SITE_URL);
     }
 
     public URL siteURL() throws Exception {
@@ -96,10 +87,19 @@ public abstract class TestBase {
     }
 
     @AfterAll
-    static void afterAll() {
+    static synchronized void afterAll() {
         var driver = threadLocal.get();
         if (driver != null) {
-//            driver.quit();
+            driver.quit();
+            threadLocal.set(null);
         }
+    }
+
+    private synchronized WebDriver getDriver() {
+        var driver = threadLocal.get();
+        if (driver == null) {
+            threadLocal.set(driver = BrowserQueue.getOrDefault("chrome").getDriver());
+        }
+        return driver;
     }
 }

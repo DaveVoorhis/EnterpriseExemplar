@@ -22,12 +22,8 @@ public class Browser {
 
     private final WebDriver driver;
 
-    public static String getConfigSetting(String key) {
-        return System.getProperty(key, System.getenv().get(key));
-    }
-
     private String gridURI() {
-        return getConfigSetting(SELENIUM_GRID_URL);
+        return Config.getConfigSetting(SELENIUM_GRID_URL);
     }
 
     public Browser(String name) {
@@ -38,10 +34,6 @@ public class Browser {
 
     public WebDriver getDriver() {
         return driver;
-    }
-
-    public void quitDriver() {
-        driver.quit();
     }
 
     private URL gridUrl() {
