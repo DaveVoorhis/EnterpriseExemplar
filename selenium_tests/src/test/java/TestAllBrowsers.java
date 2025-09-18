@@ -61,7 +61,6 @@ public class TestAllBrowsers {
         Arrays.stream(browsers)
                 .parallel()
                 .forEach(browser -> accumulate(runSuiteFor(browser)));
-        BrowserQueue.quit();
 
         System.out.println();
         System.out.printf("Browsers: %s; Tests: %s; Passed: %s; Failed: %s; Skipped: %s",

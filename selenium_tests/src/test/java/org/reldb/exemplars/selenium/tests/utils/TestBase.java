@@ -1,5 +1,6 @@
 package org.reldb.exemplars.selenium.tests.utils;
 
+import org.junit.jupiter.api.AfterAll;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -22,7 +23,18 @@ public abstract class TestBase {
 
     private final static String TEST_SITE_URL = "TEST_SITE_URL";  // often http://localhost or http://localhost:5173
 
-    protected WebDriver driver = BrowserQueue.getOrDefault("chrome").getDriver();
+    public static final InheritableThreadLocal<WebDriver> threadLocal = new InheritableThreadLocal<>();
+
+    protected WebDriver driver = getDriver();
+
+    protected WebDriver getDriver() {
+        var driver = threadLocal.get();
+        if (driver == null) {
+            driver = BrowserQueue.getOrDefault("chrome").getDriver();
+            threadLocal.set(driver);
+        }
+        return driver;
+    }
 
     public String siteURI() {
         return Browser.getConfigSetting(TEST_SITE_URL);
@@ -81,5 +93,13 @@ public abstract class TestBase {
 
         var loginButton = wait.until(session -> session.findElement(By.id("loginButton")));
         assertThat(loginButton).isNotNull();
+    }
+
+    @AfterAll
+    static void afterAll() {
+        var driver = threadLocal.get();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
