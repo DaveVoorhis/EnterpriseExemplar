@@ -230,9 +230,9 @@ To simplify application launch, you may wish to create a shell (MacOS) or CMD (W
 E.g., for Windows create a `launch.cmd` file within the backend project root:
 
 ```shell
-set SPRING_DATASOURCE_JDBCURL=jdbc:postgresql://postgres_db:5432/main?user=pguser&password=sqlpass;
-set SPRING_DATASOURCETWO_JDBCURL=jdbc:postgresql://postgres_db:5432/two?user=pguser&password=sqlpass;
-set SPRING_DATASOURCETHREE_JDBCURL=jdbc:postgresql://postgres_db:5432/three?user=pguser&password=sqlpass;
+set "SPRING_DATASOURCE_JDBCURL=jdbc:postgresql://localhost:5432/main?user=pguser&password=sqlpass"
+set "SPRING_DATASOURCETWO_JDBCURL=jdbc:postgresql://localhost:5432/two?user=pguser&password=sqlpass"
+set "SPRING_DATASOURCETHREE_JDBCURL=jdbc:postgresql://localhost:5432/three?user=pguser&password=sqlpass"
 java -jar target\JavaBackendExemplar-0.0.1.jar
 ``` 
 
@@ -240,24 +240,13 @@ For MacOS or Linux, create a `launch.sh` file within the backend project root:
 
 ```shell
 #!/bin/sh
-export SPRING_DATASOURCE_JDBCURL="jdbc:postgresql://postgres_db:5432/main?user=pguser&password=sqlpass"
-export SPRING_DATASOURCETWO_JDBCURL="jdbc:postgresql://postgres_db:5432/two?user=pguser&password=sqlpass"
-export SPRING_DATASOURCETHREE_JDBCURL="jdbc:postgresql://postgres_db:5432/three?user=pguser&password=sqlpass"
+export SPRING_DATASOURCE_JDBCURL="jdbc:postgresql://localhost:5432/main?user=pguser&password=sqlpass"
+export SPRING_DATASOURCETWO_JDBCURL="jdbc:postgresql://localhost:5432/two?user=pguser&password=sqlpass"
+export SPRING_DATASOURCETHREE_JDBCURL="jdbc:postgresql://localhost:5432/three?user=pguser&password=sqlpass"
 java -jar target/JavaBackendExemplar-0.0.1.jar
 ```
 
-**NOTE**: Replace `postgres_db`, `sqlpass` and `pguser` with the appropriate credentials for your environment.
-
-You can verify that the databases are accessible from the application console log. If you see entries like the following for all
-three databases, it's connecting to real databases:
-```
-... Added connection ConnectionID:1 ClientConnectionId: 7b0410a0-1ac1-40df-abda-f9b6a92240df
-```
-If you see any log entries like the following for any of the three databases, it's failed to read the connection string from an environment variable:
-```
-... Added connection conn0: url=jdbc:h2:mem:testdb user=SA
-```
-It may also fail to launch at all, and will show errors in the log related to failed JDBC connections like `java.lang.RuntimeException: Failed to get driver instance for jdbcUrl=jdbc:h2:mem:testdb;user=sa;MODE=PostgreSQL;`
+**NOTE**: Replace `sqlpass` and `pguser` with the appropriate credentials for your environment.
 
 **WARNING: Set your SCM configuration to ***not*** upload your launch script, to avoid uploading passwords to the code repository.**
 

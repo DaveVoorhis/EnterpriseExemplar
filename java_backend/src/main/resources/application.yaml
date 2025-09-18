@@ -48,8 +48,9 @@ management:
       probes:
         enabled: true
 
+# For production, this will be the URL of an OAuth issuer, e.g., one obtained from Microsoft Entra admin.
 oauth:
-  issuer: "https://login.microsoftonline.com/AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrq/v2.0"
+  issuer: "http://sso-emulator:5556"
 
 periodic-background-task:
   schedule: "1 */1 * * * *"
