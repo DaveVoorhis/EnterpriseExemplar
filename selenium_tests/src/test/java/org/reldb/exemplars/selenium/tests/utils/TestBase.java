@@ -99,7 +99,7 @@ public abstract class TestBase {
     static void afterAll() {
         var driver = threadLocal.get();
         if (driver != null) {
-            driver.quit();
+//            driver.quit();
         }
     }
 }

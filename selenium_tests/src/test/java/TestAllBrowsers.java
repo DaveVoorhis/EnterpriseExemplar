@@ -59,7 +59,7 @@ public class TestAllBrowsers {
         var browsers = browsersString.split(",");
         BrowserQueue.add(browsers);
         Arrays.stream(browsers)
-                .parallel()
+//                .parallel()
                 .forEach(TestAllBrowsers::runSuiteFor);
 
         System.out.println();
