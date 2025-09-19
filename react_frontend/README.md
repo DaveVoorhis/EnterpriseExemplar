@@ -13,7 +13,7 @@ The frontend will obtain auth tokens from the identity provider specified in `.e
 usually `http://localhost:5556` for local dev. It can be overridden at build time by specifying the authority
 via the `VITE_SSO_AUTHORITY` environment variable.
 
-## Run
+## Run for Development
 ```bash
 npm install
 npm run dev
@@ -23,10 +23,24 @@ Open the displayed URL.
 
 Changes to the frontend will automatically deploy.
 
-## Build for deployment
+## Build for Deployment
 ```bash
 npm install
 npm run build
 ```
 
-Distributable site will be in the `dist` directory.
+The distributable site will be in the `dist` directory.  It can be exposed by any standard Web server.
+
+## Clean
+
+You may need to clean the frontend before you can run for development or build for deployment if build errors occur, 
+particularly when moving from one platform to another.
+
+### MacOS/Linux
+```shell
+npm run clean
+```
+### Windows
+```shell
+npm run cleanw
+```
