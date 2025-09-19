@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import Notification, { notifyError } from '../components/Notification'
-import { api, apiPost, apiDelete, apiPut, errorMessage } from '../api.js'
+import { api, apiPost, apiDelete, apiPut, errorMessage } from '../utils/api'
 import Table from "../components/Table"
 import UserRoles from './UserRoles'
 

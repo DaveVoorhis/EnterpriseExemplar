@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { api, apiPost, apiDelete, apiPut, errorMessage, setApiUser } from './api.js'
-import { login, logout, userManager, handleCallback, getUser } from './authService'
+import { api, apiPost, apiDelete, apiPut, errorMessage, setApiUser } from './utils/api'
+import { login, logout, userManager, handleCallback, getUser } from './utils/authService'
 import ErrorBoundary from './components/ErrorBoundary'
 import Notification from './components/Notification'
 import Tabs from './Tabs'
@@ -47,7 +47,9 @@ export default function App() {
               </div>
             </div>
           </header>
-          {user ? <Tabs /> : null}
+          {user
+              ? <Tabs />
+              : <div className="content">Welcome to the EnterpriseExemplar. Please log in.</div>}
           <footer className="footer">
             <div>EnterpriseExemplar = (Java + Spring Boot + SQL Server) × React ÷ Docker</div>
             <div className="muted">Backend by DaveVoorhis; Frontend by DaveVoorhis feat. ChatGPT</div>

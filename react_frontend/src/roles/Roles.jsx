@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Notification, { notifyError } from '../components/Notification'
-import { api, apiPost, apiDelete, apiPut, errorMessage } from '../api.js'
-import { ADMIN_ROLE_ID, specialRoles } from '../constants.js'
+import { api, apiPost, apiDelete, apiPut, errorMessage } from '../utils/api'
+import { ADMIN_ROLE_ID, specialRoles } from '../utils/constants'
 import Table from "../components/Table"
 import RolePermissions from "./RolePermissions"
 

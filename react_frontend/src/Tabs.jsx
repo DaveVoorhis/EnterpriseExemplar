@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { api } from './api.js'
+import { api } from './utils/api'
 import TabbedPanel from './components/TabbedPanel'
 import Demo from './demo/Demo'
 import Users from './users/Users'

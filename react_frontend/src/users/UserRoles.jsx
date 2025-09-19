@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Notification, { notifyError } from '../components/Notification'
-import { api, apiPost, apiDelete, apiPut, errorMessage } from '../api.js'
-import { ADMIN_ROLE_ID } from '../constants.js'
+import { api, apiPost, apiDelete, apiPut, errorMessage } from '../utils/api'
+import { ADMIN_ROLE_ID } from '../utils/constants'
 import Table from "../components/Table"
 
 const USERS_URL = 'users'
