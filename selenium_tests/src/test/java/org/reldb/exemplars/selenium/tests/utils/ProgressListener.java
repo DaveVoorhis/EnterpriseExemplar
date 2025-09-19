@@ -49,7 +49,6 @@ public class ProgressListener implements TestExecutionListener {
             case SUCCESSFUL -> "✔";
             case ABORTED    -> "⚠";
             case FAILED     -> "✖";
-            default         -> "?";
         };
 
         synchronized (lock) {
@@ -74,16 +73,16 @@ public class ProgressListener implements TestExecutionListener {
                 .orElse(id.getDisplayName());
     }
 
-    private java.util.Optional<String> methodSignature(TestSource src) {
-        return src instanceof MethodSource ms
-                ? java.util.Optional.of(obtainSimpleClassName(ms) + "#" + ms.getMethodName())
+    private java.util.Optional<String> methodSignature(TestSource testSource) {
+        return testSource instanceof MethodSource methodSource
+                ? java.util.Optional.of(obtainSimpleClassName(methodSource) + "#" + methodSource.getMethodName())
                 : java.util.Optional.empty();
     }
 
-    private Object obtainSimpleClassName(MethodSource ms) {
-        return ms
+    private String obtainSimpleClassName(MethodSource methodSource) {
+        return methodSource
                 .getClassName()
-                .substring(ms.getClassName().lastIndexOf('.') + 1);
+                .substring(methodSource.getClassName().lastIndexOf('.') + 1);
     }
 }
 

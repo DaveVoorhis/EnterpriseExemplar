@@ -53,7 +53,7 @@ services:
     hostname: sso-emulator
     command: ["dex", "serve", "/etc/dex/config.yaml"]
     volumes:
-      - ./config.yaml:/etc/dex/config.yaml:ro
+      - ./dex_config.yaml:/etc/dex/config.yaml:ro
     ports:
       - "5556:5556"
 
@@ -198,7 +198,7 @@ services:
         apt-get update && apt-get install -y socat && rm -rf /var/lib/apt/lists/*;
         # forward localhost:80 -> frontend:80
         socat TCP-LISTEN:80,fork TCP:frontend:80 &
-        mvn clean test-compile exec:java ${mvnparms}
+        mvn clean install -DskipTests ${mvnparms}; java -jar target/SeleniumTestExemplar-1.0.0-SNAPSHOT.jar
       "
 
 volumes:

@@ -1,6 +1,6 @@
 # Selenium Tests
 
-Selenium-based integration tests that drive the application via the frontend running in a browser.
+Selenium-based integration tests that drive the application via its frontend running in a browser.
 
 To enable Safari test capability on MacOS, run the following from the commandline:
 ```shell
@@ -25,8 +25,11 @@ npm run dev
 cd selenium_tests
 mvn test
 ```
-Or by running the `TestAllBrowsers` class, e.g.:
+Or by running the `TestAllBrowsers` class from the IDE.
+
+Or by running the `TestAllBrowsers` class via the generated test .jar:
 ```shell
 cd selenium_tests
-mvn exec:java
+mvn clean install -DskipTests
+java -jar target/SeleniumTestExamplar-1.0.0-SNAPSHOT.jar
 ```

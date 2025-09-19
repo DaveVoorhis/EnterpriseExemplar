@@ -73,6 +73,8 @@ See below for additional environment options.
 
 ## To launch the SQL database to support running the backend locally...
 
+*This launches just the SQL DBMS in a container. It's useful when developing the backend.*
+
 Navigate to the docker directory, then:
 
 - For most platforms:
