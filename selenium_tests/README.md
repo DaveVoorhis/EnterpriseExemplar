@@ -33,3 +33,6 @@ cd selenium_tests
 mvn clean install -DskipTests
 java -jar target/SeleniumTestExamplar-1.0.0-SNAPSHOT.jar
 ```
+
+The browsers that the application will be tested against are specified in the `src/test/resources/test.properties` file,
+which can vary by operating system and/or test target (local browser vs "remote" Selenium test hub.)
