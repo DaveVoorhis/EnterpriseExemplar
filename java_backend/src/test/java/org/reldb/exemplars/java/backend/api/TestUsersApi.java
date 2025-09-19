@@ -182,7 +182,7 @@ class TestUsersApi extends ApiTestBase {
         final var userRoles = getUserRoles(VALID_ENABLED_USER_ID);
 
         assertThat(userRoles).hasSize(1);
-        assertThat(userRoles.getFirst().name()).isEqualTo("user");
+        assertThat(userRoles.getFirst().name()).isEqualTo("USER");
     }
 
     @Test

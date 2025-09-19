@@ -20,13 +20,13 @@ public class TestRoleRepository extends ApplicationTestBase {
 
         final var role0 = iterator.next();
         assertThat(role0.getRoleId()).isEqualTo(1);
-        assertThat(role0.getName()).isEqualTo("admin");
+        assertThat(role0.getName()).isEqualTo("ADMIN");
         assertThat(role0.getDescription()).isEqualTo("Administrator");
         assertThat(role0.isActive()).isTrue();
 
         final var role1 = iterator.next();
         assertThat(role1.getRoleId()).isEqualTo(2);
-        assertThat(role1.getName()).isEqualTo("user");
+        assertThat(role1.getName()).isEqualTo("USER");
         assertThat(role1.getDescription()).isEqualTo("User");
         assertThat(role1.isActive()).isTrue();
     }

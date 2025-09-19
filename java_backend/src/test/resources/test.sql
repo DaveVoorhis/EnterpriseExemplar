@@ -7,8 +7,8 @@ DELETE FROM role_permissions;
 DELETE FROM roles;
 
 INSERT INTO roles (role_id, name, description, active)
-VALUES (1, 'admin', 'Administrator', 1),
-       (2, 'user', 'User', 1);
+VALUES (1, 'ADMIN', 'Administrator', 1),
+       (2, 'USER', 'User', 1);
 
 INSERT INTO role_permissions (role_id, permission_name)
 VALUES (1, 'ADD_DEMO'),

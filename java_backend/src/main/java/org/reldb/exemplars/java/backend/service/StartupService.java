@@ -49,7 +49,7 @@ public class StartupService implements ApplicationListener<@NonNull ApplicationR
     }
 
     private void ensureUserRoleExists() {
-        ensureRoleExists(USER_ROLE_ID, "User", "Default user role");
+        ensureRoleExists(USER_ROLE_ID, "USER", "Default user role");
     }
 
     private synchronized void ensureRoleExists(long roleId, String name, String description) {
