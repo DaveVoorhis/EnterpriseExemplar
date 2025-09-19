@@ -54,6 +54,9 @@ See below for additional options.
 
 ## To build and launch the application and run integration tests...
 
+*This builds and runs the application stack, and then runs the integration tests on it. 
+It uses a distinct database volume to keep it separate from the dev database.*
+
 Navigate to the docker directory, then:
 ```shell
 docker-compose -f docker-compose-integration-tests.yaml up
