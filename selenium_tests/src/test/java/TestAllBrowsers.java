@@ -5,6 +5,7 @@ import org.junit.platform.reporting.open.xml.OpenTestReportGeneratingListener;
 import org.reldb.exemplars.selenium.tests.utils.BrowserQueue;
 import org.reldb.exemplars.selenium.tests.utils.ProgressListener;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -89,12 +90,17 @@ public class TestAllBrowsers {
                 .enableTestExecutionListenerAutoRegistration(true)
                 .build();
 
-        var reportsDir = Paths.get("target", "reports", "test-results", browser);
+        // TODO find way to eliminate this hack to put reports under the 'target' dir.
+        var currentDir = System.getProperty("user.dir");
+        var reportsDir = currentDir.endsWith("EnterpriseExemplar")
+            ? Paths.get("selenium_tests/target/reports/test-results", browser)
+            : Paths.get("target/reports/test-results", browser);
         try {
             Files.createDirectories(reportsDir);
         } catch (IOException e) {
             throw new RuntimeException("Unable to create directory", e);
         }
+        System.out.println("Look for test reports in " + currentDir + File.separator + reportsDir);
 
         var request = LauncherDiscoveryRequestBuilder.request()
                 .selectors(DiscoverySelectors.selectPackage(TEST_PACKAGE))
