@@ -81,7 +81,7 @@ services:
       - 8080:8080
     volumes:
       - ../java_backend:/home/java_backend
-#    command: /bin/sh -c "java -Dspring.profiles.active=mockoauth -jar target/JavaBackendExemplar-1.0.0-SNAPSHOT.jar"
+#    command: /bin/sh -c "java -Dspring.profiles.active=noauth -jar target/JavaBackendExemplar-1.0.0-SNAPSHOT.jar"
     command: /bin/sh -c "java -jar target/JavaBackendExemplar-1.0.0-SNAPSHOT.jar"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/api/actuator/health"]

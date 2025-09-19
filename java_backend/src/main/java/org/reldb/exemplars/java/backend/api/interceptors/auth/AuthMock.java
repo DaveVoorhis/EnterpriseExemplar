@@ -13,13 +13,13 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 
 @Configuration
-@Profile("mockoauth")
+@Profile("noauth")
 public class AuthMock {
     @Autowired
     private MockSecureUser secureUser;
 
     /**
-     * This should only be enabled (via the mockoauth profile) when running locally or in a dev
+     * This should only be enabled (via the noauth profile) when running locally or in a dev
      * environment, to make sure unit tests can pass without having a real JWT token. The user
      * associated with 'email' must exist and be retrievable from the main database's
      * app_users table and have 'enabled' set to true.

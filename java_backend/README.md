@@ -55,7 +55,7 @@ http://localhost:8080/api/demo/3
 - DELETE (revoke) a permission from a given role: `/users/role/{roleId}/permissions/{permissionName}`
 
 NOTE: Bearer token (i.e., `Authorization` header with value `Bearer xxxxxx`) must be provided,
-but can be any value if profile `mockoauth` is active.
+but can be any value if profile `noauth` is active.
 
 See `*Api.java` classes in the `api` package for API definition.
 
@@ -256,11 +256,11 @@ I.e., uppercase, dots to underscores, dashes deleted.
 ### Special Configuration Profiles
 
 #### Bypassing authentication for local development
-If you start the application with the Spring profile 'mockoauth' (`-Dspring.profiles.active=mockoauth`),
+If you start the application with the Spring profile 'noauth' (`-Dspring.profiles.active=noauth`),
 it will treat all bearer tokens as valid, i.e., you can call the application with any bearer token (e.g., an `Authorization` header containing `Bearer blahblahblah`) and it will ignore the contents.
-E.g., to launch the .jar under Windows with the `mockoauth` profile:
+E.g., to launch the .jar under Windows with the `noauth` profile:
 ```shell
-java -jar -Dspring.profiles.active=mockoauth target\JavaBackendExamplar-0.0.1.jar
+java -jar -Dspring.profiles.active=noauth target\JavaBackendExamplar-0.0.1.jar
 ```
 
 This profile should not be used for production or test deployments, only local development.
@@ -271,7 +271,7 @@ When running with no Spring profiles specified, console logging is exception-ori
 configuration, settings, warnings, exceptions and errors. Activity logging, such as background
 processes, API calls etc. is suppressed.
 
-When running with the `mockoauth` profile, console logging is activity-oriented and
+When running with the `noauth` profile, console logging is activity-oriented and
 will show startup configuration, settings, warnings, exceptions and errors, plus background
 processes, API calls, and so on, to aid development and debugging.
 

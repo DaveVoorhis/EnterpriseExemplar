@@ -62,7 +62,7 @@ first-user-is-admin: false
 spring:
   config:
     activate:
-      on-profile: verbose,mockoauth
+      on-profile: verbose,noauth
 
 logging:
   level:
@@ -73,9 +73,9 @@ logging:
 spring:
   config:
     activate:
-      on-profile: mockoauth
+      on-profile: noauth
 
-mockoauth:
+noauth:
   secure_userid: dave.voorhis@reldb.org
   secure_username: "Dave Voorhis"
 

@@ -5,16 +5,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MockSecureUser {
-    @Value("${mockoauth.secure_userid:default}")
-    private String MOCKOAUTH_SECURE_USERID;
-    @Value("$mockoauth.secure_username:default")
-    private String MOCKOAUTH_SECURE_USERNAME;
+    @Value("${noauth.secure_userid:default}")
+    private String NOAUTH_SECURE_USERID;
+    @Value("$noauth.secure_username:default")
+    private String NOAUTH_SECURE_USERNAME;
 
     public String getUserid() {
-        return MOCKOAUTH_SECURE_USERID;
+        return NOAUTH_SECURE_USERID;
     }
 
     public String getUsername() {
-        return MOCKOAUTH_SECURE_USERNAME;
+        return NOAUTH_SECURE_USERNAME;
     }
 }

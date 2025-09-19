@@ -8,7 +8,7 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtDecoders;
 
 @Configuration
-@Profile("!mockoauth")
+@Profile("!noauth")
 public class AuthReal {
     @Bean
     public JwtDecoder getJwtDecoder(@Value("${oauth.issuer}") String issuerLocation) {

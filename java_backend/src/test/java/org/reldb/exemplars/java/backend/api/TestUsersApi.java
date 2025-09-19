@@ -20,7 +20,7 @@ class TestUsersApi extends ApiTestBase {
     @Autowired
     MockSecureUser secureUser;
 
-    // Current user set for tests by mockoauth profile
+    // Current user set for tests by noauth profile
     private static final long CURRENT_USER_ID = 4;
 
     private static final String USERS_URL = "/users";

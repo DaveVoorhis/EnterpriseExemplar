@@ -7,7 +7,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 @SpringBootTest(classes = {Application.class})
 @TestPropertySource(locations = {"/application-test.properties"})
-@ActiveProfiles("mockoauth")
+@ActiveProfiles("noauth")
 @Sql("/test.sql")
 public class ApplicationTestBase {
 }
