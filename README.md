@@ -9,9 +9,6 @@ This is a working work-in-progress illustration of a database-driven enterprise 
 The running application demonstrates 'Demo' records that can be created, read, updated, deleted and searched. User
 roles and permissions can be edited and defined.
 
-**NOTE**: Since this is work in progress, at any time there may be broken, partly working or parts-all-over-the-workbench components. 
-Currently, the `selenium_tests` subproject is mostly parts-on-the-workbench.
-
 ## Quickstart
 
 ### 1 - Install
