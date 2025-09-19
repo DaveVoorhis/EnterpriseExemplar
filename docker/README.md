@@ -80,6 +80,18 @@ Use `secret` as the VNC password when prompted if you wish to view an individual
 
 The test results will be stored in the `target/reports/test-results` subdirectory of the `selenium_tests` project.
 
+Note that the application containers will remain running after the tests complete (i.e., the `test-runner` container
+exits) so that you can launch a local frontend to access the integration test backend as follows:
+```shell
+cd react_frontend
+npm install
+npm run dev
+```
+Then access the frontend via the displayed URL.
+
+Note the application frontend running in Docker at http://localhost:80 is not accessible on the host outside the Docker network.
+This is intentional, because the Dockerised frontend configured will not allow logins when set up to run integration tests via Docker.
+
 See below for additional options.
 
 ## To launch the SQL database to support running the backend locally...

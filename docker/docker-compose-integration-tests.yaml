@@ -95,8 +95,6 @@ services:
     image: nginx:1.29.0
     container_name: frontend
     hostname: frontend
-    ports:
-      - 80:80
     volumes:
       - ../react_frontend/dist:/usr/share/nginx/html
     healthcheck:
