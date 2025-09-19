@@ -89,8 +89,9 @@ npm run dev
 ```
 Then access the frontend via the displayed URL.
 
-Note the application frontend running in Docker at http://localhost:80 is not accessible on the host outside the Docker network.
-This is intentional, because the Dockerised frontend will not allow logins when configured to run integration tests via Docker.
+Note the application frontend running in Docker at http://frontend:80 is not accessible on the host outside the Docker network.
+This is intentional, because attempts to log into the Dockerised frontend via a host browser will fail when 
+configured to run integration tests inside Docker.
 
 See below for additional options.
 
