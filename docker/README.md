@@ -76,7 +76,7 @@ docker-compose -f docker-compose-integration-tests.yaml up
 
 Once the docker containers have launched and the `test-runner` container is running, 
 you can go to http://localhost:4444 to access the Selenium console and view browser activity. 
-Use 'secret' as the VNC password when prompted if you wish to view an individual browser.
+Use `secret` as the VNC password when prompted if you wish to view an individual browser.
 
 The test results will be stored in the `target/reports/test-results` subdirectory of the `selenium_tests` project.
 
