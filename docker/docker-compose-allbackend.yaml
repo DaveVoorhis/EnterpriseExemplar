@@ -35,7 +35,7 @@ services:
     hostname: sso-emulator
     command: ["dex", "serve", "/etc/dex/config.yaml"]
     volumes:
-      - ./config.yaml:/etc/dex/config.yaml:ro
+      - ./dex_config.yaml:/etc/dex/config.yaml:ro
     ports:
       - "5556:5556"
 
