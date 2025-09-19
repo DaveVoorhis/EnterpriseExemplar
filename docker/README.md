@@ -29,6 +29,12 @@ Navigate to the docker directory, then:
 docker-compose up
 ```
 
+The Docker log will show the build and deployment activity, which ends by launching the `announce_ready`
+container to indicate the application is ready. You can then access the application from your browser via 
+http://localhost. 
+
+Subsequent Docker log entries show application activity.
+
 See below for additional options.
 
 ## To build and run the application backend...
@@ -40,6 +46,12 @@ Navigate to the docker directory, then:
 ```shell
 docker-compose -f docker-compose-allbackend.yaml up
 ```
+
+The Docker log will show the build and deployment activity, which ends by launching the `announce_ready`
+container to indicate the backend is ready. You can then access the application backend API from the frontend
+by proceeding with the frontend launch described below.
+
+Subsequent Docker log entries show detailed application activity.
 
 Once the backend is running, navigate to the `react_frontend` directory and run:
 ```shell
@@ -62,7 +74,9 @@ Navigate to the docker directory, then:
 docker-compose -f docker-compose-integration-tests.yaml up
 ```
 
-Once the docker containers have been launched, go to http://localhost:4444 to see the Selenium console. Use 'secret' as the VNC password when prompted, if you wish to view interactive activity.
+Once the docker containers have launched and the `test-runner` container is running, 
+you can go to http://localhost:4444 to access the Selenium console and view browser activity. 
+Use 'secret' as the VNC password when prompted if you wish to view an individual browser.
 
 The test results will be stored in the `target/reports/test-results` subdirectory of the `selenium_tests` project.
 

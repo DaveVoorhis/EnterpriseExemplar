@@ -41,6 +41,12 @@ cd docker
 docker-compose up
 ```
 
+The Docker log will show the build and deployment activity, which ends by launching the `announce_ready`
+container to indicate the application is ready. You can then access the application from your browser via
+http://localhost.
+
+Subsequent Docker log entries show application activity.
+
 See the Docker [README.md](./docker/README.md) for additional options and information.
 
 Once started, leave the Docker containers running in their own window/shell/session/etc.
