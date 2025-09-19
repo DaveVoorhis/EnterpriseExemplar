@@ -251,7 +251,7 @@ java -jar target/JavaBackendExemplar-0.0.1.jar
 **WARNING: Set your SCM configuration to ***not*** upload your launch script, to avoid uploading passwords to the code repository.**
 
 **Note:** the environment variable names have been constructed from property values defined in `application.yaml` per the Spring documentation at https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables
-I.e., uppercase, dots to underscores, dashes to nothing.
+I.e., uppercase, dots to underscores, dashes deleted.
 
 ### Special Configuration Profiles
 
