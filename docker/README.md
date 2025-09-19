@@ -25,13 +25,11 @@ whilst allowing the browser-hosted frontend to reference the IdP/OIDC/SSO server
 It's used to quickly deploy a working application for local testing.*
 
 Navigate to the docker directory, then:
-
-- For most platforms:
 ```shell
 docker-compose up
 ```
 
-See below for additional environment options.
+See below for additional options.
 
 ## To build and run the application backend...
 
@@ -39,8 +37,6 @@ See below for additional environment options.
 development.*
 
 Navigate to the docker directory, then:
-
-- For most platforms:
 ```shell
 docker-compose -f docker-compose-allbackend.yaml up
 ```
@@ -54,13 +50,11 @@ npm run dev
 That will launch the frontend in dev mode. It will provide the URL to browse the application.
 Then you can make changes to frontend source and they'll deploy and refresh the browser automatically.
 
-See below for additional environment options.
+See below for additional options.
 
 ## To build and launch the application and run integration tests...
 
 Navigate to the docker directory, then:
-
-- For most platforms:
 ```shell
 docker-compose -f docker-compose-integration-tests.yaml up
 ```
@@ -69,15 +63,13 @@ Once the docker containers have been launched, go to http://localhost:4444 to se
 
 The test results will be stored in the `target/reports/test-results` subdirectory of the `selenium_tests` project.
 
-See below for additional environment options.
+See below for additional options.
 
 ## To launch the SQL database to support running the backend locally...
 
 *This launches just the SQL DBMS in a container. It's useful when developing the backend.*
 
 Navigate to the docker directory, then:
-
-- For most platforms:
 ```shell
 docker-compose -f docker-compose-sqldb.yaml up
 ```
