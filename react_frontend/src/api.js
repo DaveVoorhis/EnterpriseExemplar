@@ -37,7 +37,6 @@ export function setApiUser(user) {
 
 export async function api(path, options = {}) {
   const url = path.startsWith('http') ? path : `${API_BASE}/${path.replace(/^\//,'')}`;
-
   const correlationId = uuid()
   const token = apiAuthToken ? apiAuthToken : getAuthToken()
   const headers = {
@@ -46,7 +45,6 @@ export async function api(path, options = {}) {
     'Authorization': `Bearer ${token}`,
     ...(options.headers || {}),
   };
-
   const { signal, finally: clearTimer } = withTimeout(15000); // 15s default
   try {
       const result = await fetch(url, { ...options, headers, signal });
@@ -57,8 +55,7 @@ export async function api(path, options = {}) {
         console.log(`API Error: ${error}`);
         throw new Error(error);
       }
-      const text = await result.text();
-      return text ? JSON.parse(text) : null;
+      return parseJsonSafe(result);
   } catch (err) {
     if (err.name === 'AbortError') {
       throw new Error('Request timed out');
