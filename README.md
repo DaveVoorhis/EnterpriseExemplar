@@ -6,8 +6,11 @@ This is a working work-in-progress illustration of a database-driven enterprise 
 - Browser-driving end-to-end integration tests written in Java using Selenium.  [README.md](./selenium_tests/README.md)
 - Docker deployment using Docker Compose.  [README.md](./docker/README.md)
 
-The running application demonstrates 'Demo' records that can be created, read, updated, deleted and searched. User
-roles and permissions can be edited and defined.
+The running application demonstrates:
+- 'Demo' records that can be created, read, updated, deleted and searched. 
+- User roles can be edited and defined.
+- Role permissions can be granted and revoked.
+- Miscellaneous operations can be performed.
 
 ## Quickstart
 
