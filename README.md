@@ -7,6 +7,7 @@ This is a working work-in-progress illustration of a database-driven enterprise 
 - Docker deployment using Docker Compose.  [README.md](./docker/README.md)
 
 The running application demonstrates:
+- Single-Sign-On login/logout with an identity provider.
 - 'Demo' records that can be created, read, updated, deleted and searched. 
 - User roles can be edited and defined.
 - Role permissions can be granted and revoked.
