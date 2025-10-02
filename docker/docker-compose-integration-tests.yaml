@@ -62,6 +62,12 @@ services:
       - ./dex_config.yaml:/etc/dex/config.yaml:ro
     ports:
       - "5556:5556"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5556/healthz"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
 
   run_java_backend:
     depends_on:
@@ -70,7 +76,7 @@ services:
       build_java_backend:
         condition: service_completed_successfully
       sso-emulator:
-        condition: service_started
+        condition: service_healthy
     image: "maven:3.9.11-eclipse-temurin-21-alpine"
     container_name: backend
     hostname: backend
