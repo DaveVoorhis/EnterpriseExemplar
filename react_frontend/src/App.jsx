@@ -51,7 +51,7 @@ export default function App() {
               ? <Tabs />
               : <div className="content">Welcome to the EnterpriseExemplar. Please log in.</div>}
           <footer className="footer">
-            <div>EnterpriseExemplar = (Java + Spring Boot + SQL Server) × React ÷ Docker</div>
+            <div>EnterpriseExemplar = (Java + Spring Boot + PostgreSQL) × React ÷ Docker</div>
             <div className="muted">Backend by DaveVoorhis; Frontend by DaveVoorhis feat. ChatGPT</div>
           </footer>
           <Notification />
