@@ -59,7 +59,8 @@ but can be any value if profile `noauth` is active.
 
 See `src/main/api/*Api.java` classes in the `api` package for API definitions.
 
-Each endpoint may specify an @Permit annotation to specify the permission required to access the endpoint. E.g.:
+Each API endpoint definition may specify a `@Permit` annotation to specify the permission required to access the endpoint. For example, the source below
+shows how the Demo API POST method for adding 'Demo' items is specified to require the `ADD_DEMO` permission:
 ```java
 ...
 @RestController
@@ -72,6 +73,8 @@ public class DemoApi extends ApiDefault {
     }
 ...
 ```
+An API endpoint definition without `@Permit` does not require permission to access.
+
 See the *Manage User Roles and Permissions* section below for more information.
 
 ### Application Metadata API
