@@ -9,7 +9,7 @@ services:
     container_name: build_react_frontend
     hostname: build_react_frontend
     environment:
-      - NODE_ENV=dev
+#      - NODE_ENV=dev
       - VITE_SSO_AUTHORITY=http://localhost:5556
       - VITE_API_BASE=http://localhost:8080/api
     volumes:
