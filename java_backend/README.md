@@ -61,8 +61,17 @@ See `src/main/api/*Api.java` classes in the `api` package for API definitions.
 
 Each endpoint may specify an @Permit annotation to specify the permission required to access the endpoint. E.g.:
 ```java
-@Permit(Permissions.ADD_DEMO)
-
+@CrossOrigin
+@RequestMapping("/demo")
+@RestController
+public class DemoApi extends ApiDefault {
+...
+    @Permit(Permissions.ADD_DEMO)
+    @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<@NonNull DemoOut> add(@RequestBody DemoIn demo) {
+        return ResponseEntity.ok(demoService.addDemo(demo));
+    }
+...
 ```
 See the *Manage User Roles and Permissions* section below for more information.
 
