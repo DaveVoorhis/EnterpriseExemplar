@@ -57,7 +57,14 @@ http://localhost:8080/api/demo/3
 NOTE: Bearer token (i.e., `Authorization` header with value `Bearer xxxxxx`) must be provided,
 but can be any value if profile `noauth` is active.
 
-See `*Api.java` classes in the `api` package for API definition.
+See `src/main/api/*Api.java` classes in the `api` package for API definitions.
+
+Each endpoint may specify an @Permit annotation to specify the permission required to access the endpoint. E.g.:
+```java
+@Permit(Permissions.ADD_DEMO)
+
+```
+See the *Manage User Roles and Permissions* section below for more information.
 
 ### Application Metadata API
 
