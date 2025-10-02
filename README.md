@@ -67,5 +67,5 @@ as an IdP/OIDC/SSO server:
 All three have password `pwd`.
 
 The first successful login will automatically be granted 'ADMIN' role. Subsequent logins will be granted 'USER' role. Users will
-not appear in the application until they have logged in at least once. After users have logged in at least once, use the
+not appear in the application under the 'Users' tab until they have logged in at least once. After users have logged in at least once, use the
 first successfully logged-in account (which has 'ADMIN' role) to grant permissions to roles and grant roles to users.
