@@ -26,7 +26,7 @@ export default function Tabs() {
     setLoading(true)
     let hadError = false
 
-    const results = await Promise.all(
+    const allTabs = await Promise.all(
       tabData.map(tab =>
         tab.permit
           ? tab.permit()
@@ -39,7 +39,7 @@ export default function Tabs() {
       )
     )
 
-    const permittedTabs = results.filter(t => t != null)
+    const permittedTabs = allTabs.filter(tab => tab != null)
     setTabs(permittedTabs)
 
     if (hadError || permittedTabs.length === 0) {
