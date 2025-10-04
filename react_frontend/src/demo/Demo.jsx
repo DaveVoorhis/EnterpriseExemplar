@@ -18,6 +18,7 @@ export default function Demo() {
   const [query, setQuery] = useState('')
 
   const editFirstInputRef = useRef(null)
+  const nameInputRef = useRef(null)
 
   useEffect(() => { refresh() }, [])
 
@@ -93,6 +94,7 @@ export default function Demo() {
       const created = await addDemo(payload)
       setItems((prev) => [...prev, created].sort((a, b) => a.demoId - b.demoId))
       setCreateForm(emptyIn())
+      nameInputRef.current?.focus()
     } catch (e) {
       notifyError(errorMessage(e))
     }
@@ -178,6 +180,7 @@ export default function Demo() {
           <label className="label">
             <span className="label-text">Name</span>
             <input
+              ref={nameInputRef}
               className="input"
               placeholder="Sherlock Holmes"
               value={createForm.name}
