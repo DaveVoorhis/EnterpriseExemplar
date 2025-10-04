@@ -1,3 +1,3 @@
 CREATE DATABASE "user" OWNER pguser;
-CREATE DATABASE demo OWNER pguser;
-CREATE DATABASE extra OWNER pguser;
+CREATE DATABASE "demo" OWNER pguser;
+CREATE DATABASE "extra" OWNER pguser;
