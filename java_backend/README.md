@@ -130,7 +130,7 @@ This backend uses a simple layered architecture where:
 ### Runtime (minimum)
 
 - Java JRE/JDK 21 or above
-- PostgreSQL DBMS instance with databases named `main`, `two`, `three`. See [README.md](../docker/README.md) for Docker launch instructions.
+- PostgreSQL DBMS instance with databases named `user`, `demo`, `extra`. See [README.md](../docker/README.md) for Docker launch instructions.
 
 ### Build
 
@@ -147,22 +147,22 @@ This backend uses a simple layered architecture where:
 ### 1. Setup the Databases
 
 The application expects to access three pre-existing databases, as follows:
-- `main` contains tables for managing users;
-- `two` contains a 'demo' table;
-- `three` contains nothing, as it illustrates access to additional databases.
+- `user` contains tables for managing users;
+- `demo` contains a 'demo' table;
+- `extra` contains nothing, as it illustrates access to additional databases.
 
 The databases are identified by connection strings specified in environment variables, for example:
 
 ```shell
-SPRING_DATASOURCE_JDBCURL="jdbc:postgresql://postgres_db:5432/main?user=pguser&password=sqlpass"
-SPRING_DATASOURCETWO_JDBCURL="jdbc:postgresql://postgres_db:5432/two?user=pguser&password=sqlpass"
-SPRING_DATASOURCETHREE_JDBCURL="jdbc:postgresql://postgres_db:5432/three?user=pguser&password=sqlpass"
+SPRING_DATASOURCE_JDBCURL="jdbc:postgresql://postgres_db:5432/user?user=pguser&password=sqlpass"
+SPRING_DATASOURCEDEMO_JDBCURL="jdbc:postgresql://postgres_db:5432/demo?user=pguser&password=sqlpass"
+SPRING_DATASOURCEEXTRA_JDBCURL="jdbc:postgresql://postgres_db:5432/extra?user=pguser&password=sqlpass"
 ```
 
 Note that the passwords have been elided in the above, so you'll need to obtain them and replace `sqlpass` with the real passwords and
 probably use a different user account from `pguser`.
 
-The Liquibase database migrator is configured to manage database schema changes for the `main` and `two` databases.
+The Liquibase database migrator is configured to manage database schema changes for the `user` and `demo` databases.
 
 ### 2. Setup Authentication
 
@@ -182,7 +182,7 @@ to parse and validate the bearer token.
 If it is invalid, an authentication error will be returned.
 
 If it is valid, the backend will look for the authenticated username
-(obtained from the parsed bearer token) in the `app_user` table of the `main` database, and then:
+(obtained from the parsed bearer token) in the `app_user` table of the `user` database, and then:
 
 - If a matching row is found, the backend call will proceed if the `enabled` attribute is non-zero or `true`,
   otherwise it will fail with an authentication error.
@@ -192,10 +192,10 @@ If it is valid, the backend will look for the authenticated username
 
 #### Configuring the Database - First User
 
-The relevant `main`, `two` and `three` databases are assumed to already exist.
+The relevant `user`, `demo` and `extra` databases are assumed to already exist.
 
 When a new user logs into the system, the account details will be automatically added to the `app_user` table
-of the `main` database.
+of the `user` database.
 
 There are two configuration settings that determine how the new user will be configured:
 - `new-user-is-enabled-by-default`: If this is set to `true`, the new user will have `enabled` set to `true`,
@@ -208,7 +208,7 @@ It is recommended that for production deployment, `first-user-is-admin` be set t
 be manually granted `ADMIN` privilege as described below.
 
 If `new-user-is-enabled-by-default` is set to `false`, the first user will need to be manually enabled
-in the `main` database via SQL query. E.g.:
+in the `user` database via SQL query. E.g.:
 ```sql
 UPDATE app_users SET enabled = true WHERE email = '<username>';
 ```
@@ -242,16 +242,16 @@ Assuming you're in your local directory, there are multiple ways to start the ap
 NOTE: To run you need to specify environment connection strings to real databases, as described above in *1. Setup the Databases*.
 
 NOTE: If you're setting up a real deployment with frontend and backend and a fresh set of databases being used for the first time, 
-you will need to enable the first user in the `main` database, as described above in *"3. Setup User Access | Configuring the First User"*.
+you will need to enable the first user in the `user` database, as described above in *"3. Setup User Access | Configuring the First User"*.
 
 To simplify application launch, you may wish to create a shell (MacOS) or CMD (Windows) script.
 
 E.g., for Windows create a `launch.cmd` file within the backend project root:
 
 ```shell
-set "SPRING_DATASOURCE_JDBCURL=jdbc:postgresql://localhost:5432/main?user=pguser&password=sqlpass"
-set "SPRING_DATASOURCETWO_JDBCURL=jdbc:postgresql://localhost:5432/two?user=pguser&password=sqlpass"
-set "SPRING_DATASOURCETHREE_JDBCURL=jdbc:postgresql://localhost:5432/three?user=pguser&password=sqlpass"
+set "SPRING_DATASOURCE_JDBCURL=jdbc:postgresql://localhost:5432/user?user=pguser&password=sqlpass"
+set "SPRING_DATASOURCEDEMO_JDBCURL=jdbc:postgresql://localhost:5432/demo?user=pguser&password=sqlpass"
+set "SPRING_DATASOURCEEXTRA_JDBCURL=jdbc:postgresql://localhost:5432/extra?user=pguser&password=sqlpass"
 java -jar target\JavaBackendExemplar-0.0.1.jar
 ``` 
 
@@ -259,9 +259,9 @@ For MacOS or Linux, create a `launch.sh` file within the backend project root:
 
 ```shell
 #!/bin/sh
-export SPRING_DATASOURCE_JDBCURL="jdbc:postgresql://localhost:5432/main?user=pguser&password=sqlpass"
-export SPRING_DATASOURCETWO_JDBCURL="jdbc:postgresql://localhost:5432/two?user=pguser&password=sqlpass"
-export SPRING_DATASOURCETHREE_JDBCURL="jdbc:postgresql://localhost:5432/three?user=pguser&password=sqlpass"
+export SPRING_DATASOURCE_JDBCURL="jdbc:postgresql://localhost:5432/user?user=pguser&password=sqlpass"
+export SPRING_DATASOURCEDEMO_JDBCURL="jdbc:postgresql://localhost:5432/demo?user=pguser&password=sqlpass"
+export SPRING_DATASOURCEEXTRA_JDBCURL="jdbc:postgresql://localhost:5432/extra?user=pguser&password=sqlpass"
 java -jar target/JavaBackendExemplar-0.0.1.jar
 ```
 
@@ -308,9 +308,9 @@ java -jar -Dspring.profiles.active=verbose target\JavaBackendExemplar-0.0.1.jar
 E.g.:
 ```shell
 #!/bin/sh
-export SPRING_DATASOURCE_JDBCURL="jdbc:postgresql://postgres_db:5432/main?user=pguser&password=sqlpass"
-export SPRING_DATASOURCETWO_JDBCURL="jdbc:postgresql://postgres_db:5432/two?user=pguser&password=sqlpass"
-export SPRING_DATASOURCETHREE_JDBCURL="jdbc:postgresql://postgres_db:5432/three?user=pguser&password=sqlpass"
+export SPRING_DATASOURCE_JDBCURL="jdbc:postgresql://postgres_db:5432/user?user=pguser&password=sqlpass"
+export SPRING_DATASOURCEDEMO_JDBCURL="jdbc:postgresql://postgres_db:5432/demo?user=pguser&password=sqlpass"
+export SPRING_DATASOURCEEXTRA_JDBCURL="jdbc:postgresql://postgres_db:5432/extra?user=pguser&password=sqlpass"
 java -jar target/JavaBackendExemplar-0.0.1.jar
 ```
 
@@ -378,9 +378,9 @@ allows it to be viewed with any Web browser.
 ## Manage User Roles and Permissions
 
 This section provides details on how the roles/permissions system works and how it can be managed externally via
-SQL queries against the `main` database.
+SQL queries against the `user` database.
 
-The following `main` database tables specify the roles and permissions:
+The following `user` database tables specify the roles and permissions:
 - `app_users` identifies all users;
 - `roles` identifies all possible roles;
 - `user_roles` identifies roles granted to each user;

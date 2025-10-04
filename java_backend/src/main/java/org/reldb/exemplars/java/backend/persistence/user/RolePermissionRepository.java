@@ -1,7 +1,7 @@
-package org.reldb.exemplars.java.backend.persistence.main;
+package org.reldb.exemplars.java.backend.persistence.user;
 
-import org.reldb.exemplars.java.backend.model.main.RolePermission;
-import org.reldb.exemplars.java.backend.model.main.RolePermissionPK;
+import org.reldb.exemplars.java.backend.model.user.RolePermission;
+import org.reldb.exemplars.java.backend.model.user.RolePermissionPK;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import org.jspecify.annotations.NonNull;

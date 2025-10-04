@@ -28,7 +28,7 @@ services:
     ports:
       - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d main"]
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d user"]
       interval: 15s
       timeout: 10s
       retries: 5
@@ -65,9 +65,9 @@ services:
     hostname: backend
     working_dir: /home/java_backend
     environment:
-      SPRING_DATASOURCE_JDBCURL: "jdbc:postgresql://postgres_db:5432/main?user=pguser&password=${sqlpass}"
-      SPRING_DATASOURCETWO_JDBCURL: "jdbc:postgresql://postgres_db:5432/two?user=pguser&password=${sqlpass}"
-      SPRING_DATASOURCETHREE_JDBCURL: "jdbc:postgresql://postgres_db:5432/three?user=pguser&password=${sqlpass}"
+      SPRING_DATASOURCE_JDBCURL: "jdbc:postgresql://postgres_db:5432/user?user=pguser&password=${sqlpass}"
+      SPRING_DATASOURCEDEMO_JDBCURL: "jdbc:postgresql://postgres_db:5432/demo?user=pguser&password=${sqlpass}"
+      SPRING_DATASOURCEEXTRA_JDBCURL: "jdbc:postgresql://postgres_db:5432/extra?user=pguser&password=${sqlpass}"
       OAUTH_ISSUER: "http://sso-emulator:5556"
       NEWUSERISENABLEDBYDEFAULT: true
       FIRSTUSERISADMIN: true

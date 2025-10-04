@@ -1,5 +1,5 @@
 --
--- from main database
+-- from user database
 --
 DELETE FROM user_roles;
 DELETE FROM app_users;
@@ -34,7 +34,7 @@ VALUES (6, 1),
        (5, 2);
 
 --
--- from two database
+-- from demo database
 --
 
 DELETE FROM demo;
@@ -44,5 +44,5 @@ VALUES (1, 'demo1', 'here'),
        (2, 'demo2', 'there');
 
 --
--- from three database
+-- from extra database
 --

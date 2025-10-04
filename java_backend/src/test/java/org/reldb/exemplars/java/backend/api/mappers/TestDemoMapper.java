@@ -3,7 +3,7 @@ package org.reldb.exemplars.java.backend.api.mappers;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 import org.reldb.exemplars.java.backend.api.model.DemoOut;
-import org.reldb.exemplars.java.backend.model.two.Demo;
+import org.reldb.exemplars.java.backend.model.demo.Demo;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.Test;

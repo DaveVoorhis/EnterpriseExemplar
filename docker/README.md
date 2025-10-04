@@ -106,9 +106,9 @@ docker-compose -f docker-compose-sqldb.yaml up
 
 Use the following connection strings:
 ```
-SPRING_DATASOURCE_JDBCURL: "jdbc:postgresql://localhost:5432/main?user=pguser&password=${sqlpass}"
-SPRING_DATASOURCETWO_JDBCURL: "jdbc:postgresql://localhost:5432/two?user=pguser&password=${sqlpass}"
-SPRING_DATASOURCETHREE_JDBCURL: "jdbc:postgresql://localhost:5432/three?user=pguser&password=${sqlpass}"
+SPRING_DATASOURCE_JDBCURL: "jdbc:postgresql://localhost:5432/user?user=pguser&password=${sqlpass}"
+SPRING_DATASOURCEDEMO_JDBCURL: "jdbc:postgresql://localhost:5432/demo?user=pguser&password=${sqlpass}"
+SPRING_DATASOURCEEXTRA_JDBCURL: "jdbc:postgresql://localhost:5432/extra?user=pguser&password=${sqlpass}"
 ```
 Replace `${sqlpass}` with the password defined in the `.env` file.
 

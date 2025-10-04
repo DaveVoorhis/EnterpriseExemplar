@@ -21,7 +21,7 @@ public class AuthMock {
     /**
      * This should only be enabled (via the noauth profile) when running locally or in a dev
      * environment, to make sure unit tests can pass without having a real JWT token. The user
-     * associated with 'email' must exist and be retrievable from the main database's
+     * associated with 'email' must exist and be retrievable from the user database's
      * app_users table and have 'enabled' set to true.
      */
     @Bean

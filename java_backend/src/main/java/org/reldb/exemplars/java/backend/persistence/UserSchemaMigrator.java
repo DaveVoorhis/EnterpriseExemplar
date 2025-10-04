@@ -7,16 +7,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 @Configuration
-public class MainSchemaMigrator {
+public class UserSchemaMigrator {
     @Autowired
-    MainConfiguration config;
+    UserConfiguration config;
 
     @Primary
     @Bean
     public SpringLiquibase liquibaseMain() {
         final var liquibase = new SpringLiquibase();
-        liquibase.setChangeLog("classpath:liquibase/main.xml");
-        liquibase.setDataSource(config.mainDataSource());
+        liquibase.setChangeLog("classpath:liquibase/user.xml");
+        liquibase.setDataSource(config.userDataSource());
         return liquibase;
     }
 }

@@ -1,8 +1,8 @@
 package org.reldb.exemplars.java.backend.service;
 
 import org.reldb.exemplars.java.backend.exception.custom.DemoNotFoundException;
-import org.reldb.exemplars.java.backend.model.two.Demo;
-import org.reldb.exemplars.java.backend.persistence.two.DemoRepository;
+import org.reldb.exemplars.java.backend.model.demo.Demo;
+import org.reldb.exemplars.java.backend.persistence.demo.DemoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;

@@ -1,4 +1,4 @@
-package org.reldb.exemplars.java.backend.model.main;
+package org.reldb.exemplars.java.backend.model.user;
 
 import jakarta.persistence.*;
 import lombok.Getter;

@@ -10,24 +10,27 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "org.reldb.exemplars.java.backend.persistence.main", entityManagerFactoryRef = "mainEntityManager", transactionManagerRef = "mainTransactionManager")
-public class MainConfiguration extends BaseConfiguration {
+@EnableJpaRepositories(
+        basePackages = "org.reldb.exemplars.java.backend.persistence.user", 
+        entityManagerFactoryRef = "userEntityManager", 
+        transactionManagerRef = "userTransactionManager")
+public class UserConfiguration extends BaseConfiguration {
     @Primary
     @Bean
-    public LocalContainerEntityManagerFactoryBean mainEntityManager() {
-        return entityManager("main", mainDataSource(), "org.reldb.exemplars.java.backend.model.main");
+    public LocalContainerEntityManagerFactoryBean userEntityManager() {
+        return entityManager("user", userDataSource(), "org.reldb.exemplars.java.backend.model.user");
     }
 
     @Primary
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSource mainDataSource() {
+    public DataSource userDataSource() {
         return dataSource();
     }
 
     @Primary
     @Bean
-    public PlatformTransactionManager mainTransactionManager() {
-        return transactionManager(mainEntityManager());
+    public PlatformTransactionManager userTransactionManager() {
+        return transactionManager(userEntityManager());
     }
 }

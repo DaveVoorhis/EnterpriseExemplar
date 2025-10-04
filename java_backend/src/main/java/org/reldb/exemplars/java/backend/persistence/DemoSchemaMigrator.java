@@ -6,15 +6,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class TwoSchemaMigrator {
+public class DemoSchemaMigrator {
     @Autowired
-    TwoConfiguration config;
+    DemoConfiguration config;
 
     @Bean
     public SpringLiquibase liquibaseTwo() {
         final var liquibase = new SpringLiquibase();
-        liquibase.setChangeLog("classpath:liquibase/two.xml");
-        liquibase.setDataSource(config.twoDataSource());
+        liquibase.setChangeLog("classpath:liquibase/demo.xml");
+        liquibase.setDataSource(config.demoDataSource());
         return liquibase;
     }
 }

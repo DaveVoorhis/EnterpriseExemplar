@@ -1,6 +1,6 @@
-package org.reldb.exemplars.java.backend.persistence.two;
+package org.reldb.exemplars.java.backend.persistence.demo;
 
-import org.reldb.exemplars.java.backend.model.two.Demo;
+import org.reldb.exemplars.java.backend.model.demo.Demo;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

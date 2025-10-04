@@ -1,4 +1,4 @@
-package org.reldb.exemplars.java.backend.persistence.main;
+package org.reldb.exemplars.java.backend.persistence.user;
 
 import org.reldb.exemplars.java.backend.ApplicationTestBase;
 import org.reldb.exemplars.java.backend.enums.Permissions;

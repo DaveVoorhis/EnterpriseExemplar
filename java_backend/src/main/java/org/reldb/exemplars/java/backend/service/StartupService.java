@@ -4,10 +4,10 @@ import static org.reldb.exemplars.java.backend.service.UserService.ADMIN_ROLE_ID
 import static org.reldb.exemplars.java.backend.service.UserService.USER_ROLE_ID;
 
 import org.reldb.exemplars.java.backend.enums.Permissions;
-import org.reldb.exemplars.java.backend.model.main.RolePermission;
-import org.reldb.exemplars.java.backend.model.main.RolePermissionPK;
-import org.reldb.exemplars.java.backend.persistence.main.RolePermissionRepository;
-import org.reldb.exemplars.java.backend.persistence.main.RoleRepository;
+import org.reldb.exemplars.java.backend.model.user.RolePermission;
+import org.reldb.exemplars.java.backend.model.user.RolePermissionPK;
+import org.reldb.exemplars.java.backend.persistence.user.RolePermissionRepository;
+import org.reldb.exemplars.java.backend.persistence.user.RoleRepository;
 import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.NonNull;

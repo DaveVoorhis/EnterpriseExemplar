@@ -2,8 +2,8 @@ package org.reldb.exemplars.java.backend.service;
 
 import org.reldb.exemplars.java.backend.enums.Permissions;
 import org.reldb.exemplars.java.backend.exception.custom.*;
-import org.reldb.exemplars.java.backend.model.main.*;
-import org.reldb.exemplars.java.backend.persistence.main.*;
+import org.reldb.exemplars.java.backend.model.user.*;
+import org.reldb.exemplars.java.backend.persistence.user.*;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;

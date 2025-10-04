@@ -3,7 +3,7 @@ package org.reldb.exemplars.java.backend.api.mappers;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 import org.reldb.exemplars.java.backend.api.model.RoleOut;
-import org.reldb.exemplars.java.backend.model.main.Role;
+import org.reldb.exemplars.java.backend.model.user.Role;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.Test;

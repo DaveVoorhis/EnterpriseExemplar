@@ -1,4 +1,4 @@
-package org.reldb.exemplars.java.backend.persistence.main;
+package org.reldb.exemplars.java.backend.persistence.user;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 

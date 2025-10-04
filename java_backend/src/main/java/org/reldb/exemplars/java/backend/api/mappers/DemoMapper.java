@@ -1,7 +1,7 @@
 package org.reldb.exemplars.java.backend.api.mappers;
 
 import org.reldb.exemplars.java.backend.api.model.DemoOut;
-import org.reldb.exemplars.java.backend.model.two.Demo;
+import org.reldb.exemplars.java.backend.model.demo.Demo;
 import java.util.List;
 import org.mapstruct.Mapper;
 

@@ -15,7 +15,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
  * calls with frontend activity in the logs. See
  * <a href="https://www.baeldung.com/mdc-in-log4j-2-logback">MDC</a>.
  *
- * @see <a href="file:src/main/resources/logback-spring.xml">logback-spring.xml</a> to configure the
+ * @see <a href="file:src/user/resources/logback-spring.xml">logback-spring.xml</a> to configure the
  *      layout of the logs.
  */
 @Slf4j

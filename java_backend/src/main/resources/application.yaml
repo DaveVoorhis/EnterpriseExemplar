@@ -10,11 +10,11 @@ spring:
       feature:
         INCLUDE_SOURCE_IN_LOCATION: true
   datasource:
-    jdbcUrl: jdbc:h2:mem:testdb;user=sa;MODE=MSSQLServer;
-  datasource-two:
-    jdbcUrl: jdbc:h2:mem:testdb;user=sa;MODE=MSSQLServer;
-  datasource-three:
-    jdbcUrl: jdbc:h2:mem:testdb;user=sa;MODE=MSSQLServer;
+    jdbcUrl: jdbc:h2:mem:testdb;user=sa;MODE=PostgreSQL;
+  datasource-user:
+    jdbcUrl: jdbc:h2:mem:testdb;user=sa;MODE=PostgreSQL;
+  datasource-extra:
+    jdbcUrl: jdbc:h2:mem:testdb;user=sa;MODE=PostgreSQL;
   jpa:
     open-in-view: true
   lifecycle:

@@ -1,6 +1,6 @@
-package org.reldb.exemplars.java.backend.persistence.main;
+package org.reldb.exemplars.java.backend.persistence.user;
 
-import org.reldb.exemplars.java.backend.model.main.User;
+import org.reldb.exemplars.java.backend.model.user.User;
 import java.util.Optional;
 import org.jspecify.annotations.NonNull;
 import org.springframework.data.repository.CrudRepository;
