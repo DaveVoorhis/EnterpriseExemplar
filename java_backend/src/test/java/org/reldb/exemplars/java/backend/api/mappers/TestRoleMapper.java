@@ -2,8 +2,11 @@ package org.reldb.exemplars.java.backend.api.mappers;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.reldb.exemplars.java.backend.api.model.RoleOut;
 import org.reldb.exemplars.java.backend.model.user.Role;
+
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.Test;
@@ -14,6 +17,12 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 public class TestRoleMapper {
     private final RoleMapper mapper = Mappers.getMapper(RoleMapper.class);
+
+    @Test
+    void mapsNullToNull() {
+        AssertionsForClassTypes.assertThat(mapper.toRoleOut((Role)null)).isNull();
+        assertThat(mapper.toRoleOut((List<Role>)null)).isNull();
+    }
 
     @ParameterizedTest
     @CsvSource({

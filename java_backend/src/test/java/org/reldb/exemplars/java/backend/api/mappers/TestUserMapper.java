@@ -2,6 +2,8 @@ package org.reldb.exemplars.java.backend.api.mappers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.assertj.core.api.AssertionsForClassTypes;
+import org.assertj.core.api.AssertionsForInterfaceTypes;
 import org.reldb.exemplars.java.backend.api.model.UserOut;
 import org.reldb.exemplars.java.backend.model.user.User;
 import jakarta.validation.constraints.NotNull;
@@ -14,6 +16,12 @@ import org.mapstruct.factory.Mappers;
 class TestUserMapper {
 
     private final UserMapper mapper = Mappers.getMapper(UserMapper.class);
+
+    @Test
+    void mapsNullToNull() {
+        AssertionsForClassTypes.assertThat(mapper.userToUserOut((User)null)).isNull();
+        AssertionsForInterfaceTypes.assertThat(mapper.userToUserOut((List<User>)null)).isNull();
+    }
 
     @Test
     void userToUserOutTest() {
