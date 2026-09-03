@@ -1,14 +1,15 @@
 package org.reldb.exemplars.java.backend.persistence.demo;
 
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.reldb.exemplars.java.backend.ApplicationTestBase;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class TestDemoRepository extends ApplicationTestBase {
-    @Autowired
-    private DemoRepository repository;
+    private final DemoRepository repository;
 
     @Test
     void canFindAllDemos() {

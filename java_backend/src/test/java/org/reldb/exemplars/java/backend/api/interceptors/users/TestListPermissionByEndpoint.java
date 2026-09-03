@@ -1,13 +1,14 @@
 package org.reldb.exemplars.java.backend.api.interceptors.users;
 
+import lombok.RequiredArgsConstructor;
 import org.reldb.exemplars.java.backend.api.ApiTestBase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 class TestListPermissionByEndpoint extends ApiTestBase {
-    @Autowired
-    PermissionLister permissionLister;
+    private final PermissionLister permissionLister;
 
     @Test
     @DisplayName("List of API endpoints and required permissions.")
@@ -19,7 +20,7 @@ class TestListPermissionByEndpoint extends ApiTestBase {
 
         System.out.println(header);
         permissionLister.getPermissions()
-                .forEach(method -> System.out.println(method.toString()));
+                .forEach(System.out::println);
         System.out.println(footer);
     }
 }

@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
+import lombok.RequiredArgsConstructor;
 import org.reldb.exemplars.java.backend.ApplicationTestBase;
 import org.reldb.exemplars.java.backend.enums.Permissions;
 import org.reldb.exemplars.java.backend.exception.custom.*;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 class TestUserService extends ApplicationTestBase {
 
     private static final long VALID_ENABLED_USER_ID = 5;
@@ -28,14 +30,9 @@ class TestUserService extends ApplicationTestBase {
     private static final long VALID_ENABLED_USER_ID_2 = 7;
     private static final long INVALID_ROLE_ID = 9999;
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private UserRoleRepository userRoleRepository;
+    private final UserService userService;
+    private final UserRepository userRepository;
+    private final UserRoleRepository userRoleRepository;
 
     @MockitoBean
     private UserContextService userContextService;

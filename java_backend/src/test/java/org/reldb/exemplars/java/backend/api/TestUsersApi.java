@@ -2,6 +2,7 @@ package org.reldb.exemplars.java.backend.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import lombok.RequiredArgsConstructor;
 import org.reldb.exemplars.java.backend.api.interceptors.auth.MockSecureUser;
 import org.reldb.exemplars.java.backend.api.model.*;
 import org.reldb.exemplars.java.backend.enums.Permissions;
@@ -16,9 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 class TestUsersApi extends ApiTestBase {
-    @Autowired
-    MockSecureUser secureUser;
+    private final MockSecureUser secureUser;
 
     // Current user set for tests by noauth profile
     private static final long CURRENT_USER_ID = 4;

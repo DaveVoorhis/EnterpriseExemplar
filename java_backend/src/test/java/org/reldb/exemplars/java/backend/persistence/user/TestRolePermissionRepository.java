@@ -1,14 +1,15 @@
 package org.reldb.exemplars.java.backend.persistence.user;
 
+import lombok.RequiredArgsConstructor;
 import org.reldb.exemplars.java.backend.ApplicationTestBase;
 import org.reldb.exemplars.java.backend.enums.Permissions;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class TestRolePermissionRepository extends ApplicationTestBase {
-    @Autowired
-    private RolePermissionRepository repository;
+    private final RolePermissionRepository repository;
 
     @Test
     void hasPermissions() {
