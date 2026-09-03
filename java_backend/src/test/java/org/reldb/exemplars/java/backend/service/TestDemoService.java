@@ -4,9 +4,9 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.Test;
 import org.reldb.exemplars.java.backend.ApplicationTestBase;
 import org.reldb.exemplars.java.backend.exception.custom.DemoNotFoundException;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @RequiredArgsConstructor(onConstructor_ = @Autowired)

@@ -1,24 +1,25 @@
 package org.reldb.exemplars.java.backend.api;
 
-import org.reldb.exemplars.java.backend.Application;
-import org.reldb.exemplars.java.backend.ApplicationTestBase;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
+import org.reldb.exemplars.java.backend.Application;
+import org.reldb.exemplars.java.backend.ApplicationTestBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.resttestclient.TestRestTemplate;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.test.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
+import tools.jackson.databind.json.JsonMapper;
 
 @TestPropertySource(properties = {"server.port=0"})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(classes = Application.class)
+@AutoConfigureTestRestTemplate
 public class ApiTestBase extends ApplicationTestBase {
 
     protected static final String X_REQUEST_ID = "X-Request-Id";
@@ -67,25 +68,23 @@ public class ApiTestBase extends ApplicationTestBase {
         return call(url, HttpMethod.DELETE, t);
     }
 
-    protected <T> ResponseEntity<T> post(String url, Object in) throws JsonProcessingException {
+    protected <T> ResponseEntity<T> post(String url, Object in) {
         return post(url, new ParameterizedTypeReference<>() {
         }, in);
     }
 
     // Use this when Jackson's "best guess" deserialization doesn't work.
-    protected <T> ResponseEntity<T> post(String url, ParameterizedTypeReference<T> t, Object in)
-            throws JsonProcessingException {
+    protected <T> ResponseEntity<T> post(String url, ParameterizedTypeReference<T> t, Object in) {
         return call(url, HttpMethod.POST, t, in);
     }
 
-    protected <T> ResponseEntity<T> put(String url, Object in) throws JsonProcessingException {
+    protected <T> ResponseEntity<T> put(String url, Object in) {
         return put(url, new ParameterizedTypeReference<>() {
         }, in);
     }
 
     // Use this when Jackson's "best guess" deserialization doesn't work.
-    protected <T> ResponseEntity<T> put(String url, ParameterizedTypeReference<T> t, Object in)
-            throws JsonProcessingException {
+    protected <T> ResponseEntity<T> put(String url, ParameterizedTypeReference<T> t, Object in) {
         return call(url, HttpMethod.PUT, t, in);
     }
 
@@ -93,12 +92,11 @@ public class ApiTestBase extends ApplicationTestBase {
         return call(url, method, new HttpEntity<>(getHeaders()), t);
     }
 
-    private <T> ResponseEntity<T> call(String url, HttpMethod method, ParameterizedTypeReference<T> t, Object in)
-            throws JsonProcessingException {
+    private <T> ResponseEntity<T> call(String url, HttpMethod method, ParameterizedTypeReference<T> t, Object in) {
         final var headers = getHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        final var mapper = new ObjectMapper();
+        final var mapper = new JsonMapper();
         final var requestBody = mapper.writeValueAsString(in);
 
         return call(url, method, new HttpEntity<>(requestBody, headers), t);

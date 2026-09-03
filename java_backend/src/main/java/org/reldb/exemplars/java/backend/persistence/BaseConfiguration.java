@@ -2,7 +2,6 @@ package org.reldb.exemplars.java.backend.persistence;
 
 import java.util.HashMap;
 import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.core.env.Environment;

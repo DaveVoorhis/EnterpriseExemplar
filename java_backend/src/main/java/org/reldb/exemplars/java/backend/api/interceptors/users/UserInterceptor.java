@@ -1,11 +1,11 @@
 package org.reldb.exemplars.java.backend.api.interceptors.users;
 
-import org.reldb.exemplars.java.backend.api.service.UserContextServiceAdapter;
-import org.reldb.exemplars.java.backend.api.service.UserServiceAdapter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.reldb.exemplars.java.backend.api.service.UserContextServiceAdapter;
+import org.reldb.exemplars.java.backend.api.service.UserServiceAdapter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 

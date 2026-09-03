@@ -4,14 +4,14 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-import lombok.RequiredArgsConstructor;
-import org.reldb.exemplars.java.backend.ApplicationTestBase;
-import org.reldb.exemplars.java.backend.exception.custom.UserCredentialsInvalidException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.reldb.exemplars.java.backend.ApplicationTestBase;
+import org.reldb.exemplars.java.backend.exception.custom.UserCredentialsInvalidException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;

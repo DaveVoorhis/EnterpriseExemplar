@@ -1,13 +1,13 @@
 package org.reldb.exemplars.java.backend.api.interceptors.logging;
 
-import org.reldb.exemplars.java.backend.api.interceptors.RequestHandlerBase;
-import org.reldb.exemplars.java.backend.exception.custom.InvalidRequestIdException;
 import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
+import org.reldb.exemplars.java.backend.api.interceptors.RequestHandlerBase;
+import org.reldb.exemplars.java.backend.exception.custom.InvalidRequestIdException;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 /**

@@ -1,9 +1,9 @@
 package org.reldb.exemplars.java.backend.api.interceptors.users;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.reldb.exemplars.java.backend.api.service.UserContextServiceAdapter;
 import org.reldb.exemplars.java.backend.api.service.UserServiceAdapter;
-import java.util.List;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

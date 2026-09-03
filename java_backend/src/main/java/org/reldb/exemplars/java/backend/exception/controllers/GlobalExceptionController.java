@@ -2,11 +2,11 @@ package org.reldb.exemplars.java.backend.exception.controllers;
 
 import static org.springframework.http.HttpStatus.*;
 
-import org.reldb.exemplars.java.backend.exception.ErrorResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.NotImplementedException;
 import org.jspecify.annotations.NonNull;
+import org.reldb.exemplars.java.backend.exception.ErrorResponse;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;

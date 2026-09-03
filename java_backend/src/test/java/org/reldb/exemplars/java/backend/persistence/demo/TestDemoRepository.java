@@ -1,11 +1,11 @@
 package org.reldb.exemplars.java.backend.persistence.demo;
 
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.reldb.exemplars.java.backend.ApplicationTestBase;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class TestDemoRepository extends ApplicationTestBase {

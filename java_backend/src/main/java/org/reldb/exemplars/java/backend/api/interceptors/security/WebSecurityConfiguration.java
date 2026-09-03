@@ -1,7 +1,6 @@
 package org.reldb.exemplars.java.backend.api.interceptors.security;
 
 import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +20,7 @@ public class WebSecurityConfiguration {
     private final AuthFail authFail;
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) {
         return httpSecurity
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth

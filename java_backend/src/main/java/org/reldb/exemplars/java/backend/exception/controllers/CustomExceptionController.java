@@ -1,10 +1,10 @@
 package org.reldb.exemplars.java.backend.exception.controllers;
 
-import org.reldb.exemplars.java.backend.exception.ErrorResponse;
-import org.reldb.exemplars.java.backend.exception.custom.CustomExceptionBase;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.NonNull;
+import org.reldb.exemplars.java.backend.exception.ErrorResponse;
+import org.reldb.exemplars.java.backend.exception.custom.CustomExceptionBase;
 import org.slf4j.event.Level;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

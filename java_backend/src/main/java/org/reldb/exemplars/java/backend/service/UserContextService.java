@@ -1,8 +1,8 @@
 package org.reldb.exemplars.java.backend.service;
 
 import lombok.RequiredArgsConstructor;
-import org.reldb.exemplars.java.backend.exception.custom.UserCredentialsInvalidException;
 import lombok.extern.slf4j.Slf4j;
+import org.reldb.exemplars.java.backend.exception.custom.UserCredentialsInvalidException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;

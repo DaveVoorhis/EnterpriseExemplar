@@ -1,5 +1,6 @@
 package org.reldb.exemplars.java.backend.api.service;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.reldb.exemplars.java.backend.api.mappers.PermissionMapper;
 import org.reldb.exemplars.java.backend.api.mappers.RoleMapper;
@@ -10,9 +11,7 @@ import org.reldb.exemplars.java.backend.api.model.RoleOut;
 import org.reldb.exemplars.java.backend.api.model.UserOut;
 import org.reldb.exemplars.java.backend.api.model.UserSetEnabledIn;
 import org.reldb.exemplars.java.backend.enums.Permissions;
-import org.reldb.exemplars.java.backend.exception.custom.PermissionNotFoundException;
 import org.reldb.exemplars.java.backend.service.UserService;
-import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -47,7 +46,7 @@ public class UserServiceAdapter {
         final Permissions permission;
         try {
             permission = permissionMapper.permissionNameToPermission(permissionName);
-        } catch (PermissionNotFoundException pnfe) {
+        } catch (Exception exception) {
             return false;
         }
         return isCurrentUserAllowedTo(permission);

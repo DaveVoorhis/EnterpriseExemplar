@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
+import org.junit.jupiter.api.Test;
 import org.reldb.exemplars.java.backend.exception.ErrorCodes;
 import org.reldb.exemplars.java.backend.exception.ErrorResponse;
 import org.reldb.exemplars.java.backend.exception.custom.CustomExceptionBase;
@@ -11,7 +12,6 @@ import org.reldb.exemplars.java.backend.exception.custom.CustomHttpStatusCode;
 import org.reldb.exemplars.java.backend.exception.custom.InvalidRequestIdException;
 import org.reldb.exemplars.java.backend.exception.custom.SomethingUnusualException;
 import org.reldb.exemplars.java.backend.exception.custom.UserNotFoundException;
-import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
 public class TestCustomExceptionController {

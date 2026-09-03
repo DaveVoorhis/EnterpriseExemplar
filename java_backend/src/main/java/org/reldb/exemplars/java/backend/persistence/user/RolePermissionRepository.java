@@ -1,10 +1,10 @@
 package org.reldb.exemplars.java.backend.persistence.user;
 
-import org.reldb.exemplars.java.backend.model.user.RolePermission;
-import org.reldb.exemplars.java.backend.model.user.RolePermissionPK;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import org.jspecify.annotations.NonNull;
+import org.reldb.exemplars.java.backend.model.user.RolePermission;
+import org.reldb.exemplars.java.backend.model.user.RolePermissionPK;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.NativeQuery;
 import org.springframework.data.repository.CrudRepository;

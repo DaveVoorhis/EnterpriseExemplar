@@ -1,8 +1,8 @@
 package org.reldb.exemplars.java.backend.cron;
 
 import lombok.RequiredArgsConstructor;
-import org.reldb.exemplars.java.backend.service.PeriodicBackgroundTaskService;
 import lombok.extern.slf4j.Slf4j;
+import org.reldb.exemplars.java.backend.service.PeriodicBackgroundTaskService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 

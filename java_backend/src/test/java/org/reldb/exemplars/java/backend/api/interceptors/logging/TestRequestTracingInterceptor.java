@@ -1,13 +1,12 @@
 package org.reldb.exemplars.java.backend.api.interceptors.logging;
 
-import static org.reldb.exemplars.java.backend.api.interceptors.logging.MDCUtils.REQUEST_ID_KEY;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.reldb.exemplars.java.backend.api.interceptors.logging.MDCUtils.REQUEST_ID_KEY;
 
 import ch.qos.logback.classic.Level;
-import org.reldb.exemplars.java.backend.exception.custom.InvalidRequestIdException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.UUID;
@@ -19,6 +18,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.reldb.exemplars.java.backend.exception.custom.InvalidRequestIdException;
 import org.slf4j.MDC;
 
 @ExtendWith(MockitoExtension.class)

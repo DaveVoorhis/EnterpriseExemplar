@@ -1,9 +1,9 @@
 package org.reldb.exemplars.java.backend.model.user;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.Test;
 import org.reldb.exemplars.java.backend.model.ModelTestBase;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestUserRole extends ModelTestBase {
 

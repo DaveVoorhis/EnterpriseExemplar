@@ -1,9 +1,9 @@
 package org.reldb.exemplars.java.backend.api.interceptors.users;
 
 import lombok.RequiredArgsConstructor;
-import org.reldb.exemplars.java.backend.api.ApiTestBase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.reldb.exemplars.java.backend.api.ApiTestBase;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @RequiredArgsConstructor(onConstructor_ = @Autowired)

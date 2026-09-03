@@ -2,20 +2,20 @@ package org.reldb.exemplars.java.backend.api.mappers;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-import org.reldb.exemplars.java.backend.api.model.PermissionOut;
-import org.reldb.exemplars.java.backend.enums.Permissions;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
+import org.reldb.exemplars.java.backend.api.model.PermissionOut;
+import org.reldb.exemplars.java.backend.enums.Permissions;
 
 public class TestPermissionMapper {
     private final PermissionMapper mapper = Mappers.getMapper(PermissionMapper.class);
 
     @Test
     void mapsNullToNull() {
-        assertThat(mapper.permissionNameToPermission((List<String>)null)).isNull();
+        assertThat(mapper.permissionNameToPermission((List<String>) null)).isNull();
         assertThat(mapper.toPermissionOut(null)).isNull();
         assertThat(mapper.permissionsToPermissionOut(null)).isNull();
     }

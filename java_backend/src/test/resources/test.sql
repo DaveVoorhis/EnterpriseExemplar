@@ -23,10 +23,10 @@ VALUES (1, 'ADD_DEMO'),
        (2, 'ADD_DEMO');
 
 INSERT INTO app_users (user_id, email, enabled, last_login)
-VALUES (4, 'dave.voorhis@reldb.org', 1, CAST('2024-07-22T00:00:00.000' AS DateTime)), -- matches NOAUTH_SECURE_USERID
-       (5, 'blah.blah@reldb.org', 1, CAST('2024-07-22T00:00:00.000' AS DateTime)),
-       (6, 'zap.zot@reldb.org', 0, CAST('2024-07-22T00:00:00.000' AS DateTime)),
-       (7, 'zaz.zoo@reldb.org', 1, CAST('2024-07-22T00:00:00.000' AS DateTime));
+VALUES (4, 'dave.voorhis@reldb.org', 1, CAST('2024-07-22T00:00:00.000' AS TIMESTAMP)), -- matches NOAUTH_SECURE_USERID
+       (5, 'blah.blah@reldb.org', 1, CAST('2024-07-22T00:00:00.000' AS TIMESTAMP)),
+       (6, 'zap.zot@reldb.org', 0, CAST('2024-07-22T00:00:00.000' AS TIMESTAMP)),
+       (7, 'zaz.zoo@reldb.org', 1, CAST('2024-07-22T00:00:00.000' AS TIMESTAMP));
 
 INSERT INTO user_roles (user_id, role_id)
 VALUES (6, 1),

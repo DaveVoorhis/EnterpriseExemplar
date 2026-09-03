@@ -2,9 +2,6 @@ package org.reldb.exemplars.java.backend.api.mappers;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-import org.reldb.exemplars.java.backend.api.model.DemoOut;
-import org.reldb.exemplars.java.backend.model.demo.Demo;
-
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.instancio.Instancio;
@@ -12,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mapstruct.factory.Mappers;
+import org.reldb.exemplars.java.backend.api.model.DemoOut;
+import org.reldb.exemplars.java.backend.model.demo.Demo;
 import org.springframework.test.util.ReflectionTestUtils;
 
 public class TestDemoMapper {
@@ -19,8 +18,8 @@ public class TestDemoMapper {
 
     @Test
     void mapsNullToNull() {
-        assertThat(mapper.toDemoOut((Demo)null)).isNull();
-        assertThat(mapper.toDemoOut((List<Demo>)null)).isNull();
+        assertThat(mapper.toDemoOut((Demo) null)).isNull();
+        assertThat(mapper.toDemoOut((List<Demo>) null)).isNull();
     }
 
     @ParameterizedTest

@@ -1,15 +1,15 @@
 package org.reldb.exemplars.java.backend.service;
 
-import lombok.RequiredArgsConstructor;
-import org.reldb.exemplars.java.backend.enums.Permissions;
-import org.reldb.exemplars.java.backend.exception.custom.*;
-import org.reldb.exemplars.java.backend.model.user.*;
-import org.reldb.exemplars.java.backend.persistence.user.*;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.reldb.exemplars.java.backend.enums.Permissions;
+import org.reldb.exemplars.java.backend.exception.custom.*;
+import org.reldb.exemplars.java.backend.model.user.*;
+import org.reldb.exemplars.java.backend.persistence.user.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
