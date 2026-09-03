@@ -1,5 +1,6 @@
 package org.reldb.exemplars.java.backend.api.interceptors.security;
 
+import lombok.RequiredArgsConstructor;
 import org.reldb.exemplars.java.backend.api.interceptors.RequestHandlerBase;
 import org.reldb.exemplars.java.backend.exception.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -15,9 +15,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class AuthFail extends RequestHandlerBase implements AuthenticationEntryPoint {
-    @Autowired
-    private ObjectMapper mapper;
+    private final ObjectMapper mapper;
 
     @Override
     public void commence(HttpServletRequest request,

@@ -3,6 +3,7 @@ package org.reldb.exemplars.java.backend.service;
 import static org.reldb.exemplars.java.backend.service.UserService.ADMIN_ROLE_ID;
 import static org.reldb.exemplars.java.backend.service.UserService.USER_ROLE_ID;
 
+import lombok.RequiredArgsConstructor;
 import org.reldb.exemplars.java.backend.enums.Permissions;
 import org.reldb.exemplars.java.backend.model.user.RolePermission;
 import org.reldb.exemplars.java.backend.model.user.RolePermissionPK;
@@ -11,18 +12,16 @@ import org.reldb.exemplars.java.backend.persistence.user.RoleRepository;
 import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.NonNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class StartupService implements ApplicationListener<@NonNull ApplicationReadyEvent> {
-    @Autowired
-    private RoleRepository roleRepository;
-    @Autowired
-    private RolePermissionRepository rolePermissionRepository;
+    private final RoleRepository roleRepository;
+    private final RolePermissionRepository rolePermissionRepository;
 
     @Override
     public void onApplicationEvent(@NonNull final ApplicationReadyEvent event) {

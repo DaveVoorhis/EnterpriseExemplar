@@ -1,17 +1,17 @@
 package org.reldb.exemplars.java.backend.service;
 
+import lombok.RequiredArgsConstructor;
 import org.reldb.exemplars.java.backend.exception.custom.DemoNotFoundException;
 import org.reldb.exemplars.java.backend.model.demo.Demo;
 import org.reldb.exemplars.java.backend.persistence.demo.DemoRepository;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class DemoService {
-    @Autowired
-    private DemoRepository demoRepository;
+    private final DemoRepository demoRepository;
 
     public List<Demo> getAllDemos() {
         return Streamable.of(demoRepository.findAll()).toList();

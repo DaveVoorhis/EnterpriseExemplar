@@ -1,14 +1,14 @@
 package org.reldb.exemplars.java.backend.persistence;
 
 import liquibase.integration.spring.SpringLiquibase;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@RequiredArgsConstructor
 public class DemoSchemaMigrator {
-    @Autowired
-    DemoConfiguration config;
+    private final DemoConfiguration config;
 
     @Bean
     public SpringLiquibase liquibaseTwo() {

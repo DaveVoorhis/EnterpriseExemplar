@@ -1,19 +1,19 @@
 package org.reldb.exemplars.java.backend.service;
 
+import lombok.RequiredArgsConstructor;
 import org.reldb.exemplars.java.backend.exception.custom.UserCredentialsInvalidException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class UserContextService {
     private static final String USERNAME = "email";
 
-    @Autowired
-    private SecurityContextProvider securityContextProvider;
+    private final SecurityContextProvider securityContextProvider;
 
     public String getUsername() {
         final var auth = securityContextProvider.getAuthentication();

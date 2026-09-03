@@ -5,7 +5,8 @@ import static java.time.temporal.ChronoUnit.SECONDS;
 
 import java.time.Instant;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -14,9 +15,9 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 
 @Configuration
 @Profile("noauth")
+@RequiredArgsConstructor
 public class AuthMock {
-    @Autowired
-    private MockSecureUser secureUser;
+    private final MockSecureUser secureUser;
 
     /**
      * This should only be enabled (via the noauth profile) when running locally or in a dev
