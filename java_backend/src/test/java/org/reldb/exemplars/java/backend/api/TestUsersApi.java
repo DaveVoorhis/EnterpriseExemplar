@@ -2,23 +2,23 @@ package org.reldb.exemplars.java.backend.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.reldb.exemplars.java.backend.api.interceptors.auth.MockSecureUser;
-import org.reldb.exemplars.java.backend.api.model.*;
-import org.reldb.exemplars.java.backend.enums.Permissions;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.Arrays;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NonNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.reldb.exemplars.java.backend.api.interceptors.auth.MockSecureUser;
+import org.reldb.exemplars.java.backend.api.model.*;
+import org.reldb.exemplars.java.backend.enums.Permissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 class TestUsersApi extends ApiTestBase {
-    @Autowired
-    MockSecureUser secureUser;
+    private final MockSecureUser secureUser;
 
     // Current user set for tests by noauth profile
     private static final long CURRENT_USER_ID = 4;
@@ -56,7 +56,7 @@ class TestUsersApi extends ApiTestBase {
     }
 
     @Test
-    void shouldSetDisabledEnabled() throws JsonProcessingException {
+    void shouldSetDisabledEnabled() {
         final var user = VALID_DISABLED_USER_ID;
         final var url = getBaseUrl() + USER_URL.formatted(user);
 
@@ -65,7 +65,7 @@ class TestUsersApi extends ApiTestBase {
     }
 
     @Test
-    void shouldSetEnabledDisabled() throws JsonProcessingException {
+    void shouldSetEnabledDisabled() {
         final var user = VALID_ENABLED_USER_ID;
         final var url = getBaseUrl() + USER_URL.formatted(user);
 
@@ -145,7 +145,7 @@ class TestUsersApi extends ApiTestBase {
     }
 
     @Test
-    void shouldAddUpdateAndDeleteARole() throws JsonProcessingException {
+    void shouldAddUpdateAndDeleteARole() {
         final var initialRolesCount = getAllRoles().size();
 
         final var addedRole = addRole("blah", "blahblahblah", true);
@@ -186,7 +186,7 @@ class TestUsersApi extends ApiTestBase {
     }
 
     @Test
-    void shouldGrantAndRevokeUserRole() throws JsonProcessingException {
+    void shouldGrantAndRevokeUserRole() {
         final var testUserId = VALID_ENABLED_USER_ID_2;
         final var testRoleId = ADMIN_ROLE;
         final var initialUserRolesCount = getUserRoles(testUserId).size();
@@ -206,7 +206,7 @@ class TestUsersApi extends ApiTestBase {
     }
 
     @Test
-    void shouldGrantAndRevokeRolePermission() throws JsonProcessingException {
+    void shouldGrantAndRevokeRolePermission() {
         final var testPermission = Permissions.ADMIN;
 
         final var newRole = addRole("blah", "blahblah", true);
@@ -234,7 +234,7 @@ class TestUsersApi extends ApiTestBase {
         return response.getBody();
     }
 
-    private RoleOut addRole(String name, String description, boolean active) throws JsonProcessingException {
+    private RoleOut addRole(String name, String description, boolean active) {
         final var addURL = getBaseUrl() + USERS_URL + "/roles";
 
         final ResponseEntity<@NonNull RoleOut> addResponse = post(addURL,
@@ -251,8 +251,7 @@ class TestUsersApi extends ApiTestBase {
         return addBody;
     }
 
-    private RoleOut updateRole(long roleId, String name, String description, boolean active)
-            throws JsonProcessingException {
+    private RoleOut updateRole(long roleId, String name, String description, boolean active) {
         final var updateUrl = getBaseUrl() + USERS_URL + "/roles/" + roleId;
 
         final ResponseEntity<@NonNull RoleOut> updateResponse = put(updateUrl,
@@ -289,7 +288,7 @@ class TestUsersApi extends ApiTestBase {
         return response.getBody();
     }
 
-    private void grantRoleToUser(long userId, long roleId) throws JsonProcessingException {
+    private void grantRoleToUser(long userId, long roleId) {
         final var addUrl = getBaseUrl() + USERS_URL + "/%s/roles/%s".formatted(userId, roleId);
 
         final ResponseEntity<@NonNull Void> addResponse = post(addUrl, new ParameterizedTypeReference<>() {
@@ -318,7 +317,7 @@ class TestUsersApi extends ApiTestBase {
         return response.getBody();
     }
 
-    private void grantPermissionToRole(long roleId, Permissions permission) throws JsonProcessingException {
+    private void grantPermissionToRole(long roleId, Permissions permission) {
         final var grantUrl = getBaseUrl() + USERS_URL
                 + "/role/%s/permissions/%s".formatted(roleId, permission.name());
 
@@ -338,7 +337,7 @@ class TestUsersApi extends ApiTestBase {
         assertThat(revokeResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
-    private void verifySetEnabled(String url, long userId, UserSetEnabledIn enabled) throws JsonProcessingException {
+    private void verifySetEnabled(String url, long userId, UserSetEnabledIn enabled) {
         final ResponseEntity<@NonNull Void> responseSetEnabled = put(url, enabled);
 
         assertThat(responseSetEnabled.getStatusCode()).isEqualTo(HttpStatus.OK);

@@ -2,9 +2,9 @@ package org.reldb.exemplars.java.backend.exception;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
 import org.reldb.exemplars.java.backend.enums.Permissions;
 import org.reldb.exemplars.java.backend.exception.custom.UserLacksPermissionException;
-import org.junit.jupiter.api.Test;
 
 public class TestUserLacksPermissionException {
     @Test

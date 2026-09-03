@@ -1,35 +1,31 @@
 package org.reldb.exemplars.java.backend.service;
 
-import org.reldb.exemplars.java.backend.enums.Permissions;
-import org.reldb.exemplars.java.backend.exception.custom.*;
-import org.reldb.exemplars.java.backend.model.user.*;
-import org.reldb.exemplars.java.backend.persistence.user.*;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.reldb.exemplars.java.backend.enums.Permissions;
+import org.reldb.exemplars.java.backend.exception.custom.*;
+import org.reldb.exemplars.java.backend.model.user.*;
+import org.reldb.exemplars.java.backend.persistence.user.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class UserService {
     public final static long ADMIN_ROLE_ID = 1;
     public final static long USER_ROLE_ID = 2;
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private UserContextService userContextService;
-    @Autowired
-    private RoleRepository roleRepository;
-    @Autowired
-    private UserRoleRepository userRoleRepository;
-    @Autowired
-    private RolePermissionRepository rolePermissionRepository;
+    private final UserRepository userRepository;
+    private final UserContextService userContextService;
+    private final RoleRepository roleRepository;
+    private final UserRoleRepository userRoleRepository;
+    private final RolePermissionRepository rolePermissionRepository;
 
     @Value("${new-user-is-enabled-by-default:false}")
     private boolean newUserEnabledDefault;

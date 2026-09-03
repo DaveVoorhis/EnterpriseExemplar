@@ -1,11 +1,11 @@
 package org.reldb.exemplars.java.backend.model;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class ModelTestBase {
     protected void assertFieldIsGeneratedSequenceId(Class<?> clazz, String fieldName) throws NoSuchFieldException {
@@ -23,7 +23,8 @@ public class ModelTestBase {
         assertFieldNullability(clazz, fieldName, true);
     }
 
-    private void assertFieldNullability(Class<?> clazz, String fieldName, boolean nullable) throws NoSuchFieldException {
+    private void assertFieldNullability(Class<?> clazz, String fieldName, boolean nullable)
+            throws NoSuchFieldException {
         final var field = clazz.getDeclaredField(fieldName);
         final var columnAnnotation = field.getAnnotation(Column.class);
         assertThat(columnAnnotation).isNotNull();

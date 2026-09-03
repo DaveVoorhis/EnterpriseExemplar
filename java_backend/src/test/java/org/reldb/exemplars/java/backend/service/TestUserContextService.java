@@ -4,13 +4,14 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-import org.reldb.exemplars.java.backend.ApplicationTestBase;
-import org.reldb.exemplars.java.backend.exception.custom.UserCredentialsInvalidException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.reldb.exemplars.java.backend.ApplicationTestBase;
+import org.reldb.exemplars.java.backend.exception.custom.UserCredentialsInvalidException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,26 +19,25 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 class TestUserContextService extends ApplicationTestBase {
-    @Autowired
-    UserContextService service;
+    private final UserContextService service;
+
     @MockitoBean
-    SecurityContextProvider securityContextProvider;
+    private SecurityContextProvider securityContextProvider;
 
     @Test
     void verifyExceptionForBogusCredentials() {
         when(securityContextProvider.getAuthentication())
                 .thenCallRealMethod();
-        assertThrows(UserCredentialsInvalidException.class,
-                () -> service.getUsername());
+        assertThrows(UserCredentialsInvalidException.class, service::getUsername);
     }
 
     @Test
     void verifyExceptionForNullAuthentication() {
         when(securityContextProvider.getAuthentication())
                 .thenReturn(null);
-        assertThrows(UserCredentialsInvalidException.class,
-                () -> service.getUsername());
+        assertThrows(UserCredentialsInvalidException.class, service::getUsername);
     }
 
     @Test
@@ -45,8 +45,7 @@ class TestUserContextService extends ApplicationTestBase {
         when(securityContextProvider.getAuthentication())
                 .thenReturn(new AnonymousAuthenticationToken("blah", "blah",
                         List.of((GrantedAuthority) () -> "blah")));
-        assertThrows(UserCredentialsInvalidException.class,
-                () -> service.getUsername());
+        assertThrows(UserCredentialsInvalidException.class, service::getUsername);
     }
 
     @Test

@@ -1,5 +1,8 @@
 package org.reldb.exemplars.java.backend.api;
 
+import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.NonNull;
 import org.reldb.exemplars.java.backend.api.interceptors.users.Permit;
 import org.reldb.exemplars.java.backend.api.model.PermissionOut;
 import org.reldb.exemplars.java.backend.api.model.RoleIn;
@@ -8,9 +11,6 @@ import org.reldb.exemplars.java.backend.api.model.UserOut;
 import org.reldb.exemplars.java.backend.api.model.UserSetEnabledIn;
 import org.reldb.exemplars.java.backend.api.service.UserServiceAdapter;
 import org.reldb.exemplars.java.backend.enums.Permissions;
-import java.util.List;
-import org.jspecify.annotations.NonNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +19,9 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @RequestMapping("/users")
 @RestController
+@RequiredArgsConstructor
 public class UsersApi extends ApiDefault {
-
-    @Autowired
-    private UserServiceAdapter userService;
+    private final UserServiceAdapter userService;
 
     @Permit(Permissions.ADMIN)
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)

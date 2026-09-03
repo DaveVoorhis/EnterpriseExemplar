@@ -1,17 +1,12 @@
 package org.reldb.exemplars.java.backend.api.service;
 
-import static org.reldb.exemplars.java.backend.enums.Permissions.FIND_USER;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.reldb.exemplars.java.backend.enums.Permissions.FIND_USER;
 
-import org.reldb.exemplars.java.backend.api.mappers.PermissionMapper;
-import org.reldb.exemplars.java.backend.api.mappers.UserMapper;
-import org.reldb.exemplars.java.backend.api.model.UserSetEnabledIn;
-import org.reldb.exemplars.java.backend.enums.Permissions;
-import org.reldb.exemplars.java.backend.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,6 +14,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.reldb.exemplars.java.backend.api.mappers.PermissionMapper;
+import org.reldb.exemplars.java.backend.api.mappers.UserMapper;
+import org.reldb.exemplars.java.backend.api.model.UserSetEnabledIn;
+import org.reldb.exemplars.java.backend.enums.Permissions;
+import org.reldb.exemplars.java.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @ExtendWith(MockitoExtension.class)

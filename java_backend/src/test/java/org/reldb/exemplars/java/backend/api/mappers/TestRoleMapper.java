@@ -2,17 +2,16 @@ package org.reldb.exemplars.java.backend.api.mappers;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-import org.assertj.core.api.AssertionsForClassTypes;
-import org.reldb.exemplars.java.backend.api.model.RoleOut;
-import org.reldb.exemplars.java.backend.model.user.Role;
-
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mapstruct.factory.Mappers;
+import org.reldb.exemplars.java.backend.api.model.RoleOut;
+import org.reldb.exemplars.java.backend.model.user.Role;
 import org.springframework.test.util.ReflectionTestUtils;
 
 public class TestRoleMapper {
@@ -20,8 +19,8 @@ public class TestRoleMapper {
 
     @Test
     void mapsNullToNull() {
-        AssertionsForClassTypes.assertThat(mapper.toRoleOut((Role)null)).isNull();
-        assertThat(mapper.toRoleOut((List<Role>)null)).isNull();
+        AssertionsForClassTypes.assertThat(mapper.toRoleOut((Role) null)).isNull();
+        assertThat(mapper.toRoleOut((List<Role>) null)).isNull();
     }
 
     @ParameterizedTest

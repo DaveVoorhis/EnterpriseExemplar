@@ -1,5 +1,7 @@
 package org.reldb.exemplars.java.backend.api.service;
 
+import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.reldb.exemplars.java.backend.api.mappers.PermissionMapper;
 import org.reldb.exemplars.java.backend.api.mappers.RoleMapper;
 import org.reldb.exemplars.java.backend.api.mappers.UserMapper;
@@ -9,22 +11,16 @@ import org.reldb.exemplars.java.backend.api.model.RoleOut;
 import org.reldb.exemplars.java.backend.api.model.UserOut;
 import org.reldb.exemplars.java.backend.api.model.UserSetEnabledIn;
 import org.reldb.exemplars.java.backend.enums.Permissions;
-import org.reldb.exemplars.java.backend.exception.custom.PermissionNotFoundException;
 import org.reldb.exemplars.java.backend.service.UserService;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceAdapter {
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private UserMapper userMapper;
-    @Autowired
-    private PermissionMapper permissionMapper;
-    @Autowired
-    private RoleMapper roleMapper;
+    private final UserService userService;
+    private final UserMapper userMapper;
+    private final PermissionMapper permissionMapper;
+    private final RoleMapper roleMapper;
 
     public UserOut getCurrentUser() {
         return userMapper.userToUserOut(userService.getCurrentUser());
@@ -50,7 +46,7 @@ public class UserServiceAdapter {
         final Permissions permission;
         try {
             permission = permissionMapper.permissionNameToPermission(permissionName);
-        } catch (PermissionNotFoundException pnfe) {
+        } catch (Exception exception) {
             return false;
         }
         return isCurrentUserAllowedTo(permission);

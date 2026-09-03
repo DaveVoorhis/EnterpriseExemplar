@@ -1,11 +1,11 @@
 package org.reldb.exemplars.java.backend.api.mappers;
 
-import org.reldb.exemplars.java.backend.api.model.PermissionOut;
-import org.reldb.exemplars.java.backend.enums.Permissions;
-import org.reldb.exemplars.java.backend.exception.custom.PermissionNotFoundException;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.reldb.exemplars.java.backend.api.model.PermissionOut;
+import org.reldb.exemplars.java.backend.enums.Permissions;
+import org.reldb.exemplars.java.backend.exception.custom.PermissionNotFoundException;
 
 @Mapper
 public abstract class PermissionMapper {

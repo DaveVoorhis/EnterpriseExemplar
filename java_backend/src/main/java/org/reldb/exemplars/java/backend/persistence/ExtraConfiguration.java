@@ -9,10 +9,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@EnableJpaRepositories(
-        basePackages = "org.reldb.exemplars.java.backend.persistence.extra",
-        entityManagerFactoryRef = "extraEntityManager",
-        transactionManagerRef = "extraTransactionManager")
+@EnableJpaRepositories(basePackages = "org.reldb.exemplars.java.backend.persistence.extra", entityManagerFactoryRef = "extraEntityManager", transactionManagerRef = "extraTransactionManager")
 public class ExtraConfiguration extends BaseConfiguration {
     @Bean
     public LocalContainerEntityManagerFactoryBean extraEntityManager() {

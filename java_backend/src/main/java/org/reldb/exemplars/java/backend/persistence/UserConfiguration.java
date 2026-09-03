@@ -10,10 +10,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@EnableJpaRepositories(
-        basePackages = "org.reldb.exemplars.java.backend.persistence.user", 
-        entityManagerFactoryRef = "userEntityManager", 
-        transactionManagerRef = "userTransactionManager")
+@EnableJpaRepositories(basePackages = "org.reldb.exemplars.java.backend.persistence.user", entityManagerFactoryRef = "userEntityManager", transactionManagerRef = "userTransactionManager")
 public class UserConfiguration extends BaseConfiguration {
     @Primary
     @Bean

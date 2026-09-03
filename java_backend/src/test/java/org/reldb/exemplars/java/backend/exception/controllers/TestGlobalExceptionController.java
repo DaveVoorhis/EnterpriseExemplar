@@ -3,10 +3,10 @@ package org.reldb.exemplars.java.backend.exception.controllers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-import org.reldb.exemplars.java.backend.exception.ErrorResponse;
 import org.apache.commons.lang3.NotImplementedException;
 import org.jspecify.annotations.NonNull;
 import org.junit.jupiter.api.Test;
+import org.reldb.exemplars.java.backend.exception.ErrorResponse;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +35,8 @@ public class TestGlobalExceptionController {
 
         final var errorResponseEntity = globalExceptionController
                 .handleNoResourceFoundException(ex);
-        final var expectedErrorResponse = ErrorResponse.resourceNotFound("No static resource /non/existence for request 'http://something'.");
+        final var expectedErrorResponse = ErrorResponse
+                .resourceNotFound("No static resource /non/existence for request 'http://something'.");
 
         validateException(errorResponseEntity, expectedErrorResponse);
     }

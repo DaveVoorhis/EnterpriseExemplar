@@ -1,15 +1,15 @@
 package org.reldb.exemplars.java.backend.persistence;
 
 import liquibase.integration.spring.SpringLiquibase;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 @Configuration
+@RequiredArgsConstructor
 public class UserSchemaMigrator {
-    @Autowired
-    UserConfiguration config;
+    private final UserConfiguration config;
 
     @Primary
     @Bean

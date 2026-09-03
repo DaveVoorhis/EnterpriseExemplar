@@ -1,15 +1,15 @@
 package org.reldb.exemplars.java.backend.api.interceptors.users;
 
-import org.reldb.exemplars.java.backend.api.model.UserOut;
-import org.reldb.exemplars.java.backend.api.service.UserContextServiceAdapter;
-import org.reldb.exemplars.java.backend.api.service.UserServiceAdapter;
-import org.reldb.exemplars.java.backend.exception.custom.UserLacksPermissionException;
-import org.reldb.exemplars.java.backend.exception.custom.UserNotEnabledException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.reldb.exemplars.java.backend.api.model.UserOut;
+import org.reldb.exemplars.java.backend.api.service.UserContextServiceAdapter;
+import org.reldb.exemplars.java.backend.api.service.UserServiceAdapter;
+import org.reldb.exemplars.java.backend.exception.custom.UserLacksPermissionException;
+import org.reldb.exemplars.java.backend.exception.custom.UserNotEnabledException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;

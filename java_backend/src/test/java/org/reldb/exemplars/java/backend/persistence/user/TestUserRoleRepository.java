@@ -2,13 +2,14 @@ package org.reldb.exemplars.java.backend.persistence.user;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-import org.reldb.exemplars.java.backend.ApplicationTestBase;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.reldb.exemplars.java.backend.ApplicationTestBase;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class TestUserRoleRepository extends ApplicationTestBase {
-    @Autowired
-    private UserRoleRepository repository;
+    private final UserRoleRepository repository;
 
     @Test
     void canFindAllUserRoles() {

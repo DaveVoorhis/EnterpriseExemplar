@@ -3,13 +3,13 @@ package org.reldb.exemplars.java.backend.api.interceptors.users;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import org.reldb.exemplars.java.backend.api.ApiTestBase;
-import org.reldb.exemplars.java.backend.service.UserContextService;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.reldb.exemplars.java.backend.api.ApiTestBase;
+import org.reldb.exemplars.java.backend.service.UserContextService;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;

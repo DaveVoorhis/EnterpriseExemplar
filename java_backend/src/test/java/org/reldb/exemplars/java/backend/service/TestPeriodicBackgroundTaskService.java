@@ -1,12 +1,13 @@
 package org.reldb.exemplars.java.backend.service;
 
-import org.reldb.exemplars.java.backend.ApplicationTestBase;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.reldb.exemplars.java.backend.ApplicationTestBase;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 class TestPeriodicBackgroundTaskService extends ApplicationTestBase {
-    @Autowired
-    PeriodicBackgroundTaskService periodicBackgroundTaskService;
+    private final PeriodicBackgroundTaskService periodicBackgroundTaskService;
 
     @Test
     void ensureThereIsAMethodToCall() {

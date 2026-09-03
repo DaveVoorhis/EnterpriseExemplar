@@ -5,7 +5,7 @@ import static java.time.temporal.ChronoUnit.SECONDS;
 
 import java.time.Instant;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -14,15 +14,15 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 
 @Configuration
 @Profile("noauth")
+@RequiredArgsConstructor
 public class AuthMock {
-    @Autowired
-    private MockSecureUser secureUser;
+    private final MockSecureUser secureUser;
 
     /**
      * This should only be enabled (via the noauth profile) when running locally or in a dev
      * environment, to make sure unit tests can pass without having a real JWT token. The user
-     * associated with 'email' must exist and be retrievable from the user database's
-     * app_users table and have 'enabled' set to true.
+     * associated with 'email' must exist and be retrievable from the user database's app_users
+     * table and have 'enabled' set to true.
      */
     @Bean
     public JwtDecoder getDummyJwtDecoder() {

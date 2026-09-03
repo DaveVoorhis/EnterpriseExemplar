@@ -2,8 +2,8 @@ package org.reldb.exemplars.java.backend.exception.custom;
 
 import static org.reldb.exemplars.java.backend.exception.ErrorCodes.ERR_UserLacksPermission;
 
-import org.reldb.exemplars.java.backend.enums.Permissions;
 import java.util.Map;
+import org.reldb.exemplars.java.backend.enums.Permissions;
 import org.springframework.http.HttpStatus;
 
 public class UserLacksPermissionException extends CustomExceptionBase {

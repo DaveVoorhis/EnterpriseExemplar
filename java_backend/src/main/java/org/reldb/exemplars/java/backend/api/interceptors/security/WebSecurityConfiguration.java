@@ -1,7 +1,7 @@
 package org.reldb.exemplars.java.backend.api.interceptors.security;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -15,12 +15,12 @@ import org.springframework.web.filter.CorsFilter;
 // Set debug = true to see request details
 @EnableWebSecurity(debug = false)
 @Configuration
+@RequiredArgsConstructor
 public class WebSecurityConfiguration {
-    @Autowired
-    private AuthFail authFail;
+    private final AuthFail authFail;
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) {
         return httpSecurity
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth

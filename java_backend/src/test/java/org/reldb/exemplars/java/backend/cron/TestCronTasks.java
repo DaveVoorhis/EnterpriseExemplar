@@ -3,10 +3,10 @@ package org.reldb.exemplars.java.backend.cron;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.verify;
 
-import org.reldb.exemplars.java.backend.ApplicationTestBase;
-import org.reldb.exemplars.java.backend.service.PeriodicBackgroundTaskService;
 import java.time.Duration;
 import org.junit.jupiter.api.Test;
+import org.reldb.exemplars.java.backend.ApplicationTestBase;
+import org.reldb.exemplars.java.backend.service.PeriodicBackgroundTaskService;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
